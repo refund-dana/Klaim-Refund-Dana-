@@ -3,323 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Berita Acara Jaminan Legalitas Sementara | DJBC</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+  <title>Berita Acara Resmi DJBC | Dokumen Kedinasan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bc-blue: #002B5C;
-      --bc-blue-dark: #001F45;
-      --bc-blue-gradient-start: #002B5C;
-      --bc-blue-gradient-end: #003A75;
-      --bc-gold: #D4AF37;
-      --red: #c00000;
-      --red-light: #ffe6e6;
-      --gray-300: #d5d9e0;
-      --white: #ffffff;
+      --legal-red: #b22222;
+      --paper-bg: #ffffff;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
-      font-family: 'Nunito', sans-serif;
-      color: #333;
-      line-height: 1.6;
-      background: var(--white);
-      padding: 16px;
+      background: #adb5bd;
+      font-family: 'Open Sans', sans-serif;
+      padding: 30px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ctext x='50%25' y='50%25' fill='rgba(0,43,92,0.02)' font-size='24' text-anchor='middle' transform='rotate(-30,100,100)'%3EDOKUMEN RESMI%3C/text%3E%3C/svg%3E");
-      z-index: -1;
-      pointer-events: none;
-    }
-    @media print { body::before { display: none; } }
 
+    /* Format A4 */
     .document {
-      width: 100%;
-      max-width: 900px;
-      background: var(--white);
-      padding: 28px;
-      font-size: 14px;
-      box-shadow: 0 4px 20px rgba(0,43,92,0.08);
-      border: 1px solid var(--gray-300);
-      border-radius: 8px;
-    }
-
-    .header {
-      background: linear-gradient(135deg, var(--bc-blue-gradient-start), var(--bc-blue-gradient-end));
-      color: var(--white);
-      padding: 22px;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    }
-    .logo { width: 68px; flex-shrink: 0; }
-    .logo img { width: 100%; height: auto; display: block; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
-    .kop { 
-      text-align: center; 
-      flex: 1; 
-      font-size: 13px; 
-      line-height: 1.45;
-      min-width: 300px;
-    }
-    .kop div { margin: 3px 0; }
-    .kop-bold { font-weight: 700; font-size: 15px; letter-spacing: 0.3px; }
-
-    .title { text-align: center; margin: 24px 0; }
-    .title-main {
-      font-family: 'Merriweather', serif;
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--bc-blue);
-      line-height: 1.3;
-    }
-
-    .meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--bc-gold);
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .recipient {
-      margin: 20px 0;
-      padding: 16px;
-      border-left: 4px solid var(--bc-blue);
-      background: #f8fafd;
-      border-radius: 0 6px 6px 0;
-    }
-
-    .section-title {
-      font-family: 'Merriweather', serif;
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--bc-blue);
-      margin: 28px 0 16px;
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--paper-bg);
+      padding: 20mm 25mm;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
       position: relative;
     }
-    .section-title::after {
-      content: '';
+
+    /* Watermark */
+    .watermark {
       position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 50px;
-      height: 2px;
-      background: var(--bc-gold);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-35deg);
+      font-size: 70pt;
+      color: rgba(0, 43, 92, 0.04);
+      font-weight: 800;
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
-    th, td { padding: 10px; text-align: left; border: 1px solid var(--gray-300); }
-    th { background: #f2f7fe; font-weight: 700; color: var(--bc-blue); }
-    .numeric { text-align: right; }
-    tr.warning td {
-      background: var(--red-light);
-      color: var(--red);
-      font-weight: 600;
-    }
+    /* Kop Surat */
+    .header-table { width: 100%; border-collapse: collapse; margin-bottom: 5px; }
+    .kop-text { text-align: center; }
+    .kop-text h2 { font-size: 14pt; font-weight: 700; margin-bottom: 2px; }
+    .kop-text h1 { font-size: 15pt; font-weight: 800; margin-bottom: 5px; }
+    .kop-text p { font-size: 9pt; line-height: 1.3; }
 
-    .legal-cell {
-      width: 56px;
-      text-align: center;
-      padding: 4px !important;
-    }
-    .legal-cell img { height: 40px; object-fit: contain; }
+    .line-thick { border-top: 2.5pt solid #000; margin-top: 10px; }
+    .line-thin { border-top: 1pt solid #000; margin-top: 2px; margin-bottom: 20px; }
 
-    .consequence {
-      background: var(--red-light);
-      border-left: 4px solid var(--red);
-      padding: 16px;
-      margin: 20px 0;
-      font-weight: 600;
-      color: var(--red);
-      border-radius: 0 6px 6px 0;
+    /* Judul */
+    .title-block { text-align: center; margin-bottom: 25px; }
+    .title-block h3 {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 16pt;
+      text-decoration: underline;
+      font-weight: 700;
+      margin-bottom: 5px;
     }
+    .title-block p { font-weight: 700; font-size: 11pt; }
 
-    .note {
-      background: #f0f6ff;
-      padding: 14px;
-      margin: 20px 0;
-      border-left: 4px solid var(--bc-blue);
-      border-radius: 0 6px 6px 0;
-      font-size: 13px;
-      color: #666;
+    /* Isi Dokumen */
+    .content-area { font-size: 11pt; text-align: justify; line-height: 1.5; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .data-table th, .data-table td {
+      border: 1px solid #000;
+      padding: 8px 12px;
+      font-size: 10.5pt;
+      vertical-align: top;
     }
+    .data-table th { background: #f0f0f0; width: 35%; text-align: left; }
 
-    .qr-box {
-      text-align: center;
-      margin: 24px 0;
-      padding: 14px;
-      background: #f9fbfd;
-      border: 1px dashed var(--bc-blue);
-      border-radius: 6px;
+    /* Section Pidana */
+    .law-section {
+      background: #fffafa;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-top: 10px;
     }
-    .qr-box img { max-width: 140px; height: auto; margin-top: 8px; }
+    .law-section h4 { 
+      color: var(--legal-red); 
+      font-size: 11pt; 
+      margin-bottom: 8px; 
+      text-transform: uppercase;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .law-item { font-size: 9.5pt; margin-bottom: 10px; color: #333; }
+    .law-item strong { color: #000; }
 
-    .signature {
-      margin-top: 32px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .sig-box { text-align: center; min-width: 200px; position: relative; }
-    .sig-box p { margin: 4px 0; font-size: 13px; }
-    .materai {
-      position: absolute;
-      bottom: -10px;
-      right: -10px;
-      width: 76px;
-      height: auto;
-    }
-
-    .footer {
-      margin-top: 32px;
-      padding-top: 16px;
-      border-top: 1px solid var(--gray-300);
+    /* Tanda Tangan */
+    .sign-container {
+      margin-top: 40px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 12px;
-      color: #666;
+    }
+    .sign-box { width: 250px; text-align: center; position: relative; }
+    .spacer { height: 85px; }
+    
+    .materai {
+      position: absolute;
+      width: 90px;
+      left: 10px;
+      top: 10px;
+      z-index: 1;
+      opacity: 0.95;
+    }
+    .stempel {
+      position: absolute;
+      width: 125px;
+      left: 55%;
+      top: -10px;
+      transform: translateX(-50%) rotate(-5deg);
+      z-index: 2;
+      opacity: 0.8;
     }
 
-    @media (max-width: 768px) {
-      .header { flex-direction: column; text-align: center; }
-      .kop { order: -1; margin-top: 16px; }
-      .signature { flex-direction: column; align-items: center; gap: 24px; }
-      .materai { position: static; margin-top: 12px; width: 68px; }
-      .meta, .footer { flex-direction: column; text-align: center; gap: 8px; }
+    /* Footer */
+    .footer-verify {
+      position: absolute;
+      bottom: 15mm;
+      left: 25mm;
+      right: 25mm;
+      border-top: 1px solid #000;
+      padding-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .qr-img { width: 70px; }
+    .footer-text { font-size: 8pt; color: #444; }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .document { box-shadow: none; }
     }
   </style>
 </head>
 <body>
 
 <div class="document">
+  <div class="watermark">SALINAN RESMI</div>
 
-  <!-- HEADER RESMI - WARNA DISATUKAN DENGAN LOGO -->
-  <div class="header">
-    <div class="logo">
-      <img src="https://i.ibb.co/wFBNMKtB/1000014485-11zon.jpg" alt="Logo Kementerian Keuangan">
-    </div>
-    <div class="kop">
-      <div class="kop-bold">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</div>
-      <div class="kop-bold">DIREKTORAT JENDERAL BEA DAN CUKAI</div>
-      <div>KANTOR PENGAWASAN DAN PELAYANAN BEA DAN CUKAI</div>
-      <div>TIPE MADYA PABEAN B PELABUHAN PANJANG</div>
-      <div>Jl. Yos Sudarso No. 1, Bandar Lampung, Lampung 35212</div>
-    </div>
-    <div class="logo">
-      <img src="https://i.ibb.co/Qv3YzFYd/1000014478-11zon.jpg" alt="Logo Direktorat Jenderal Bea dan Cukai">
-    </div>
-  </div>
-
-  <div class="title">
-    <div class="title-main">BERITA ACARA<br>JAMINAN LEGALITAS SEMENTARA</div>
-  </div>
-
-  <div class="meta">
-    <span><strong>Nomor</strong>: BC.PNJ/SL-011/2026</span>
-    <span><strong>Tanggal</strong>: Senin, 12 Januari 2026</span>
-  </div>
-
-  <div class="recipient">
-    <p><strong>Kepada Yth.,</strong></p>
-    <p><strong>Nama</strong>: Candra</p>
-    <p><strong>Alamat</strong>: Jl. Sosial Gandus, RT 14/RW.04 (Depan Warung Maryani), Kec. Gandus, Kota Palembang, Sumatera Selatan 30149.</p>
-    <p><strong>Telepon</strong>: (+62) 887-4371-51348</p>
-    <p>Berdasarkan hasil pemeriksaan barang kiriman di KPPBC TMP B Pelabuhan Panjang, disampaikan hal sebagai berikut:</p>
-  </div>
-
-  <h2 class="section-title">I. DATA BARANG</h2>
-  <table>
-    <tr><th>Jenis Barang</th><td>Rokok Tanpa Pita Cukai</td></tr>
-    <tr><th>Jumlah</th><td>2 slop (400 batang)</td></tr>
-    <tr class="warning">
-      <td colspan="2"><strong>Peringatan:</strong> Ditemukan pelanggaran cukai (rokok tanpa pita cukai resmi).</td>
-    </tr>
-  </table>
-
-  <h2 class="section-title">II. PERHITUNGAN JAMINAN</h2>
-  <table>
+  <table class="header-table">
     <tr>
-      <td style="padding:0;">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div class="legal-cell">
-            <img src="https://i.ibb.co/LDZmbQXY/1000010580-11zon.jpg" alt="Wajib Legalisasi">
-          </div>
-          <div>Nilai Cukai<br><em>(2 × Rp2.000 × 400)</em></div>
-        </div>
+      <td style="width: 15%;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Logo_Kementerian_Keuangan_Republik_Indonesia.png/600px-Logo_Kementerian_Keuangan_Republik_Indonesia.png" width="80"></td>
+      <td class="kop-text">
+        <h2>KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
+        <h2>DIREKTORAT JENDERAL BEA DAN CUKAI</h2>
+        <h1>KANTOR PENGAWASAN DAN PELAYANAN TIPE MADYA PABEAN B PELABUHAN PANJANG</h1>
+        <p>JALAN YOS SUDARSO NOMOR 1, BANDAR LAMPUNG 35212; TELEPON (0721) 482015</p>
+        <p>SITUS: WWW.BEACUKAI.GO.ID; PUSAT KONTAK LAYANAN: 1500225</p>
       </td>
-      <td class="numeric">800.000,00</td>
-    </tr>
-    <tr>
-      <td>Biaya Lanjutan Pengiriman</td>
-      <td class="numeric">50.000,00</td>
-    </tr>
-    <tr>
-      <th>Total Jaminan Sementara</th>
-      <td class="numeric"><strong>Rp 850.000,00</strong></td>
+      <td style="width: 15%; text-align: right;"><img src="https://upload.wikimedia.org/wikipedia/id/thumb/e/e0/Logo_Bea_Cukai.png/800px-Logo_Bea_Cukai.png" width="90"></td>
     </tr>
   </table>
+  
+  <div class="line-thick"></div>
+  <div class="line-thin"></div>
 
-  <h2 class="section-title">III. IDENTITAS PENERIMA</h2>
-  <table>
-    <tr><th>Ekspedisi</th><td><img src="https://i.ibb.co/S4bmr6Mx/perusahaan-layanan-pengiriman-barang-sicepat-di-mana-disebut-karyawan-220907074827-264.jpg" alt="Sicepat" style="height:24px;"></td></tr>
-    <tr><th>Nomor Resi</th><td>001797571148</td></tr>
-    <tr><th>Nama</th><td>Candra</td></tr>
-    <tr><th>Telepon</th><td>(+62) 887-4371-51348</td></tr>
-    <tr><th>Alamat</th><td>Jl. Sosial Gandus, RT 14/RW.04, Palembang, Sumatera Selatan 30149.</td></tr>
-  </table>
-
-  <h2 class="section-title">IV. KONSEKUENSI</h2>
-  <div class="consequence">
-    Apabila tidak diselesaikan dalam waktu 7×24 jam, barang akan diserahkan ke Bea Cukai untuk pemeriksaan lebih lanjut dan penyelidikan terhadap pengirim.
+  <div class="title-block">
+    <h3>BERITA ACARA JAMINAN LEGALITAS SEMENTARA</h3>
+    <p>NOMOR: BA-011/WBC.07/KPP.MP.01/2026</p>
   </div>
 
-  <div class="qr-box">
-    <p>SCAN QR UNTUK VERIFIKASI<br>LEGALITAS JAMINAN SEMENTARA ✓</p>
-    <img src="https://iili.io/fjU6P4f.md.jpg" alt="QR Verifikasi">
-  </div>
+  <div class="content-area">
+    <p>Berkenaan dengan hasil pemeriksaan fisik terhadap paket kiriman melalui jasa ekspedisi, dengan ini Pejabat Pemeriksa pada KPPBC TMP B Pelabuhan Panjang menerangkan bahwa barang berikut memerlukan penyelesaian kewajiban pabean/cukai:</p>
+    
+    <table class="data-table">
+      <tr>
+        <th>I. Nama Pemilik Barang</th>
+        <td><strong>CANDRA</strong></td>
+      </tr>
+      <tr>
+        <th>II. Deskripsi Barang</th>
+        <td>Barang Kena Cukai (BKC) Jenis Hasil Tembakau (Rokok SKM) sebanyak 2 Slop (400 Batang) tanpa dilekati Pita Cukai Resmi.</td>
+      </tr>
+      <tr>
+        <th>III. Lokasi Pemeriksaan</th>
+        <td>Area Pabean Pelabuhan Panjang, Bandar Lampung.</td>
+      </tr>
+      <tr>
+        <th>IV. Total Jaminan (PP)</th>
+        <td><strong>Rp 850.000,00</strong> (Delapan Ratus Lima Puluh Ribu Rupiah)</td>
+      </tr>
+    </table>
 
-  <p><strong>Demikian Berita Acara ini dibuat sebagai dasar administrasi penyelesaian barang temuan.</strong></p>
-  <p><strong>Hormat kami,</strong></p>
+    <div class="law-section">
+      <h4>V. KETENTUAN PIDANA & SANKSI</h4>
+      
+      <div class="law-item">
+        <strong>Pasal 54 UU No. 39 Tahun 2007:</strong> 
+        "Setiap orang yang menawarkan, menyerahkan, menjual, atau menyediakan untuk dijual barang kena cukai yang tidak dikemas untuk penjualan eceran atau tidak dilekati pita cukai... dipidana dengan pidana penjara paling singkat 1 (satu) tahun dan paling lama 5 (lima) tahun dan/atau pidana denda paling sedikit 2 (dua) kali nilai cukai dan paling banyak 10 (sepuluh) kali nilai cukai yang seharusnya dibayar."
+      </div>
 
-  <div class="signature">
-    <div class="sig-box">
-      <p>Bandar Lampung, 12 Januari 2026</p>
-      <p>Pejabat Pemeriksa Barang</p>
-      <p>KPPBC TMP B Pelabuhan Panjang</p>
-      <img src="https://i.ibb.co/C3jHqyNv/IMG-20260120-162645.jpg" alt="Materai Tempel" class="materai">
+      <div class="law-item">
+        <strong>Pasal 56 UU No. 39 Tahun 2007:</strong>
+        "Setiap orang yang memiliki, menyimpan, menguasai, membeli barang kena cukai yang diketahui atau patut harus diduganya berasal dari tindak pidana... dipidana dengan pidana penjara paling singkat 1 (satu) tahun dan paling lama 5 (lima) tahun dan pidana denda paling sedikit 2 (dua) kali nilai cukai dan paling banyak 10 (sepuluh) kali nilai cukai yang seharusnya dibayar."
+      </div>
+      
+      <p style="font-size: 9pt; color: #555;">* Pembayaran Jaminan Sementara ini bertujuan sebagai upaya langkah persuasif/administratif sebelum dilakukan penyidikan lebih lanjut ke tingkat pidana.</p>
     </div>
-    <div class="sig-box">
-      <p>Kepala Kantor</p>
-      <p>DR. AGUS SULISTYO, S.H., M.H.</p>
-      <p>NIP. 19780322 200312 1 002</p>
-      <img src="https://i.ibb.co/5xSDYknk/1000014472-11zon.jpg" alt="Materai Digital" class="materai">
+  </div>
+
+  <div class="sign-section">
+    <div class="sign-container">
+      <div class="sign-box">
+        <p>Pemilik Barang,</p>
+        <div class="spacer"></div>
+        <p><strong>CANDRA</strong></p>
+      </div>
+      
+      <div class="sign-box">
+        <p>Bandar Lampung, 22 Januari 2026</p>
+        <p>Kepala Kantor,</p>
+        <div class="spacer">
+          <img src="https://i.ibb.co/C3jHqyNv/IMG-20260120-162645.jpg" class="materai">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Stamp_of_Indonesia.svg/500px-Stamp_of_Indonesia.svg.png" class="stempel" style="filter: hue-rotate(180deg) brightness(0.9) contrast(1.2);">
+        </div>
+        <p><strong>DR. AGUS SULISTYO, S.H., M.H.</strong></p>
+        <p>NIP. 19780322 200312 1 002</p>
+      </div>
     </div>
   </div>
 
-  <div class="footer">
-    <div>© 2026 Direktorat Jenderal Bea dan Cukai<br><small>Dokumen elektronik berkekuatan hukum sesuai PMK No. 31/PMK.01/2023.</small></div>
-    <div><img src="https://i.ibb.co/4wcBBxK0/IMG-20251215-205820-651.jpg" alt="ISO 9001" style="width:80px;height:24px;object-fit:contain;"></div>
+  <div class="footer-verify">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=VALID-CEISA-4.0-PNJ-CANDRA-850000" class="qr-img">
+    <div class="footer-text">
+      <strong>SISTEM VERIFIKASI DOKUMEN DJBC (CEISA 4.0)</strong><br>
+      Dokumen ini diterbitkan secara otomatis oleh sistem aplikasi kepabeanan dan cukai. 
+    </div>
   </div>
-
 </div>
 
 </body>
