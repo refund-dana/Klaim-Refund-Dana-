@@ -1,262 +1,319 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dokumen Resmi Kemenkeu - DJBC</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Berita Acara Resmi DJBC - Pelabuhan Panjang</title>
   <style>
-    /* RESET & PRINT PREPARATION */
-    @page { size: A4; margin: 0; }
-    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; }
-    
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+    }
+
     body {
-      background-color: #525659;
-      font-family: "Times New Roman", Times, serif;
+      background: #f9f9f9;
       display: flex;
       justify-content: center;
-      padding: 40px 0;
+      padding: 20px 0;
+      font-family: "Times New Roman", Times, serif;
+      color: #000;
+      line-height: 1.5;
     }
 
-    /* KERTAS A4 */
-    .sheet {
+    .document-page {
       width: 210mm;
-      height: 297mm;
-      background: white;
-      padding: 15mm 25mm 15mm 25mm;
+      min-height: 297mm;
+      background: #fff;
+      padding: 40mm 30mm 30mm 30mm; /* Atas 4cm, kiri/kanan 3cm, bawah 3cm */
       position: relative;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
-    /* HEADER / KOP SURAT */
-    .header {
-      border-bottom: 4px solid #000;
-      padding-bottom: 5px;
-      margin-bottom: 2px;
+    /* === KOP SURAT === */
+    .kop-surat {
       display: flex;
-      align-items: center;
-    }
-    .header-logo { width: 90px; height: auto; }
-    .header-text {
-      flex: 1;
-      text-align: center;
-      line-height: 1.2;
-    }
-    .header-text h2 { font-size: 14pt; font-weight: bold; }
-    .header-text h1 { font-size: 16pt; font-weight: bold; margin-bottom: 5px; }
-    .header-text p { font-size: 9pt; font-family: Arial, sans-serif; }
-
-    .header-line-thin {
-      border-top: 1px solid #000;
-      margin-bottom: 25px;
-    }
-
-    /* TRACKING BARCODE */
-    .doc-id-box {
-      position: absolute;
-      top: 15mm;
-      right: 25mm;
-      text-align: right;
-      font-family: Arial, sans-serif;
-      font-size: 7pt;
-      color: #333;
-    }
-
-    /* JUDUL DOKUMEN */
-    .title-area {
-      text-align: center;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 3pt double #000;
+      padding-bottom: 12px;
       margin-bottom: 30px;
     }
-    .title-area h3 {
+    .kop-logo img {
+      height: 40px;
+      display: block;
+    }    .kop-center {
+      text-align: center;
+      flex: 1;
+      padding: 0 12px;
+    }
+    .kop-center h2,
+    .kop-center h1 {
+      font-weight: bold;
+      margin: 3px 0;
+      line-height: 1.2;
+    }
+    .kop-center h2 { font-size: 14pt; }
+    .kop-center h1 { font-size: 15pt; }
+    .kop-center p {
+      font-size: 9pt;
+      font-family: Arial, sans-serif;
+      margin-top: 4px;
+    }
+
+    /* === JUDUL === */
+    .judul-area {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .judul-area h3 {
       font-size: 14pt;
       text-decoration: underline;
-      font-weight: bold;
       text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 0.5px;
     }
-    .title-area p { font-size: 12pt; font-weight: bold; margin-top: 5px; }
+    .judul-area p {
+      font-size: 11pt;
+      font-weight: bold;
+      margin-top: 6px;
+    }
 
-    /* CONTENT */
-    .content {
-      font-size: 12pt;
-      line-height: 1.5;
+    /* === PARAGRAF PEMBUKA === */
+    .intro-paragraph {
+      font-size: 11pt;
       text-align: justify;
+      text-indent: 40px;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
-    .content p { margin-bottom: 15px; text-indent: 40px; }
 
-    /* DATA TABLE */
-    .table-data {
+    /* === TABEL === */
+    .main-table {
       width: 100%;
-      border-collapse: collapse;
-      margin: 20px 0;
-      table-layout: fixed;
-    }
-    .table-data td {
-      border: 1px solid #000;
-      padding: 10px;
-      vertical-align: top;
+      border-collapse: collapse;      margin: 20px 0 25px;
       font-size: 11pt;
     }
-    .table-data .label { width: 35%; background-color: #f2f2f2; font-weight: bold; }
-
-    /* LEGAL BOX */
-    .legal-notice {
+    .main-table thead th {
+      background: #f8f8f8;
       border: 1.5pt solid #000;
-      padding: 12px;
-      margin: 20px 0;
-      background-color: #fff9f9;
+      padding: 10px;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
     }
-    .legal-notice strong { color: #8b0000; }
-    .legal-notice p { text-indent: 0; font-size: 10pt; font-style: italic; margin-bottom: 0; }
+    .main-table td {
+      border: 1pt solid #000;
+      padding: 12px 15px;
+      vertical-align: top;
+      line-height: 1.4;
+    }
+    .col-index {
+      width: 30px;
+      text-align: center;
+      font-weight: bold;
+      background: #fafafa;
+    }
+    .col-label {
+      width: 35%;
+      font-weight: bold;
+      background: #fafafa;
+    }
 
-    /* SIGNATURE AREA */
-    .sign-section {
-      margin-top: 40px;
+    /* === BOX HUKUM === */
+    .legal-box {
+      border: 1pt solid #000;
+      padding: 15px;
+      margin: 25px 0;
+      font-size: 10pt;
+      text-align: justify;
+    }
+    .legal-box strong {
+      display: block;
+      margin-bottom: 8px;
+      text-decoration: underline;
+    }
+
+    /* === TANDA TANGAN === */
+    .footer-sign {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      margin-top: 45px;
+      gap: 20px;
+    }    .sign-cell {
+      width: 48%;
+      text-align: center;
     }
-    .sign-box {
-      width: 300px;
-      text-align: left;
+    .sign-space {
+      height: 80px;
       position: relative;
+      margin: 10px 0;
     }
-    .sign-box p { text-indent: 0; margin-bottom: 2px; }
-    
-    .signature-wrapper {
-      height: 110px;
-      position: relative;
+    .materai-placeholder {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 30px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      font-size: 8pt;
+      color: #555;
     }
-
-    .img-materai {
-      width: 90px;
-      z-index: 1;
-      filter: grayscale(10%) contrast(1.1);
-    }
-    .img-stempel {
+    .stempel-placeholder {
       position: absolute;
-      width: 140px;
-      left: 60px;
-      top: -10px;
-      opacity: 0.85;
-      z-index: 2;
-      filter: hue-rotate(150deg) saturate(2) contrast(1.2); /* Warna Ungu Dinas Resmi */
+      bottom: 0;
+      right: 0;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8pt;
+      color: #555;
     }
 
-    /* FOOTER VERIFIKASI DIGITAL */
-    .footer-verify {
+    /* === FOOTER VERIFIKASI === */
+    .digital-footer {
       position: absolute;
       bottom: 20mm;
-      left: 25mm;
-      right: 25mm;
-      border-top: 0.5pt solid #000;
+      left: 30mm;
+      right: 30mm;
+      border-top: 1pt solid #ccc;
       padding-top: 10px;
       display: flex;
-      align-items: center;
+      gap: 15px;
     }
-    .qr-box { width: 80px; margin-right: 15px; }
-    .verify-info { font-family: Arial, sans-serif; font-size: 8pt; color: #333; }
-
-    /* WATERMARK */
-    .watermark {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      font-size: 80pt;
-      color: rgba(0,0,0,0.03);
-      font-weight: bold;
-      pointer-events: none;
-      z-index: 0;
+    .qr-container {
+      width: 65px;
+    }
+    .qr-container img {
+      width: 100%;
+      height: auto;    }
+    .verify-text {
+      font-family: Arial, sans-serif;
+      font-size: 8pt;
+      color: #444;
+      line-height: 1.4;
+    }
+    .verify-text strong {
+      display: block;
+      margin-bottom: 4px;
     }
 
     @media print {
-      body { background: none; padding: 0; }
-      .sheet { box-shadow: none; margin: 0; }
-      .legal-notice { background-color: transparent !important; }
+      body {
+        background: none;
+        padding: 0;
+      }
+      .document-page {
+        box-shadow: none;
+      }
     }
   </style>
 </head>
 <body>
-
-<div class="sheet">
-  <div class="watermark">DOKUMEN RESMI</div>
-  
-  <div class="doc-id-box">
-    CEISA Document ID: 8829/KPPBC.PNJ/2026<br>
-    Dicetak: 20 Jan 2026 17:09 WIB
-  </div>
-
-  <div class="header">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Logo_Kementerian_Keuangan_Republik_Indonesia.png/200px-Logo_Kementerian_Keuangan_Republik_Indonesia.png" class="header-logo" alt="Logo Kemenkeu">
-    <div class="header-text">
-      <h2>KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
-      <h2>DIREKTORAT JENDERAL BEA DAN CUKAI</h2>
-      <h1>KANTOR PENGAWASAN DAN PELAYANAN TIPE MADYA PABEAN B PELABUHAN PANJANG</h1>
-      <p>JALAN YOS SUDARSO NOMOR 1, BANDAR LAMPUNG 35212; TELEPON (0721) 482015</p>
-      <p>LAMAN: WWW.BEACUKAI.GO.ID; PUSAT KONTAK LAYANAN: 1500225</p>
+  <div class="document-page">
+    <!-- KOP SURAT -->
+    <div class="kop-surat">
+      <div class="kop-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Logo_Kementerian_Keuangan_Republik_Indonesia.png/200px-Logo_Kementerian_Keuangan_Republik_Indonesia.png" alt="Logo Kemenkeu" />
+      </div>
+      <div class="kop-center">
+        <h2>KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
+        <h2>DIREKTORAT JENDERAL BEA DAN CUKAI</h2>
+        <h1>KANTOR PENGAWASAN DAN PELAYANAN TIPE MADYA PABEAN B PELABUHAN PANJANG</h1>
+        <p>Jalan Yos Sudarso Nomor 1, Bandar Lampung 35212; Telepon (0721) 482015</p>
+        <p>Laman: www.beacukai.go.id; Pusat Kontak Layanan: 1500225</p>
+      </div>
+      <div class="kop-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/e/e0/Logo_Bea_Cukai.png/200px-Logo_Bea_Cukai.png" alt="Logo Bea Cukai" />
+      </div>
     </div>
-    <img src="https://upload.wikimedia.org/wikipedia/id/thumb/e/e0/Logo_Bea_Cukai.png/200px-Logo_Bea_Cukai.png" class="header-logo" alt="Logo Bea Cukai">
-  </div>
-  <div class="header-line-thin"></div>
 
-  <div class="title-area">
-    <h3>BERITA ACARA JAMINAN LEGALITAS SEMENTARA</h3>
-    <p>NOMOR: BA-011/WBC.07/KPP.MP.01/2026</p>
-  </div>
+    <!-- JUDUL -->
+    <div class="judul-area">
+      <h3>Berita Acara Jaminan Legalitas Sementara</h3>
+      <p>NOMOR: BA-011/WBC.07/KPP.MP.01/2026</p>
+    </div>
 
-  <div class="content">
-    <p>Berkenaan dengan hasil pengawasan terhadap barang kiriman di Terminal Kedatangan/Area Pabean, pada hari ini <strong>Senin</strong>, tanggal <strong>Dua Belas</strong>, bulan <strong>Januari</strong>, tahun <strong>Dua Ribu Dua Puluh Enam</strong>, Pejabat Pemeriksa yang bertanda tangan di bawah ini telah melakukan tindakan pengamanan administratif terhadap Barang Kena Cukai (BKC) milik:</p>
+    <!-- PARAGRAF PEMBUKA -->
+    <p class="intro-paragraph">      Sehubungan dengan pelaksanaan tugas pengawasan di wilayah kerja KPPBC TMP B Pelabuhan Panjang, pada hari ini <strong>Senin</strong>, tanggal <strong>Dua Belas</strong>, bulan <strong>Januari</strong>, tahun <strong>Dua Ribu Dua Puluh Enam</strong>, telah dilakukan pemeriksaan administratif dan fisik terhadap barang kiriman dengan rincian sebagai berikut:
+    </p>
 
-    <table class="table-data">
-      <tr>
-        <td class="label">Nama Pemilik Barang</td>
-        <td><strong>CANDRA</strong></td>
-      </tr>
-      <tr>
-        <td class="label">Alamat / Domisili</td>
-        <td>Jl. Sosial Gandus, RT 14/RW.04, Kec. Gandus, Kota Palembang, Sumatera Selatan 30149.</td>
-      </tr>
-      <tr>
-        <td class="label">Uraian / Deskripsi Barang</td>
-        <td>Hasil Tembakau (Rokok SKM) sebanyak 2 Slop (400 Batang) Tanpa Pelekatan Pita Cukai Resmi.</td>
-      </tr>
-      <tr>
-        <td class="label">Nilai Jaminan Administrasi</td>
-        <td><strong>Rp 850.000,00</strong> (Delapan Ratus Lima Puluh Ribu Rupiah)</td>
-      </tr>
+    <!-- TABEL -->
+    <table class="main-table">
+      <thead>
+        <tr>
+          <th colspan="3">DATA IDENTIFIKASI DAN PENETAPAN JAMINAN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-index">I.</td>
+          <td class="col-label">Identitas Penerima Barang</td>
+          <td><strong>Sdr/i. CANDRA</strong><br />Jl. Sosial Gandus, RT 14/RW.04, Kec. Gandus, Kota Palembang, Sumatera Selatan 30149.</td>
+        </tr>
+        <tr>
+          <td class="col-index">II.</td>
+          <td class="col-label">Klasifikasi Barang</td>
+          <td>Barang Kena Cukai (BKC) - Hasil Tembakau</td>
+        </tr>
+        <tr>
+          <td class="col-index">III.</td>
+          <td class="col-label">Detail Temuan Fisik</td>
+          <td>Rokok Jenis SKM sebanyak 2 (dua) Slop / 400 (empat ratus) Batang. Kondisi: Tanpa Pelekatan Pita Cukai Resmi.</td>
+        </tr>
+        <tr>
+          <td class="col-index">IV.</td>
+          <td class="col-label">Nominal Jaminan (IDR)</td>
+          <td><strong>Rp 850.000,00</strong><br /><em>(Terbilang: Delapan Ratus Lima Puluh Ribu Rupiah)</em></td>
+        </tr>
+      </tbody>
     </table>
 
-    <div class="legal-notice">
-      <p><strong>KETENTUAN HUKUM:</strong> Berdasarkan Pasal 54 UU No. 39 Tahun 2007, pemilikan barang tanpa pita cukai resmi adalah tindakan ilegal. Penyelesaian jaminan ini wajib dilakukan sebagai bukti itikad baik penyelesaian administrasi pabean. Apabila tidak diselesaikan dalam 7 hari kerja, barang dinyatakan sebagai Barang Milik Negara (BMN).</p>
+    <!-- BOX HUKUM -->
+    <div class="legal-box">
+      <strong>DASAR HUKUM DAN KONSEKUENSI:</strong>
+      <p>
+        Berdasarkan Pasal 54 Undang-Undang Nomor 39 Tahun 2007 tentang Perubahan atas Undang-Undang Nomor 11 Tahun 1995 tentang Cukai, barang yang tidak memenuhi ketentuan wajib dilakukan penegahan. Pembayaran jaminan ini bersifat wajib untuk legalisasi status administratif. Apabila kewajiban tidak dipenuhi dalam jangka waktu 7 (tujuh) hari kerja, maka barang kiriman tersebut dikategorikan sebagai Barang Milik Negara (BMN).
+      </p>
     </div>
 
-    <p>Demikian Berita Acara ini dibuat dengan sebenar-benarnya untuk digunakan sebagaimana mestinya.</p>
-  </div>
-
-  <div class="sign-section">
-    <div class="sign-box">
-      <p>Bandar Lampung, 12 Januari 2026</p>
-      <p>Kepala Kantor,</p>
-      <div class="signature-wrapper">
-        <img src="https://i.ibb.co/C3jHqyNv/IMG-20260120-162645.jpg" class="img-materai" alt="Materai">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Stamp_of_Indonesia.svg/500px-Stamp_of_Indonesia.svg.png" class="img-stempel" alt="Stempel Dinas">
+    <!-- TANDA TANGAN -->
+    <div class="footer-sign">
+      <div class="sign-cell">
+        <p>Pemilik/Penerima Barang,</p>
+        <div class="sign-space">
+          <div class="materai-placeholder">[Materai Rp10.000]</div>
+        </div>
+        <p><strong>( CANDRA )</strong></p>      </div>
+      <div class="sign-cell">
+        <p>Bandar Lampung, 12 Januari 2026</p>
+        <p>Kepala Kantor,</p>
+        <div class="sign-space">
+          <div class="stempel-placeholder">[Stempel Dinas]</div>
+        </div>
+        <p><strong>DR. AGUS SULISTYO, S.H., M.H.</strong></p>
+        <p>NIP. 19780322 200312 1 002</p>
       </div>
-      <p><strong>DR. AGUS SULISTYO, S.H., M.H.</strong></p>
-      <p>NIP. 19780322 200312 1 002</p>
+    </div>
+
+    <!-- FOOTER DIGITAL -->
+    <div class="digital-footer">
+      <div class="qr-container">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VERIFIED-OFFICIAL-DJBC-PNJ-2026-CANDRA" alt="QR Verifikasi" />
+      </div>
+      <div class="verify-text">
+        <strong>ELEKTRONIK VERIFIED DOCUMENT</strong>
+        Dokumen ini sah secara hukum dan telah diverifikasi oleh sistem CEISA 4.0 Direktorat Jenderal Bea dan Cukai. Informasi dalam dokumen ini bersifat rahasia dan memiliki kekuatan pembuktian hukum yang sah sesuai dengan UU ITE Nomor 11 Tahun 2008.
+      </div>
     </div>
   </div>
-
-  <div class="footer-verify">
-    <div class="qr-box">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=CERTIFIED-CEISA-PNJ-2026-CANDRA" style="width:100%;" alt="QR Verify">
-    </div>
-    <div class="verify-info">
-      <strong>Dokumen ini telah ditandatangani secara elektronik (Digital Signature).</strong><br>
-      Sesuai dengan UU ITE Nomor 11 Tahun 2008, informasi elektronik ini memiliki kekuatan hukum yang sah. 
-      Keaslian dokumen dapat diverifikasi melalui pemindaian Kode QR atau melalui portal resmi CEISA 4.0 Bea dan Cukai Republik Indonesia.
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
