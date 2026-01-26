@@ -2,318 +2,217 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Berita Acara Resmi DJBC - Pelabuhan Panjang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Berita Acara Pemeriksaan - DJBC</title>
   <style>
-    @page {
-      size: A4;
-      margin: 0;
-    }
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact;
     }
 
     body {
-      background: #f9f9f9;
-      display: flex;
-      justify-content: center;
-      padding: 20px 0;
       font-family: "Times New Roman", Times, serif;
-      color: #000;
+      font-size: 12pt;
       line-height: 1.5;
+      color: #000;
+      background: #fff;
     }
 
-    .document-page {
+    .page {
       width: 210mm;
       min-height: 297mm;
-      background: #fff;
-      padding: 40mm 30mm 30mm 30mm; /* Atas 4cm, kiri/kanan 3cm, bawah 3cm */
+      padding: 15mm;
+      margin: 0 auto;
       position: relative;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      page-break-after: always;
     }
 
-    /* === KOP SURAT === */
-    .kop-surat {
+    .header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      border-bottom: 3pt double #000;
-      padding-bottom: 12px;
-      margin-bottom: 30px;
-    }
-    .kop-logo img {
-      height: 40px;
-      display: block;
-    }    .kop-center {
-      text-align: center;
-      flex: 1;
-      padding: 0 12px;
-    }
-    .kop-center h2,
-    .kop-center h1 {
-      font-weight: bold;
-      margin: 3px 0;
-      line-height: 1.2;
-    }
-    .kop-center h2 { font-size: 14pt; }
-    .kop-center h1 { font-size: 15pt; }
-    .kop-center p {
-      font-size: 9pt;
-      font-family: Arial, sans-serif;
-      margin-top: 4px;
+      align-items: center;
+      margin-bottom: 10mm;
+      padding-bottom: 5mm;
+      border-bottom: 1px solid black;
     }
 
-    /* === JUDUL === */
-    .judul-area {
+    .logo-placeholder {
+      width: 35mm;
+      height: 35mm;
+      background: #f0f0f0;
+      border: 1px dashed #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8pt;
+      color: #666;
       text-align: center;
-      margin-bottom: 25px;
-    }
-    .judul-area h3 {
-      font-size: 14pt;
-      text-decoration: underline;
-      text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-    }
-    .judul-area p {
-      font-size: 11pt;
-      font-weight: bold;
-      margin-top: 6px;
     }
 
-    /* === PARAGRAF PEMBUKA === */
-    .intro-paragraph {
-      font-size: 11pt;
-      text-align: justify;
-      text-indent: 40px;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-
-    /* === TABEL === */
-    .main-table {
-      width: 100%;
-      border-collapse: collapse;      margin: 20px 0 25px;
-      font-size: 11pt;
-    }
-    .main-table thead th {
-      background: #f8f8f8;
-      border: 1.5pt solid #000;
-      padding: 10px;
+    .header-center {
       text-align: center;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-    .main-table td {
-      border: 1pt solid #000;
-      padding: 12px 15px;
-      vertical-align: top;
-      line-height: 1.4;
-    }
-    .col-index {
-      width: 30px;
-      text-align: center;
-      font-weight: bold;
-      background: #fafafa;
-    }
-    .col-label {
-      width: 35%;
-      font-weight: bold;
-      background: #fafafa;
-    }
-
-    /* === BOX HUKUM === */
-    .legal-box {
-      border: 1pt solid #000;
-      padding: 15px;
-      margin: 25px 0;
       font-size: 10pt;
-      text-align: justify;
-    }
-    .legal-box strong {
-      display: block;
-      margin-bottom: 8px;
-      text-decoration: underline;
+      line-height: 1.3;
+      max-width: 60%;
     }
 
-    /* === TANDA TANGAN === */
-    .footer-sign {
+    h2 {
+      text-align: center;
+      font-size: 14pt;
+      font-weight: bold;
+      text-decoration: underline;
+      margin: 5mm 0 3mm;
+    }
+
+    .nomor {
+      text-align: center;
+      font-size: 10pt;
+      margin-bottom: 8mm;
+    }
+
+    .intro {
+      text-align: justify;
+      margin-bottom: 8mm;
+      text-indent: 2em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8mm 0;
+      font-size: 10pt;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 4px 6px;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f9f9f9;
+    }
+
+    .footer {
       display: flex;
       justify-content: space-between;
-      margin-top: 45px;
-      gap: 20px;
-    }    .sign-cell {
-      width: 48%;
-      text-align: center;
-    }
-    .sign-space {
-      height: 80px;
-      position: relative;
-      margin: 10px 0;
-    }
-    .materai-placeholder {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8pt;
-      color: #555;
-    }
-    .stempel-placeholder {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8pt;
-      color: #555;
+      margin-top: 15mm;
+      font-size: 10pt;
     }
 
-    /* === FOOTER VERIFIKASI === */
-    .digital-footer {
-      position: absolute;
-      bottom: 20mm;
-      left: 30mm;
-      right: 30mm;
-      border-top: 1pt solid #ccc;
-      padding-top: 10px;
+    .footer-section {
+      width: 45%;
+      text-align: center;
+    }
+
+    .qr-placeholder {
+      width: 60px;
+      height: 60px;
+      background: #eee;
+      margin: 8px auto;
+      border: 1px dashed #999;
       display: flex;
-      gap: 15px;
-    }
-    .qr-container {
-      width: 65px;
-    }
-    .qr-container img {
-      width: 100%;
-      height: auto;    }
-    .verify-text {
-      font-family: Arial, sans-serif;
+      align-items: center;
+      justify-content: center;
       font-size: 8pt;
-      color: #444;
-      line-height: 1.4;
+      color: #666;
     }
-    .verify-text strong {
-      display: block;
-      margin-bottom: 4px;
+
+    .meterai-placeholder {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border: 1px solid #000;
+      margin: 8px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6pt;
+      color: #000;
+      transform: rotate(45deg);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
     }
 
     @media print {
       body {
-        background: none;
-        padding: 0;
-      }
-      .document-page {
-        box-shadow: none;
+        -webkit-print-color-adjust: exact;
       }
     }
   </style>
 </head>
 <body>
-  <div class="document-page">
-    <!-- KOP SURAT -->
-    <div class="kop-surat">
-      <div class="kop-logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Logo_Kementerian_Keuangan_Republik_Indonesia.png/200px-Logo_Kementerian_Keuangan_Republik_Indonesia.png" alt="Logo Kemenkeu" />
-      </div>
-      <div class="kop-center">
-        <h2>KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
-        <h2>DIREKTORAT JENDERAL BEA DAN CUKAI</h2>
-        <h1>KANTOR PENGAWASAN DAN PELAYANAN TIPE MADYA PABEAN B PELABUHAN PANJANG</h1>
-        <p>Jalan Yos Sudarso Nomor 1, Bandar Lampung 35212; Telepon (0721) 482015</p>
-        <p>Laman: www.beacukai.go.id; Pusat Kontak Layanan: 1500225</p>
-      </div>
-      <div class="kop-logo">
-        <img src="https://upload.wikimedia.org/wikipedia/id/thumb/e/e0/Logo_Bea_Cukai.png/200px-Logo_Bea_Cukai.png" alt="Logo Bea Cukai" />
-      </div>
+
+<!-- DOKUMEN BARU: ANDRE -->
+<div class="page">
+  <div class="header">
+    <div class="logo-placeholder">LOGO<br>DJBC</div>
+    <div class="header-center">
+      DIREKTORAT JENDERAL BEA DAN CUKAI<br>
+      KEMENTERIAN KEUANGAN REPUBLIK INDONESIA
     </div>
+    <div class="logo-placeholder">LOGO<br>KEMENKEU</div>
+  </div>
 
-    <!-- JUDUL -->
-    <div class="judul-area">
-      <h3>Berita Acara Jaminan Legalitas Sementara</h3>
-      <p>NOMOR: BA-011/WBC.07/KPP.MP.01/2026</p>
+  <h2>BERITA ACARA PEMERIKSAAN</h2>
+  <div class="nomor">NOMOR: BA-001800/KPU.01/2026</div>
+
+  <p class="intro">Pada hari ini, <strong>Senin tanggal 26 Januari 2026</strong>, bertempat di Kantor Pengawasan dan Pelayanan Bea dan Cukai Tipe Madya Pabean B Medan, telah dilakukan pemeriksaan terhadap barang kiriman dengan rincian sebagai berikut:</p>
+
+  <table>
+    <tr><th>Nama Penerima</th><td>Andre</td></tr>
+    <tr><th>No. HP</th><td>(+62)831-4197-6220</td></tr>
+    <tr><th>Alamat</th><td>Jl. PW Asri B. Gg. Rahayu, Pasar 6, Sidodadi Ramania, RT.001 (Beringin), Kec. Beringin, Kab. Deli Serdang, Sumatera Utara 20552.</td></tr>
+    <tr><th>No. Resi</th><td>001797572136</td></tr>
+    <tr><th>Ekspedisi</th><td>SICEPAT EKSPRES</td></tr>
+    <tr><th>Jumlah</th><td>2 SLOP / 400 Batang</td></tr>
+    <tr><th>Jenis Barang</th><td>Hasil Tembakau (Rokok) Tanpa Pita Cukai</td></tr>
+    <tr><th>Status Barang</th><td>Ditegah (Barang Larangan/Pembatasan)</td></tr>
+  </table>
+
+  <p>Berdasarkan Undang-Undang Nomor 39 Tahun 2007 tentang Cukai, barang tersebut dikategorikan sebagai barang ilegal karena tidak dilekati pita cukai. Atas pelanggaran tersebut, dikenakan sanksi administrasi berupa jaminan sementara sebesar:</p>
+
+  <table>
+    <tr><th>Uraian</th><th>Perhitungan</th><th>Jumlah (Rp)</th></tr>
+    <tr><td>Nilai Pita Cukai per batang</td><td>Rp 2.000,00</td><td></td></tr>
+    <tr><td>Jumlah batang</td><td>400 batang</td><td></td></tr>
+    <tr><td>Total Dasar Penilaian</td><td>400 × Rp 2.000,00</td><td>Rp 800.000,00</td></tr>
+    <tr><td>Jaminan Pengiriman Sementara</td><td>100% dari total dasar penilaian</td><td>Rp 800.000,00</td></tr>
+    <tr><td>Biaya Lanjutan Pengiriman</td><td>-</td><td>Rp 0,00</td></tr>
+    <tr><td><strong>TOTAL JAMINAN PENGIRIMAN SEMENTARA</strong></td><td></td><td><strong>Rp 800.000,00</strong></td></tr>
+  </table>
+
+  <p><strong>IV. OPSI REFUND</strong><br>
+  Setelah proses verifikasi internal selesai dan dokumen pendukung telah dilengkapi secara sah, pemilik barang diberikan opsi restitusi sebagai berikut:</p>
+
+  <table>
+    <tr><th>Uraian</th><th>Jumlah (Rp)</th></tr>
+    <tr><td>Pengembalian (Refund) 75% dari total jaminan</td><td>Rp 600.000,00</td></tr>
+    <tr><td>Biaya Administrasi Internal 25%</td><td>Rp 200.000,00</td></tr>
+  </table>
+
+  <p><strong>PENYELESAIAN & REFUND:</strong><br>
+  Penerima wajib menyelesaikan proses administrasi dalam waktu 30 (tiga puluh) hari sejak tanggal pemeriksaan. Setelah penyelesaian, jaminan sementara akan dikembalikan sebesar 75% melalui mekanisme refund resmi Direktorat Jenderal Bea dan Cukai.</p>
+
+  <p><strong>PEMBAYARAN:</strong><br>
+  Pembayaran jaminan sementara dapat dilakukan melalui QR Code berikut menggunakan aplikasi pembayaran yang mendukung QRIS (Quick Response Code Indonesian Standard):</p>
+
+  <div class="footer">
+    <div class="footer-section">
+      <div>Penerima Barang,</div>
+      <div class="qr-placeholder">[QR CODE]</div>
+      <div class="meterai-placeholder">METERAI<br>10.000</div>
     </div>
-
-    <!-- PARAGRAF PEMBUKA -->
-    <p class="intro-paragraph">      Sehubungan dengan pelaksanaan tugas pengawasan di wilayah kerja KPPBC TMP B Pelabuhan Panjang, pada hari ini <strong>Senin</strong>, tanggal <strong>Dua Belas</strong>, bulan <strong>Januari</strong>, tahun <strong>Dua Ribu Dua Puluh Enam</strong>, telah dilakukan pemeriksaan administratif dan fisik terhadap barang kiriman dengan rincian sebagai berikut:
-    </p>
-
-    <!-- TABEL -->
-    <table class="main-table">
-      <thead>
-        <tr>
-          <th colspan="3">DATA IDENTIFIKASI DAN PENETAPAN JAMINAN</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="col-index">I.</td>
-          <td class="col-label">Identitas Penerima Barang</td>
-          <td><strong>Sdr/i. CANDRA</strong><br />Jl. Sosial Gandus, RT 14/RW.04, Kec. Gandus, Kota Palembang, Sumatera Selatan 30149.</td>
-        </tr>
-        <tr>
-          <td class="col-index">II.</td>
-          <td class="col-label">Klasifikasi Barang</td>
-          <td>Barang Kena Cukai (BKC) - Hasil Tembakau</td>
-        </tr>
-        <tr>
-          <td class="col-index">III.</td>
-          <td class="col-label">Detail Temuan Fisik</td>
-          <td>Rokok Jenis SKM sebanyak 2 (dua) Slop / 400 (empat ratus) Batang. Kondisi: Tanpa Pelekatan Pita Cukai Resmi.</td>
-        </tr>
-        <tr>
-          <td class="col-index">IV.</td>
-          <td class="col-label">Nominal Jaminan (IDR)</td>
-          <td><strong>Rp 850.000,00</strong><br /><em>(Terbilang: Delapan Ratus Lima Puluh Ribu Rupiah)</em></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- BOX HUKUM -->
-    <div class="legal-box">
-      <strong>DASAR HUKUM DAN KONSEKUENSI:</strong>
-      <p>
-        Berdasarkan Pasal 54 Undang-Undang Nomor 39 Tahun 2007 tentang Perubahan atas Undang-Undang Nomor 11 Tahun 1995 tentang Cukai, barang yang tidak memenuhi ketentuan wajib dilakukan penegahan. Pembayaran jaminan ini bersifat wajib untuk legalisasi status administratif. Apabila kewajiban tidak dipenuhi dalam jangka waktu 7 (tujuh) hari kerja, maka barang kiriman tersebut dikategorikan sebagai Barang Milik Negara (BMN).
-      </p>
-    </div>
-
-    <!-- TANDA TANGAN -->
-    <div class="footer-sign">
-      <div class="sign-cell">
-        <p>Pemilik/Penerima Barang,</p>
-        <div class="sign-space">
-          <div class="materai-placeholder">[Materai Rp10.000]</div>
-        </div>
-        <p><strong>( CANDRA )</strong></p>      </div>
-      <div class="sign-cell">
-        <p>Bandar Lampung, 12 Januari 2026</p>
-        <p>Kepala Kantor,</p>
-        <div class="sign-space">
-          <div class="stempel-placeholder">[Stempel Dinas]</div>
-        </div>
-        <p><strong>DR. AGUS SULISTYO, S.H., M.H.</strong></p>
-        <p>NIP. 19780322 200312 1 002</p>
-      </div>
-    </div>
-
-    <!-- FOOTER DIGITAL -->
-    <div class="digital-footer">
-      <div class="qr-container">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=VERIFIED-OFFICIAL-DJBC-PNJ-2026-CANDRA" alt="QR Verifikasi" />
-      </div>
-      <div class="verify-text">
-        <strong>ELEKTRONIK VERIFIED DOCUMENT</strong>
-        Dokumen ini sah secara hukum dan telah diverifikasi oleh sistem CEISA 4.0 Direktorat Jenderal Bea dan Cukai. Informasi dalam dokumen ini bersifat rahasia dan memiliki kekuatan pembuktian hukum yang sah sesuai dengan UU ITE Nomor 11 Tahun 2008.
-      </div>
+    <div class="footer-section">
+      <div>Petugas Pemeriksa,</div>
+      <div style="margin-top: 10mm;">AGUS SULISTYO</div>
+      <div>NIP. 19780322 200312 1 002</div>
     </div>
   </div>
+</div>
+
 </body>
 </html>
