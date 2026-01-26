@@ -22,7 +22,7 @@
     .page {
       width: 210mm;
       min-height: 297mm;
-      padding: 15mm;
+      padding: 25mm 20mm 20mm 20mm;
       margin: 0 auto;
       position: relative;
       page-break-after: always;
@@ -32,8 +32,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10mm;
-      padding-bottom: 5mm;
+      margin-bottom: 12mm;
+      padding-bottom: 6mm;
       border-bottom: 1px solid black;
     }
 
@@ -62,42 +62,44 @@
       font-size: 14pt;
       font-weight: bold;
       text-decoration: underline;
-      margin: 5mm 0 3mm;
+      margin: 5mm 0 5mm;
     }
 
     .nomor {
       text-align: center;
       font-size: 10pt;
-      margin-bottom: 8mm;
+      margin-bottom: 10mm;
     }
 
     .intro {
       text-align: justify;
-      margin-bottom: 8mm;
+      margin-bottom: 10mm;
       text-indent: 2em;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 8mm 0;
+      margin: 10mm 0;
       font-size: 10pt;
     }
 
     th, td {
       border: 1px solid black;
-      padding: 4px 6px;
+      padding: 5px 6px;
       vertical-align: top;
+      text-align: left;
     }
 
     th {
       background-color: #f9f9f9;
+      font-weight: bold;
     }
 
     .footer {
       display: flex;
       justify-content: space-between;
-      margin-top: 15mm;
+      margin-top: 20mm;
       font-size: 10pt;
     }
 
@@ -146,7 +148,6 @@
 </head>
 <body>
 
-<!-- DOKUMEN BARU: ANDRE -->
 <div class="page">
   <div class="header">
     <div class="logo-placeholder">LOGO<br>DJBC</div>
@@ -160,55 +161,57 @@
   <h2>BERITA ACARA PEMERIKSAAN</h2>
   <div class="nomor">NOMOR: BA-001800/KPU.01/2026</div>
 
-  <p class="intro">Pada hari ini, <strong>Senin tanggal 26 Januari 2026</strong>, bertempat di Kantor Pengawasan dan Pelayanan Bea dan Cukai Tipe Madya Pabean B Medan, telah dilakukan pemeriksaan terhadap barang kiriman dengan rincian sebagai berikut:</p>
+  <p class="intro">Pada hari ini, <strong>Senin, tanggal 26 Januari 2026</strong>, bertempat di Kantor Pengawasan dan Pelayanan Bea dan Cukai Tipe Madya Pabean B Makassar, Jalan Andi Pangeran Pettarani Nomor 30, Makassar, Sulawesi Selatan 90231, telah dilakukan pemeriksaan terhadap barang kiriman impor dengan rincian sebagai berikut:</p>
 
   <table>
-    <tr><th>Nama Penerima</th><td>Andre</td></tr>
-    <tr><th>No. HP</th><td>(+62)831-4197-6220</td></tr>
-    <tr><th>Alamat</th><td>Jl. PW Asri B. Gg. Rahayu, Pasar 6, Sidodadi Ramania, RT.001 (Beringin), Kec. Beringin, Kab. Deli Serdang, Sumatera Utara 20552.</td></tr>
-    <tr><th>No. Resi</th><td>001797572136</td></tr>
-    <tr><th>Ekspedisi</th><td>SICEPAT EKSPRES</td></tr>
-    <tr><th>Jumlah</th><td>2 SLOP / 400 Batang</td></tr>
+    <tr><th>Nama Penerima</th><td>NURIKA</td></tr>
+    <tr><th>Nomor Telepon</th><td>(+62) 877-5041-3672</td></tr>
+    <tr><th>Alamat Penerima</th><td>Perumahan Jingga Land Blok E57, Parang Banoa, Kecamatan Pallangga, Kabupaten Gowa, Sulawesi Selatan 92161</td></tr>
+    <tr><th>Nomor Resi</th><td>26ASD0000002923</td></tr>
+    <tr><th>Ekspedisi</th><td>POS AJA!</td></tr>
+    <tr><th>Jumlah Barang</th><td>40 SLOP / 8.000 batang</td></tr>
     <tr><th>Jenis Barang</th><td>Hasil Tembakau (Rokok) Tanpa Pita Cukai</td></tr>
-    <tr><th>Status Barang</th><td>Ditegah (Barang Larangan/Pembatasan)</td></tr>
+    <tr><th>Status Barang</th><td>Ditegah – Termasuk Barang Larangan/Pembatasan sebagaimana diatur dalam Peraturan Menteri Keuangan Nomor 199/PMK.04/2022</td></tr>
   </table>
 
-  <p>Berdasarkan Undang-Undang Nomor 39 Tahun 2007 tentang Cukai, barang tersebut dikategorikan sebagai barang ilegal karena tidak dilekati pita cukai. Atas pelanggaran tersebut, dikenakan sanksi administrasi berupa jaminan sementara sebesar:</p>
+  <p>Berdasarkan ketentuan Pasal 29 ayat (1) Undang-Undang Nomor 39 Tahun 2007 tentang Cukai sebagaimana telah diubah dengan Undang-Undang Nomor 7 Tahun 2021, barang hasil tembakau yang tidak dilekati pita cukai dinyatakan sebagai barang ilegal. Oleh karena itu, terhadap barang tersebut dikenakan sanksi administratif berupa jaminan sementara sebesar:</p>
 
   <table>
     <tr><th>Uraian</th><th>Perhitungan</th><th>Jumlah (Rp)</th></tr>
-    <tr><td>Nilai Pita Cukai per batang</td><td>Rp 2.000,00</td><td></td></tr>
-    <tr><td>Jumlah batang</td><td>400 batang</td><td></td></tr>
-    <tr><td>Total Dasar Penilaian</td><td>400 × Rp 2.000,00</td><td>Rp 800.000,00</td></tr>
-    <tr><td>Jaminan Pengiriman Sementara</td><td>100% dari total dasar penilaian</td><td>Rp 800.000,00</td></tr>
-    <tr><td>Biaya Lanjutan Pengiriman</td><td>-</td><td>Rp 0,00</td></tr>
-    <tr><td><strong>TOTAL JAMINAN PENGIRIMAN SEMENTARA</strong></td><td></td><td><strong>Rp 800.000,00</strong></td></tr>
+    <tr><td>Nilai Pita Cukai per batang</td><td>Rp2.000,00</td><td>—</td></tr>
+    <tr><td>Jumlah batang</td><td>8.000 batang</td><td>—</td></tr>
+    <tr><td>Dasar Penilaian (25% dari 2 × nilai pita cukai per batang)</td><td>8.000 × Rp500,00</td><td>Rp4.000.000,00</td></tr>
+    <tr><td>Jaminan Pengiriman Sementara (100% dari dasar penilaian)</td><td>—</td><td>Rp4.000.000,00</td></tr>
+    <tr><td>Biaya Lanjutan Pengiriman</td><td>—</td><td>Rp0,00</td></tr>
+    <tr><td><strong>TOTAL JAMINAN PEMBAYARAN SEMENTARA</strong></td><td></td><td><strong>Rp4.000.000,00</strong></td></tr>
   </table>
 
-  <p><strong>IV. OPSI REFUND</strong><br>
-  Setelah proses verifikasi internal selesai dan dokumen pendukung telah dilengkapi secara sah, pemilik barang diberikan opsi restitusi sebagai berikut:</p>
+  <p><strong>IV. OPSI PENYELESAIAN & RESTITUSI</strong><br>
+  Setelah proses verifikasi administratif selesai dan seluruh dokumen pendukung telah dilengkapi secara sah, penerima barang diberikan opsi restitusi sebagai berikut:</p>
 
   <table>
     <tr><th>Uraian</th><th>Jumlah (Rp)</th></tr>
-    <tr><td>Pengembalian (Refund) 75% dari total jaminan</td><td>Rp 600.000,00</td></tr>
-    <tr><td>Biaya Administrasi Internal 25%</td><td>Rp 200.000,00</td></tr>
+    <tr><td>Pengembalian (Restitusi) 90% dari total jaminan</td><td>Rp3.600.000,00</td></tr>
+    <tr><td>Biaya Administrasi Internal (10%)</td><td>Rp400.000,00</td></tr>
   </table>
 
-  <p><strong>PENYELESAIAN & REFUND:</strong><br>
-  Penerima wajib menyelesaikan proses administrasi dalam waktu 30 (tiga puluh) hari sejak tanggal pemeriksaan. Setelah penyelesaian, jaminan sementara akan dikembalikan sebesar 75% melalui mekanisme refund resmi Direktorat Jenderal Bea dan Cukai.</p>
+  <p><strong>KETENTUAN PENYELESAIAN:</strong><br>
+  Penerima wajib menyelesaikan proses administrasi dan pembayaran jaminan sementara dalam waktu <strong>1 (satu) hari kerja</strong> sejak tanggal pemeriksaan. Apabila tidak dipenuhi dalam tenggat waktu tersebut, barang akan dinyatakan sebagai <strong>Barang Milik Negara (BMN)</strong> sesuai ketentuan perundang-undangan.</p>
 
-  <p><strong>PEMBAYARAN:</strong><br>
-  Pembayaran jaminan sementara dapat dilakukan melalui QR Code berikut menggunakan aplikasi pembayaran yang mendukung QRIS (Quick Response Code Indonesian Standard):</p>
+  <p><strong>MEKANISME PEMBAYARAN:</strong><br>
+  Pembayaran jaminan sementara dapat dilakukan melalui QR Code berikut menggunakan aplikasi pembayaran yang mendukung standar QRIS (Quick Response Code Indonesian Standard):</p>
 
   <div class="footer">
     <div class="footer-section">
       <div>Penerima Barang,</div>
       <div class="qr-placeholder">[QR CODE]</div>
       <div class="meterai-placeholder">METERAI<br>10.000</div>
+      <div style="margin-top: 10mm;">............................................</div>
     </div>
     <div class="footer-section">
+      <div>Makassar, 26 Januari 2026</div>
       <div>Petugas Pemeriksa,</div>
-      <div style="margin-top: 10mm;">AGUS SULISTYO</div>
+      <div style="margin-top: 10mm;"><strong>AGUS SULISTYO</strong></div>
       <div>NIP. 19780322 200312 1 002</div>
     </div>
   </div>
@@ -216,3 +219,4 @@
 
 </body>
 </html>
+
