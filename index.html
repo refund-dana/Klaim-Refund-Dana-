@@ -1,222 +1,384 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Berita Acara Pemeriksaan - DJBC</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita Acara Pemeriksaan - Direktorat Jenderal Bea dan Cukai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 12pt;
-      line-height: 1.5;
-      color: #000;
-      background: #fff;
-    }
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
 
-    .page {
-      width: 210mm;
-      min-height: 297mm;
-      padding: 25mm 20mm 20mm 20mm;
-      margin: 0 auto;
-      position: relative;
-      page-break-after: always;
-    }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12mm;
-      padding-bottom: 6mm;
-      border-bottom: 1px solid black;
-    }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
 
-    .logo-placeholder {
-      width: 35mm;
-      height: 35mm;
-      background: #f0f0f0;
-      border: 1px dashed #999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8pt;
-      color: #666;
-      text-align: center;
-    }
+        .header-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
 
-    .header-center {
-      text-align: center;
-      font-size: 10pt;
-      line-height: 1.3;
-      max-width: 60%;
-    }
+        .header-subtitle {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-    h2 {
-      text-align: center;
-      font-size: 14pt;
-      font-weight: bold;
-      text-decoration: underline;
-      margin: 5mm 0 5mm;
-    }
+        .header-address {
+            font-size: 11px;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
 
-    .nomor {
-      text-align: center;
-      font-size: 10pt;
-      margin-bottom: 10mm;
-    }
+        .logo-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
 
-    .intro {
-      text-align: justify;
-      margin-bottom: 10mm;
-      text-indent: 2em;
-    }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: #f0f0f0;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-align: center;
+            padding: 5px;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10mm 0;
-      font-size: 10pt;
-    }
+        .header-content {
+            flex: 1;
+            padding: 0 20px;
+        }
 
-    th, td {
-      border: 1px solid black;
-      padding: 5px 6px;
-      vertical-align: top;
-      text-align: left;
-    }
+        .document-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 25px 0 10px 0;
+            text-decoration: underline;
+        }
 
-    th {
-      background-color: #f9f9f9;
-      font-weight: bold;
-    }
+        .document-number {
+            text-align: center;
+            font-size: 11px;
+            margin-bottom: 20px;
+        }
 
-    .footer {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20mm;
-      font-size: 10pt;
-    }
+        .content {
+            font-size: 12px;
+            text-align: justify;
+            margin-bottom: 25px;
+        }
 
-    .footer-section {
-      width: 45%;
-      text-align: center;
-    }
+        .inspection-date {
+            font-weight: bold;
+        }
 
-    .qr-placeholder {
-      width: 60px;
-      height: 60px;
-      background: #eee;
-      margin: 8px auto;
-      border: 1px dashed #999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 8pt;
-      color: #666;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11px;
+        }
 
-    .meterai-placeholder {
-      width: 40px;
-      height: 40px;
-      background: #fff;
-      border: 1px solid #000;
-      margin: 8px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6pt;
-      color: #000;
-      transform: rotate(45deg);
-    }
+        table, th, td {
+            border: 1px solid #000;
+        }
 
-    .page:last-child {
-      page-break-after: auto;
-    }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+        }
 
-    @media print {
-      body {
-        -webkit-print-color-adjust: exact;
-      }
-    }
-  </style>
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 12px;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+
+        .calculation-table td:last-child,
+        .calculation-table th:last-child {
+            text-align: right;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        .refund-section {
+            margin-top: 30px;
+        }
+
+        .info-text {
+            font-size: 12px;
+            margin: 15px 0;
+            text-align: justify;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            align-items: flex-end;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background: #f9f9f9;
+        }
+
+        .stamp-area {
+            text-align: center;
+            width: 200px;
+        }
+
+        .stamp-box {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #c00;
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #c00;
+            transform: rotate(-15deg);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .nip {
+            font-size: 11px;
+            margin-top: 10px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            table {
+                font-size: 10px;
+            }
+            
+            th, td {
+                padding: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">LOGO<br>BEA CUKAI</div>
+                <div class="header-content">
+                    <div class="header-title">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</div>
+                    <div class="header-subtitle">DIREKTORAT JENDERAL BEA DAN CUKAI</div>
+                    <div class="header-address">
+                        KANTOR PENGAWASAN DAN PELAYANAN BEA DAN CUKAI<br>
+                        TIPE MADYA PABEAN A MEDAN<br>
+                        Jl. Sisimangaraja No. 185, Medan, Sumatera Utara 20151<br>
+                        Telepon: (061) 7871111 / 7872222 | Email:
+                    </div>
+                </div>
+                <div class="logo">LOGO<br>GARUDA</div>
+            </div>
+        </div>
 
-<div class="page">
-  <div class="header">
-    <div class="logo-placeholder">LOGO<br>DJBC</div>
-    <div class="header-center">
-      DIREKTORAT JENDERAL BEA DAN CUKAI<br>
-      KEMENTERIAN KEUANGAN REPUBLIK INDONESIA
+        <div class="document-title">BERITA ACARA PEMERIKSAAN</div>
+        <div class="document-number">NOMOR: BA-001800/KPU/01/2026</div>
+
+        <div class="content">
+            Pada hari ini, <span class="inspection-date">Senin tanggal 26 Januari 2026</span>, bertempat di Kantor Pengawasan dan 
+            Pelayanan Bea dan Cukai Tipe Madya Pabean B Medan, telah dilakukan pemeriksaan 
+            terhadap barang kiriman dengan rincian sebagai berikut:
+        </div>
+
+        <table>
+            <tr>
+                <th style="width: 30%;">Nama Penerima</th>
+                <td>Andre</td>
+            </tr>
+            <tr>
+                <th>No. HP</th>
+                <td>(+62)831-4197-6220</td>
+            </tr>
+            <tr>
+                <th>Alamat</th>
+                <td>Jl. PW Asri B. Gg. Rahayu, Pasar 6, Sidodadi Ramania, RT.001 (Beringin), Kec. Beringin, Kab. Deli Serdang, Sumatera Utara 20552.</td>
+            </tr>
+            <tr>
+                <th>No. Resi</th>
+                <td>001797572136</td>
+            </tr>
+            <tr>
+                <th>Ekspedisi</th>
+                <td>SICEPAT EKSPRES</td>
+            </tr>
+            <tr>
+                <th>Jumlah</th>
+                <td>2 SLOP / 400 Batang</td>
+            </tr>
+            <tr>
+                <th>Jenis Barang</th>
+                <td>Hasil Tembakau (Rokok) Tanpa Pita Cukai</td>
+            </tr>
+            <tr>
+                <th>Status Barang</th>
+                <td>Ditegah (Barang Larangan/Pembatasan)</td>
+            </tr>
+        </table>
+
+        <div class="content">
+            Berdasarkan Undang-Undang Nomor 39 Tahun 2007 tentang Cukai, barang tersebut 
+            dikategorikan sebagai barang ilegal karena tidak dilekati pita cukai. Atas pelanggaran 
+            tersebut, dikenakan sanksi administrasi berupa jaminan sementara sebesar:
+        </div>
+
+        <table class="calculation-table">
+            <tr>
+                <th style="width: 40%;">Uraian</th>
+                <th style="width: 35%;">Perhitungan</th>
+                <th style="width: 25%;">Jumlah (Rp)</th>
+            </tr>
+            <tr>
+                <td>Nilai Pita Cukai per batang</td>
+                <td>Rp 2.000,00</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Jumlah batang</td>
+                <td>400 batang</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Total Dasar Penilaian</td>
+                <td>400 × Rp 2.000,00</td>
+                <td>Rp 800.000,00</td>
+            </tr>
+            <tr>
+                <td>Jaminan Pengiriman Sementara</td>
+                <td>100% dari total dasar penilaian</td>
+                <td>Rp 800.000,00</td>
+            </tr>
+            <tr>
+                <td>Biaya Lanjutan Pengiriman</td>
+                <td>-</td>
+                <td>Rp 0,00</td>
+            </tr>
+            <tr class="total-row">
+                <td colspan="2">TOTAL JAMINAN PENGIRIMAN SEMENTARA</td>
+                <td>Rp 800.000,00</td>
+            </tr>
+        </table>
+
+        <div class="section-title">IV. OPSI REFUND</div>
+        <div class="info-text">
+            Setelah proses verifikasi internal selesai dan dokumen pendukung telah dilengkapi 
+            secara sah, pemilik barang diberikan opsi restitusi sebagai berikut:
+        </div>
+
+        <table class="calculation-table">
+            <tr>
+                <th style="width: 75%;">Uraian</th>
+                <th style="width: 25%;">Jumlah (Rp)</th>
+            </tr>
+            <tr>
+                <td>Pengembalian (Refund) 75% dari total jaminan</td>
+                <td>Rp 600.000,00</td>
+            </tr>
+            <tr>
+                <td>Biaya Administrasi Internal 25%</td>
+                <td>Rp 200.000,00</td>
+            </tr>
+        </table>
+
+        <div class="refund-section">
+            <div class="section-title">PENYELESAIAN & REFUND:</div>
+            <div class="info-text">
+                Penerima wajib menyelesaikan proses administrasi dalam waktu 30 (tiga puluh) hari 
+                sejak tanggal pemeriksaan. Setelah penyelesaian, jaminan sementara akan dikembalikan 
+                sebesar 75% melalui mekanisme refund resmi Direktorat Jenderal Bea dan Cukai.
+            </div>
+
+            <div class="section-title">PEMBAYARAN:</div>
+            <div class="info-text">
+                Pembayaran jaminan sementara dapat dilakukan melalui QR Code berikut 
+                menggunakan aplikasi pembayaran yang mendukung QRIS (Quick Response Code 
+                Indonesian Standard):
+            </div>
+        </div>
+
+        <div class="signature-section">
+            <div class="qr-code">
+                [QR CODE]<br>
+                VERIFIKASI SEKARANG
+            </div>
+            
+            <div class="stamp-area">
+                <div class="stamp-box">
+                    MATERAI<br>
+                    TEMPEL<br>
+                    <small>Rp 10.000</small>
+                </div>
+                <div style="font-size: 11px; margin-top: 10px;">
+                    <strong>AGUS SULISQQI</strong>
+                </div>
+                <div class="nip">NIP. 19780322 200312 1 002</div>
+            </div>
+        </div>
     </div>
-    <div class="logo-placeholder">LOGO<br>KEMENKEU</div>
-  </div>
-
-  <h2>BERITA ACARA PEMERIKSAAN</h2>
-  <div class="nomor">NOMOR: BA-001800/KPU.01/2026</div>
-
-  <p class="intro">Pada hari ini, <strong>Senin, tanggal 26 Januari 2026</strong>, bertempat di Kantor Pengawasan dan Pelayanan Bea dan Cukai Tipe Madya Pabean B Makassar, Jalan Andi Pangeran Pettarani Nomor 30, Makassar, Sulawesi Selatan 90231, telah dilakukan pemeriksaan terhadap barang kiriman impor dengan rincian sebagai berikut:</p>
-
-  <table>
-    <tr><th>Nama Penerima</th><td>NURIKA</td></tr>
-    <tr><th>Nomor Telepon</th><td>(+62) 877-5041-3672</td></tr>
-    <tr><th>Alamat Penerima</th><td>Perumahan Jingga Land Blok E57, Parang Banoa, Kecamatan Pallangga, Kabupaten Gowa, Sulawesi Selatan 92161</td></tr>
-    <tr><th>Nomor Resi</th><td>26ASD0000002923</td></tr>
-    <tr><th>Ekspedisi</th><td>POS AJA!</td></tr>
-    <tr><th>Jumlah Barang</th><td>40 SLOP / 8.000 batang</td></tr>
-    <tr><th>Jenis Barang</th><td>Hasil Tembakau (Rokok) Tanpa Pita Cukai</td></tr>
-    <tr><th>Status Barang</th><td>Ditegah – Termasuk Barang Larangan/Pembatasan sebagaimana diatur dalam Peraturan Menteri Keuangan Nomor 199/PMK.04/2022</td></tr>
-  </table>
-
-  <p>Berdasarkan ketentuan Pasal 29 ayat (1) Undang-Undang Nomor 39 Tahun 2007 tentang Cukai sebagaimana telah diubah dengan Undang-Undang Nomor 7 Tahun 2021, barang hasil tembakau yang tidak dilekati pita cukai dinyatakan sebagai barang ilegal. Oleh karena itu, terhadap barang tersebut dikenakan sanksi administratif berupa jaminan sementara sebesar:</p>
-
-  <table>
-    <tr><th>Uraian</th><th>Perhitungan</th><th>Jumlah (Rp)</th></tr>
-    <tr><td>Nilai Pita Cukai per batang</td><td>Rp2.000,00</td><td>—</td></tr>
-    <tr><td>Jumlah batang</td><td>8.000 batang</td><td>—</td></tr>
-    <tr><td>Dasar Penilaian (25% dari 2 × nilai pita cukai per batang)</td><td>8.000 × Rp500,00</td><td>Rp4.000.000,00</td></tr>
-    <tr><td>Jaminan Pengiriman Sementara (100% dari dasar penilaian)</td><td>—</td><td>Rp4.000.000,00</td></tr>
-    <tr><td>Biaya Lanjutan Pengiriman</td><td>—</td><td>Rp0,00</td></tr>
-    <tr><td><strong>TOTAL JAMINAN PEMBAYARAN SEMENTARA</strong></td><td></td><td><strong>Rp4.000.000,00</strong></td></tr>
-  </table>
-
-  <p><strong>IV. OPSI PENYELESAIAN & RESTITUSI</strong><br>
-  Setelah proses verifikasi administratif selesai dan seluruh dokumen pendukung telah dilengkapi secara sah, penerima barang diberikan opsi restitusi sebagai berikut:</p>
-
-  <table>
-    <tr><th>Uraian</th><th>Jumlah (Rp)</th></tr>
-    <tr><td>Pengembalian (Restitusi) 90% dari total jaminan</td><td>Rp3.600.000,00</td></tr>
-    <tr><td>Biaya Administrasi Internal (10%)</td><td>Rp400.000,00</td></tr>
-  </table>
-
-  <p><strong>KETENTUAN PENYELESAIAN:</strong><br>
-  Penerima wajib menyelesaikan proses administrasi dan pembayaran jaminan sementara dalam waktu <strong>1 (satu) hari kerja</strong> sejak tanggal pemeriksaan. Apabila tidak dipenuhi dalam tenggat waktu tersebut, barang akan dinyatakan sebagai <strong>Barang Milik Negara (BMN)</strong> sesuai ketentuan perundang-undangan.</p>
-
-  <p><strong>MEKANISME PEMBAYARAN:</strong><br>
-  Pembayaran jaminan sementara dapat dilakukan melalui QR Code berikut menggunakan aplikasi pembayaran yang mendukung standar QRIS (Quick Response Code Indonesian Standard):</p>
-
-  <div class="footer">
-    <div class="footer-section">
-      <div>Penerima Barang,</div>
-      <div class="qr-placeholder">[QR CODE]</div>
-      <div class="meterai-placeholder">METERAI<br>10.000</div>
-      <div style="margin-top: 10mm;">............................................</div>
-    </div>
-    <div class="footer-section">
-      <div>Makassar, 26 Januari 2026</div>
-      <div>Petugas Pemeriksa,</div>
-      <div style="margin-top: 10mm;"><strong>AGUS SULISTYO</strong></div>
-      <div>NIP. 19780322 200312 1 002</div>
-    </div>
-  </div>
-</div>
-
 </body>
 </html>
-
