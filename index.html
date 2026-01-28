@@ -46,6 +46,20 @@
             overflow: hidden;
         }
 
+        .watermark-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background-image: url('https://i.ibb.co/yF02JKYh/pm-1766605896438-cmp.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.05;
+        }
+
         .watermark-center {
             position: absolute;
             top: 50%;
@@ -76,7 +90,7 @@
             padding: 2cm 2.5cm;
         }
 
-        /* Header Section - Perfect Alignment */
+        /* Header Section */
         .header-section {
             border-bottom: 4px double #000;
             padding-bottom: 25px;
@@ -103,7 +117,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            filter: contrast(1.1) brightness(1.05);
         }
 
         .header-text {
@@ -254,7 +267,7 @@
             line-height: 1.8;
         }
 
-        /* Signature Section - Professional Layout */
+        /* Signature Section */
         .signature-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -308,35 +321,22 @@
 
         /* Materai Design */
         .materai-stamp {
-            width: 90px;
-            height: 90px;
-            border: 2.5px solid #654321;
-            background: linear-gradient(135deg, #d4af37 0%, #f4e4c1 25%, #d4af37 50%, #f4e4c1 75%, #d4af37 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #654321;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            width: 100px;
+            height: 100px;
             position: absolute;
-            top: -20px;
-            right: 20px;
-            transform: rotate(5deg);
+            top: -25px;
+            right: 15px;
+            z-index: 10;
         }
 
-        .materai-text {
-            font-size: 9px;
-            letter-spacing: 0.5px;
+        .materai-stamp img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
         }
 
-        .materai-value {
-            font-size: 13px;
-            margin-top: 3px;
-            letter-spacing: 0.3px;
-        }
-
-        /* Official Stamp - Circular */
+        /* Official Stamp */
         .official-stamp {
             width: 180px;
             height: 180px;
@@ -408,10 +408,28 @@
             margin-top: 5px;
         }
 
+        /* Legalisasi Stamp */
+        .legalisasi-stamp {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: auto;
+            z-index: 11;
+        }
+
+        .legalisasi-stamp img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+        }
+
         .officer-name {
             font-size: 12px;
             font-weight: bold;
-            margin-top: 25px;
+            margin-top: 35px;
             text-align: center;
         }
 
@@ -437,6 +455,23 @@
             font-size: 12px;
         }
 
+        /* Expedition Logo */
+        .expedition-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .expedition-badge img {
+            height: 20px;
+            width: auto;
+        }
+
         /* Footer */
         .document-footer {
             text-align: center;
@@ -458,10 +493,6 @@
                 box-shadow: none;
                 margin: 0;
                 padding: 0;
-            }
-
-            .watermark-center {
-                opacity: 0.8;
             }
         }
 
@@ -485,14 +516,6 @@
                 height: 70px;
             }
 
-            .header-line-1 {
-                font-size: 14px;
-            }
-
-            .header-line-2 {
-                font-size: 12px;
-            }
-
             .signature-wrapper {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -502,13 +525,6 @@
             .calc-table {
                 font-size: 10px;
             }
-
-            .data-table th,
-            .data-table td,
-            .calc-table th,
-            .calc-table td {
-                padding: 8px 10px;
-            }
         }
     </style>
 </head>
@@ -516,6 +532,7 @@
     <div class="page-container">
         <!-- Professional Watermark Layer -->
         <div class="watermark-layer">
+            <div class="watermark-bg"></div>
             <div class="watermark-center">DIREKTORAT JENDERAL BEA DAN CUKAI</div>
             <div class="watermark-pattern" style="top: 15%; left: 5%;">RESMI</div>
             <div class="watermark-pattern" style="top: 35%; right: 8%;">KEMENKEU RI</div>
@@ -530,7 +547,7 @@
             <div class="header-section">
                 <div class="kop-surat">
                     <div class="logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Logo_Bea_Cukai.svg/300px-Logo_Bea_Cukai.svg.png" alt="Logo Bea Cukai" onerror="this.style.display='none'">
+                        <img src="https://i.ibb.co/Qv3YzFYd/1000014478-11zon.jpg" alt="Logo Bea Cukai">
                     </div>
                     <div class="header-text">
                         <div class="header-line-1">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</div>
@@ -543,7 +560,7 @@
                         </div>
                     </div>
                     <div class="logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Garuda_Pancasila%2C_Coat_Arms_of_Indonesia.svg/300px-Garuda_Pancasila%2C_Coat_Arms_of_Indonesia.svg.png" alt="Garuda Pancasila" onerror="this.style.display='none'">
+                        <img src="https://i.ibb.co/wFBNMKtB/1000014485-11zon.jpg" alt="Logo Kemenkeu">
                     </div>
                 </div>
             </div>
@@ -551,47 +568,52 @@
             <!-- Document Title -->
             <div class="doc-title-section">
                 <div class="doc-title">BERITA ACARA PEMERIKSAAN</div>
-                <div class="doc-number">NOMOR: BA-001800/KPU/01/2026</div>
+                <div class="doc-number">NOMOR: BA-001797/KPU/01/2026</div>
             </div>
 
             <!-- Opening Statement -->
             <div class="paragraph">
-                Pada hari ini, <span class="inspection-date">Senin tanggal 26 Januari 2026</span>, bertempat di Kantor Pengawasan dan Pelayanan Bea dan Cukai Tipe Madya Pabean B Medan, telah dilakukan pemeriksaan terhadap barang kiriman dengan rincian sebagai berikut:
+                Pada hari ini, <span class="inspection-date">Senin tanggal 27 Januari 2026</span>, bertempat di Kantor Pengawasan dan Pelayanan Bea dan Cukai Tipe Madya Pabean B Medan, telah dilakukan pemeriksaan terhadap barang kiriman dengan rincian sebagai berikut:
             </div>
 
             <!-- Data Table -->
             <table class="data-table">
                 <tr>
+                    <th>Nama Pengirim</th>
+                    <td>Distributor (+62) 851-0101-04981<br>Desa Karangtumaritis, Kec. Pakisaji, Kab. Malang, Jawa Timur 65162</td>
+                </tr>
+                <tr>
                     <th>Nama Penerima</th>
-                    <td>Andre</td>
-                </tr>
-                <tr>
-                    <th>No. HP</th>
-                    <td>(+62)831-4197-6220</td>
-                </tr>
-                <tr>
-                    <th>Alamat</th>
-                    <td>Jl. PW Asri B. Gg. Rahayu, Pasar 6, Sidodadi Ramania, RT.001 (Beringin), Kec. Beringin, Kab. Deli Serdang, Sumatera Utara 20552.</td>
+                    <td>Adi Wiguna (+62) 852-5503-0301<br>Jl. BTN II Bonggoeya, Blok C No. 1, Bonggoeya, Kec. Wua-Wua, Kota Kendari, Sulawesi Tenggara 93117</td>
                 </tr>
                 <tr>
                     <th>No. Resi</th>
-                    <td>001797572136</td>
+                    <td>001797572209 
+                        <span class="expedition-badge">
+                            <img src="https://i.ibb.co/S4bmr6Mx/perusahaan-layanan-pengiriman-barang-sicepat-di-mana-disebut-karyawan-220907074827-264.jpg" alt="SiCepat">
+                            <strong>SICEPAT EKSPRES</strong>
+                        </span>
+                    </td>
                 </tr>
                 <tr>
-                    <th>Ekspedisi</th>
-                    <td>SICEPAT EKSPRES</td>
+                    <th>Berat / Quantity</th>
+                    <td>3kg / Qntt 10</td>
                 </tr>
                 <tr>
-                    <th>Jumlah</th>
-                    <td>2 SLOP / 400 Batang</td>
+                    <th>Jenis Pengiriman</th>
+                    <td>TUNAI - Non COD</td>
                 </tr>
                 <tr>
                     <th>Jenis Barang</th>
-                    <td>Hasil Tembakau (Rokok) Tanpa Pita Cukai</td>
+                    <td>Hasil Tembakau (Rokok) Tanpa Pita Cukai - SUDAH TERMASUK PAJAK</td>
                 </tr>
                 <tr>
                     <th>Status Barang</th>
                     <td>Ditegah (Barang Larangan/Pembatasan)</td>
+                </tr>
+                <tr>
+                    <th>Total Biaya</th>
+                    <td><strong>IDR - LUNAS</strong></td>
                 </tr>
             </table>
 
@@ -616,19 +638,19 @@
                         <td>—</td>
                     </tr>
                     <tr>
-                        <td>Jumlah batang</td>
-                        <td>400 batang</td>
+                        <td>Estimasi jumlah batang (10 pack × 200)</td>
+                        <td>2.000 batang</td>
                         <td>—</td>
                     </tr>
                     <tr>
                         <td>Total Dasar Penilaian</td>
-                        <td>400 × Rp 2.000,00</td>
-                        <td>Rp 800.000,00</td>
+                        <td>2.000 × Rp 2.000,00</td>
+                        <td>Rp 4.000.000,00</td>
                     </tr>
                     <tr>
                         <td>Jaminan Pengiriman Sementara</td>
                         <td>100% dari total dasar penilaian</td>
-                        <td>Rp 800.000,00</td>
+                        <td>Rp 4.000.000,00</td>
                     </tr>
                     <tr>
                         <td>Biaya Lanjutan Pengiriman</td>
@@ -637,7 +659,7 @@
                     </tr>
                     <tr class="total-row">
                         <td colspan="2"><strong>TOTAL JAMINAN PENGIRIMAN SEMENTARA</strong></td>
-                        <td><strong>Rp 800.000,00</strong></td>
+                        <td><strong>Rp 4.000.000,00</strong></td>
                     </tr>
                 </tbody>
             </table>
@@ -658,16 +680,16 @@
                 <tbody>
                     <tr>
                         <td>Pengembalian (Refund) 75% dari total jaminan</td>
-                        <td>Rp 600.000,00</td>
+                        <td>Rp 3.000.000,00</td>
                     </tr>
                     <tr>
                         <td>Biaya Administrasi Internal 25%</td>
-                        <td>Rp 200.000,00</td>
+                        <td>Rp 1.000.000,00</td>
                     </tr>
                 </tbody>
             </table>
 
-           <!-- Settlement Information -->
+            <!-- Settlement Information -->
             <div class="section-title">PENYELESAIAN & REFUND:</div>
             <div class="info-paragraph">
                 Penerima wajib menyelesaikan proses administrasi dalam waktu 30 (tiga puluh) hari sejak tanggal pemeriksaan. Setelah penyelesaian, jaminan sementara akan dikembalikan sebesar 75% melalui mekanisme refund resmi Direktorat Jenderal Bea dan Cukai.
@@ -682,17 +704,15 @@
             <div class="signature-wrapper">
                 <div class="qr-section">
                     <div class="qr-box">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BEACUKAI-BA001800-KPU-01-2026-VERIFICATION-KPPBC-MEDAN" alt="QR Code Verifikasi">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BEACUKAI-BA001797-KPU-01-2026-RESI-001797572209-VERIFICATION-KPPBC-MEDAN-4JT" alt="QR Code Verifikasi">
                     </div>
                     <div class="qr-label">✓ SCAN UNTUK VERIFIKASI</div>
                 </div>
 
                 <div class="signature-section">
-                    <!-- Materai -->
+                    <!-- Materai Tempel -->
                     <div class="materai-stamp">
-                        <div class="materai-text">METERAI</div>
-                        <div class="materai-text">TEMPEL</div>
-                        <div class="materai-value">Rp 10.000</div>
+                        <img src="https://i.ibb.co/C3jHqyNv/IMG-20260120-162645.jpg" alt="Materai Tempel">
                     </div>
 
                     <!-- Official Stamp -->
@@ -707,19 +727,27 @@
                         </div>
                     </div>
 
+                    <!-- Legalisasi Stamp -->
+                    <div class="legalisasi-stamp">
+                        <img src="https://i.ibb.co/LDZmbQXY/1000010580-11zon.jpg" alt="Wajib Legalisasi">
+                    </div>
+
                     <div class="officer-name">AGUS SULISQQI</div>
                     <div class="officer-nip">NIP. 19780322 200312 1 002</div>
                 </div>
             </div>
 
-                        </div>
+            <!-- Warning Notice -->
+            <div class="warning-notice">
+                <strong>⚠️ PENTING:</strong> Dokumen ini adalah berita acara resmi yang dikeluarkan oleh Direktorat Jenderal Bea dan Cukai. Untuk verifikasi, scan QR Code di atas atau hubungi Kantor Bea dan Cukai Medan di (061) 7871111 atau kunjungi website resmi www.beacukai.go.id
+            </div>
 
             <!-- Document Footer -->
             <div class="document-footer">
-                Dokumen Resmi sesuai UU ITE<br>
+                Dokumen ini resmi dan sah sesuai UU ITE<br>
                 © 2026 Direktorat Jenderal Bea dan Cukai - Kementerian Keuangan Republik Indonesia
             </div>
         </div>
     </div>
 </body>
-</html> 
+</html>
