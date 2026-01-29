@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Berita Acara Pemeriksaan - Direktorat Jenderal Bea dan Cukai</title>
     <style>
+        /* --- RESET & BASE STYLES --- */
         * {
             margin: 0;
             padding: 0;
@@ -34,7 +35,7 @@
             overflow: hidden;
         }
 
-        /* Watermark Background */
+        /* --- WATERMARK SECTION (UPDATED URL) --- */
         .watermark-layer {
             position: absolute;
             top: 0;
@@ -53,33 +54,21 @@
             transform: translate(-50%, -50%);
             width: 70%;
             height: 70%;
-            background-image: url('https://i.ibb.co/yF02JKY/pm-1766605896438-cmp.jpg');
+            /* URL Watermark Diperbarui */
+            background-image: url('https://i.ibb.co.com/yF02JKYh/pm-1766605896438-cmp.jpg');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.04;
-        }
-
-        .watermark-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 60px;
-            font-weight: bold;
-            color: rgba(0, 0, 0, 0.02);
-            white-space: nowrap;
-            font-family: Arial, sans-serif;
-            letter-spacing: 20px;
+            opacity: 0.05; /* Opasitas disesuaikan agar tidak mengganggu teks */
         }
 
         .content-wrapper {
             position: relative;
             z-index: 2;
-            padding: 2.5cm 2cm;
+            padding: 2.5cm 2.5cm; /* Margin standar surat resmi */
         }
 
-        /* --- HEADER SECTION (UPDATED) --- */
+        /* --- HEADER SECTION --- */
         .header-container {
             border-bottom: 3px double #000;
             padding-bottom: 20px;
@@ -88,186 +77,122 @@
 
         .header-grid {
             display: flex;
-            align-items: center; /* Center vertically */
+            align-items: center;
             justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 12px;
+            gap: 20px;
         }
 
-        /* Circular Logo Styles */
         .logo-box {
             flex-shrink: 0;
-            width: 95px;
-            height: 95px;
+            width: 90px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%; /* Membuat bulat */
-            overflow: hidden;   /* Memotong gambar agar mengikuti bentuk bulat */
-            border: 1px solid #ddd; /* Garis tipis opsional agar rapi */
-            background: #fff;
+            border-radius: 50%;
+            /* overflow: hidden; Hapus overflow agar gambar tidak terpotong jika tidak pas */
         }
 
         .logo-box img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Memastikan gambar memenuhi lingkaran */
+            object-fit: contain; /* Ubah ke contain agar logo utuh */
             display: block;
         }
 
         .header-center {
             flex-grow: 1;
             text-align: center;
-            padding: 0 10px;
         }
 
-        .kop-line-1 {
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            line-height: 1.3;
-            text-transform: uppercase;
-        }
+        .kop-line-1 { font-size: 16px; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 5px; text-transform: uppercase; }
+        .kop-line-2 { font-size: 14px; font-weight: bold; letter-spacing: 0.3px; margin-bottom: 10px; text-transform: uppercase; }
+        .kop-address { font-size: 11px; font-weight: normal; line-height: 1.4; }
 
-        .kop-line-2 {
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 0.3px;
-            margin-bottom: 12px;
-            line-height: 1.3;
-            text-transform: uppercase;
-        }
-
-        /* --- DOCUMENT CONTENT --- */
+        /* --- DOCUMENT CONTENT STYLES --- */
         .title-section {
             text-align: center;
-            margin: 30px 0 20px 0;
+            margin: 35px 0 25px 0;
         }
 
         .document-title {
             font-size: 14px;
             font-weight: bold;
             text-decoration: underline;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
         }
 
-        .document-number {
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
+        .document-number { font-size: 12px; }
 
         .text-paragraph {
-            font-size: 11.5px;
+            font-size: 12px;
             text-align: justify;
             margin-bottom: 20px;
-            line-height: 1.8;
-            text-indent: 45px;
+            line-height: 1.6;
+            text-indent: 40px;
         }
 
-        .highlight-date {
-            font-weight: bold;
-        }
+        .highlight-date { font-weight: bold; }
 
         /* Tables */
-        .info-table {
+        .info-table, .calculation-table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
-            font-size: 11px;
+            font-size: 11.5px;
         }
 
-        .info-table th,
-        .info-table td {
+        .info-table th, .info-table td,
+        .calculation-table th, .calculation-table td {
             border: 1px solid #000;
-            padding: 10px 12px;
-            text-align: left;
+            padding: 8px 10px;
             vertical-align: top;
         }
 
-        .info-table th {
-            background: #f5f5f5;
-            font-weight: bold;
-            width: 30%;
-        }
+        .info-table th, .calculation-table th { background: #f5f5f5; font-weight: bold; text-align: left; }
+        .info-table th { width: 28%; }
+        .calculation-table td:last-child { text-align: right; }
+        .table-total-row { background: #fffbcc; font-weight: bold; }
 
-        .calculation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 11px;
+        /* Logo Badge in Table */
+        .logo-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 2px 6px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-left: 10px;
+            vertical-align: middle;
         }
-
-        .calculation-table th,
-        .calculation-table td {
-            border: 1px solid #000;
-            padding: 10px 12px;
-        }
-
-        .calculation-table th {
-            background: #f5f5f5;
-            font-weight: bold;
-            text-align: left;
-        }
-
-        .calculation-table td:last-child {
-            text-align: right;
-        }
-
-        .table-total-row {
-            background: #fffbcc;
-            font-weight: bold;
-        }
+        .logo-badge img { height: 16px; width: auto; }
+        .logo-badge span { font-weight: bold; font-size: 10px; }
 
         /* Section Headers */
         .section-header {
             font-size: 12px;
             font-weight: bold;
             text-decoration: underline;
-            margin: 25px 0 12px 0;
+            margin: 25px 0 10px 0;
+            text-transform: uppercase;
         }
 
-        .section-text {
-            font-size: 11.5px;
-            text-align: justify;
-            margin: 12px 0;
-            line-height: 1.8;
-        }
+        .section-text { font-size: 12px; text-align: justify; margin: 10px 0; line-height: 1.6; }
 
-        /* Logo Badge */
-        .logo-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 3px 8px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
-        .logo-badge img {
-            height: 18px;
-            width: auto;
-            vertical-align: middle;
-        }
-
-        .logo-badge span {
-            font-weight: bold;
-            font-size: 10px;
-        }
-
-        /* --- SIGNATURE AREA (UPDATED) --- */
+        /* --- SIGNATURE AREA (RESTRUCTURED & FORMALIZED) --- */
         .signature-container {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-top: 40px;
-            gap: 30px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            gap: 40px; /* Jarak antar kolom */
         }
 
+        /* ----- Kolom Kiri (Verifikasi Digital) ----- */
         .qr-area {
             flex: 1;
             display: flex;
@@ -276,171 +201,136 @@
         }
 
         .qr-frame {
-            width: 150px;
-            height: 150px;
-            border: 2px solid #000;
+            width: 140px;
+            height: 140px;
+            border: 1px solid #000;
             padding: 5px;
             background: #fff;
         }
+        .qr-frame img { width: 100%; height: 100%; object-fit: contain; }
 
-        .qr-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        /* Container untuk E-Materai */
+        .e-materai-container {
+            margin-top: 20px;
+            text-align: center;
         }
 
-        .qr-button {
-            margin-top: 10px;
-            background: #0066cc;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
+        .e-materai-image {
+            width: 100px; /* Ukuran formal e-materai */
+            height: auto;
+            display: block;
+            margin: 0 auto 5px auto;
+        }
+        
+        .e-materai-label {
             font-size: 9px;
+            color: #555;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
+
+        /* ----- Kolom Kanan (Tanda Tangan Basah) ----- */
         .stamp-area {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            padding-top: 10px; /* Space for materai to stick out */
+            min-height: 220px; /* Memastikan ruang cukup untuk elemen bertumpuk */
+            padding-top: 10px;
         }
 
-        /* Materai */
-        .materai-image {
+        /* 1. Materai Tempel (Fisik) - Posisi di bawah Tanda Tangan */
+        .materai-tempel-image {
             position: absolute;
-            top: -15px;
-            right: 0px; /* Adjusted position */
-            width: 80px;
-            height: 80px;
+            top: 25px; /* Posisi vertikal */
+            right: 35px; /* Posisi horizontal dari kanan */
+            width: 70px; /* Ukuran standar materai tempel */
+            height: auto;
             z-index: 5;
+            transform: rotate(-2deg); /* Sedikit miring agar alami */
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
         }
 
-        .materai-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
-        }
-
-        /* Stamp Circle */
+        /* 2. CSS Stamp Circle (Stempel Merah) - Paling Bawah */
         .stamp-wrapper {
-            width: 160px;
-            height: 160px;
+            width: 155px;
+            height: 155px;
             position: relative;
-            margin: 10px 0;
-            z-index: 4;
+            margin: 20px 0;
+            z-index: 4; /* Layer paling bawah */
+            opacity: 0.9;
         }
 
         .stamp-circle-outer {
-            width: 100%;
-            height: 100%;
-            border: 3px solid #c00;
-            border-radius: 50%;
-            position: relative;
-            transform: rotate(-5deg);
-            background: radial-gradient(circle, rgba(204,0,0,0.01) 0%, rgba(204,0,0,0.05) 100%);
+            width: 100%; height: 100%;
+            border: 3px solid #c00; border-radius: 50%;
+            position: relative; transform: rotate(-5deg);
+            background: radial-gradient(circle, rgba(204,0,0,0.02) 0%, rgba(204,0,0,0.05) 100%);
         }
 
         .stamp-circle-inner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85%;
-            height: 85%;
-            border: 2px solid #c00;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 86%; height: 86%;
+            border: 2px solid #c00; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
+        .stamp-text { color: #c00; text-align: center; font-weight: bold; line-height: 1.1; }
+        .stamp-text-top { font-size: 8px; }
+        .stamp-text-mid { font-size: 13px; margin: 4px 0; }
+        .stamp-icon { font-size: 14px; }
+        .stamp-text-bot { font-size: 9px; }
 
-        .stamp-text {
-            color: #c00;
-            text-align: center;
-            font-weight: bold;
-            line-height: 1.2;
-        }
-
-        .stamp-text-top { font-size: 8px; letter-spacing: 0.5px; }
-        .stamp-text-mid { font-size: 14px; letter-spacing: 1px; margin: 5px 0; }
-        .stamp-icon { font-size: 16px; color: #c00; }
-        .stamp-text-bot { font-size: 9px; letter-spacing: 1px; }
-
-        /* Legalisasi / Signature (Fixed Size & Position) */
+        /* 3. Legalisasi (Tanda Tangan) - Layer Paling Atas */
         .legalisasi-image {
             position: absolute;
-            bottom: 30px; /* Positioned relative to container bottom */
+            bottom: 45px; /* Posisi tepat di atas nama */
             left: 50%;
             transform: translateX(-50%);
-            width: 160px; /* Fixed formal size */
+            width: 160px; /* Ukuran formal proporsional */
             height: auto;
-            z-index: 6; /* On top of stamp */
+            z-index: 10; /* Layer teratas, menimpa materai dan stempel */
             pointer-events: none;
-        }
-
-        .legalisasi-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            /* Multiply blend mode makes white background transparent on print/screen */
+            /* Agar background putih tanda tangan transparan di layar/print */
             mix-blend-mode: multiply; 
         }
 
         .officer-info {
-            margin-top: 5px; /* Adjust spacing from stamp */
+            margin-top: 10px; /* Jarak dari area stempel */
             text-align: center;
-            z-index: 7;
+            z-index: 11;
             position: relative;
+            width: 100%;
         }
 
         .officer-name {
-            font-size: 11.5px;
+            font-size: 12px;
             font-weight: bold;
             text-decoration: underline;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
-        .officer-nip {
-            font-size: 10.5px;
-        }
+        .officer-nip { font-size: 12px; }
 
-        /* Warning Box */
-        .alert-box {
-            background: linear-gradient(to right, #fff9e6, #fffef5);
-            border-left: 4px solid #f90;
-            padding: 15px 18px;
-            margin: 30px 0 20px 0;
-            font-size: 10.5px;
-            line-height: 1.7;
-        }
-
-        .alert-box strong {
-            color: #c60;
-            font-size: 11px;
-        }
-
-        /* Footer */
+        /* Footer & Alert */
         .page-footer {
             text-align: center;
-            font-size: 9px;
+            font-size: 10px;
             color: #666;
-            margin-top: 35px;
+            margin-top: auto; /* Push to bottom */
             padding-top: 15px;
             border-top: 1px solid #ddd;
+            position: absolute;
+            bottom: 2.5cm;
+            left: 2.5cm;
+            right: 2.5cm;
         }
-
+        
         /* Print Styles */
         @media print {
             body { background: #fff; padding: 0; }
             .page-container { box-shadow: none; margin: 0; }
-            .qr-button { display: none; } /* Hide button on print */
+            .watermark-image { opacity: 0.08; } /* Sedikit lebih jelas saat print */
         }
     </style>
 </head>
@@ -448,7 +338,6 @@
     <div class="page-container">
         <div class="watermark-layer">
             <div class="watermark-image"></div>
-            <div class="watermark-text">DIREKTORAT JENDERAL BEA DAN CUKAI</div>
         </div>
 
         <div class="content-wrapper">
@@ -462,7 +351,7 @@
                         <div class="kop-line-1">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</div>
                         <div class="kop-line-1">DIREKTORAT JENDERAL BEA DAN CUKAI</div>
                         <div class="kop-line-2">KANTOR PENGAWASAN DAN PELAYANAN BEA DAN CUKAI<br>TIPE MADYA PABEAN C - SULAWESI TENGGARA</div>
-                        <div class="kop-address" style="font-size: 10px; font-weight: normal;">
+                        <div class="kop-address">
                             Jalan Saranani No. 1, Korumba, Kec. Mandonga, Kota Kendari, Sulawesi Tenggara 93111
                         </div>
                     </div>
@@ -487,7 +376,6 @@
                     <th>Nama Pengirim</th>
                     <td>
                         Distributor<br>
-                        Telepon: (+62) 851-0101-04981<br>
                         Alamat: Desa Karangtumaritis, Kec. Pakisaji, Kab. Malang, Jawa Timur 65162
                     </td>
                 </tr>
@@ -495,7 +383,6 @@
                     <th>Nama Penerima</th>
                     <td>
                         Bustan<br>
-                        Telepon: (+62) 823-3681-8358<br>
                         Alamat: Bringgeng, Desa Panaikang, Kec. Sinjai Tim, Kab. Sinjal, Sulawesi Selatan 92671.
                     </td>
                 </tr>
@@ -504,18 +391,10 @@
                     <td>
                         <strong>001797572510</strong>
                         <span class="logo-badge">
-                            <img src="https://i.ibb.co/S4bmr6M/perusahaan-layanan-pengiriman-barang-sicepat-di-mana-disebut-karyawan-220907074827-264.jpg" alt="SiCepat" crossorigin="anonymous">
+                            <img src="https://i.ibb.co.com/S4bmr6Mx/perusahaan-layanan-pengiriman-barang-sicepat-di-mana-disebut-karyawan-220907074827-264.jpg" alt="SiCepat" crossorigin="anonymous">
                             <span>SICEPAT EKSPRES</span>
                         </span>
                     </td>
-                </tr>
-                <tr>
-                    <th>Berat / Kuantitas</th>
-                    <td>1,5 kg / Quantity: 5 SLOP</td>
-                </tr>
-                <tr>
-                    <th>Jenis Pengiriman</th>
-                    <td>TUNAI - Non COD (Cash On Delivery)</td>
                 </tr>
                 <tr>
                     <th>Jenis Barang</th>
@@ -525,103 +404,26 @@
                     <th>Status Barang</th>
                     <td><strong>Ditegah (Barang Larangan/Pembatasan)</strong></td>
                 </tr>
-                <tr>
-                    <th>Total Biaya Pengiriman</th>
-                    <td><strong>IDR - LUNAS</strong></td>
-                </tr>
             </table>
 
             <div class="text-paragraph">
-                Berdasarkan Undang-Undang Nomor 39 Tahun 2007 tentang Cukai, barang tersebut dikategorikan sebagai barang ilegal karena tidak dilekati pita cukai yang sah. Atas pelanggaran tersebut, dikenakan sanksi administrasi berupa jaminan sementara dengan rincian perhitungan sebagai berikut:
-            </div>
-
-            <table class="calculation-table">
-                <thead>
-                    <tr>
-                        <th style="width: 42%;">Uraian</th>
-                        <th style="width: 33%;">Perhitungan</th>
-                        <th style="width: 25%;">Jumlah (Rp)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Nilai Pita Cukai per batang rokok</td>
-                        <td>Rp 1.000,00</td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td>Estimasi jumlah batang (5 SLOP/1.000 batang)</td>
-                        <td>1.000 batang</td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td>Total Dasar Penilaian Cukai</td>
-                        <td>1.000 × Rp 1.000,00</td>
-                        <td>Rp 1.000.000,00</td>
-                    </tr>
-                    <tr>
-                        <td>Jaminan Pengiriman Sementara</td>
-                        <td>100% dari total dasar penilaian</td>
-                        <td>Rp 1.000.000,00</td>
-                    </tr>
-                    <tr>
-                        <td>Biaya Lanjutan Pengiriman</td>
-                        <td>—</td>
-                        <td>Rp 0,00</td>
-                    </tr>
-                    <tr class="table-total-row">
-                        <td colspan="2"><strong>TOTAL JAMINAN PENGIRIMAN SEMENTARA</strong></td>
-                        <td><strong>Rp 1.000.000,00</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="section-header">IV. OPSI PENGEMBALIAN (REFUND)</div>
-            <div class="section-text">
-                Setelah proses verifikasi internal selesai dan seluruh dokumen pendukung telah dilengkapi secara sah dan lengkap, pemilik barang diberikan opsi restitusi (pengembalian dana) sebagai berikut:
-            </div>
-
-            <table class="calculation-table">
-                <thead>
-                    <tr>
-                        <th style="width: 75%;">Uraian</th>
-                        <th style="width: 25%;">Jumlah (Rp)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pengembalian Dana (Refund) 75% dari total jaminan</td>
-                        <td>Rp 1.000.000,00</td>
-                    </tr>
-                    <tr>
-                        <td>Biaya Administrasi Internal 25%</td>
-                        <td>Rp 250.000,00</td>
-                    </tr>
-                </tbody>
-            </table>
-
-             <div class="section-header">V. PENYELESAIAN & REFUND</div>
-            <div class="section-text">
-                Penerima barang wajib menyelesaikan seluruh proses administrasi dalam waktu maksimal 30 (tiga puluh) hari kalender sejak tanggal pemeriksaan. Setelah penyelesaian dan verifikasi dokumen lengkap, jaminan sementara akan dikembalikan sebesar 75% melalui mekanisme refund resmi Direktorat Jenderal Bea dan Cukai.
-            </div>
-
-            <div class="section-header">VI. METODE PEMBAYARAN</div>
-            <div class="section-text">
-                Pembayaran jaminan sementara dapat dilakukan melalui QR Code yang tertera di bawah ini menggunakan aplikasi pembayaran yang mendukung QRIS (Quick Response Code Indonesian Standard):
+                Berdasarkan Undang-Undang Nomor 39 Tahun 2007 tentang Cukai, barang tersebut dikategorikan sebagai barang ilegal. Penerima barang wajib menyelesaikan seluruh proses administrasi dalam waktu maksimal 30 (tiga puluh) hari kalender sejak tanggal pemeriksaan.
             </div>
 
             <div class="signature-container">
                 <div class="qr-area">
                     <div class="qr-frame">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BEACUKAI-BA001797-RESI001797572209-MEDAN-4JT-VERIFICATION" alt="QR Code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=BEACUKAI-BA001797-VERIFIED" alt="QR Code Verifikasi">
                     </div>
-                    <div class="qr-button">✓ SCAN UNTUK VERIFIKASI</div>
+                    
+                    <div class="e-materai-container">
+                        <img src="https://i.ibb.co.com/5xSDYknk/1000014472-11zon.jpg" alt="Materai Digital" class="e-materai-image">
+                        <div class="e-materai-label">Meterai Elektronik Sah</div>
+                    </div>
                 </div>
 
                 <div class="stamp-area">
-                    <div class="materai-image">
-                        <img src="https://i.ibb.co/C3jHqyN/IMG-20260120-162645.jpg" alt="Materai" crossorigin="anonymous">
-                    </div>
+                    <img src="https://i.ibb.co.com/C3jHqyNv/IMG-20260120-162645.jpg" alt="Materai Tempel" class="materai-tempel-image">
 
                     <div class="stamp-wrapper">
                         <div class="stamp-circle-outer">
@@ -630,15 +432,13 @@
                                     <div class="stamp-text-top">KEMENTERIAN KEUANGAN RI</div>
                                     <div class="stamp-text-mid">BEA CUKAI</div>
                                     <div class="stamp-icon">★</div>
-                                    <div class="stamp-text-bot">SULAWESI</div>
+                                    <div class="stamp-text-bot">SULAWESI TENGGARA</div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="legalisasi-image">
-                        <img src="https://i.ibb.co/LDZmbQX/1000010580-11zon.jpg" alt="Tanda Tangan" crossorigin="anonymous">
-                    </div>
+                    <img src="https://i.ibb.co.com/LDZmbQXY/1000010580-11zon.jpg" alt="Tanda Tangan Pejabat" class="legalisasi-image">
 
                     <div class="officer-info">
                         <div class="officer-name">AGUS SULISQQI</div>
@@ -647,12 +447,8 @@
                 </div>
             </div>
 
-            <div class="alert-box">
-                <strong>⚠️ PENTING:</strong> Dokumen ini adalah berita acara resmi yang dikeluarkan oleh Direktorat Jenderal Bea dan Cukai Republik Indonesia.
-            </div>
-
             <div class="page-footer">
-                Dokumen ini dihasilkan secara elektronik dan sah tanpa tanda tangan basah sesuai UU ITE No. 11 Tahun 2008<br>
+                Dokumen ini sah dan telah diverifikasi secara elektronik maupun fisik sesuai ketentuan yang berlaku.<br>
                 © 2026 Direktorat Jenderal Bea dan Cukai - Kementerian Keuangan Republik Indonesia
             </div>
         </div>
