@@ -3,94 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faktur Resmi R2 Nusantara - #INV/R2N/2026/0202</title>
+    <title>Invoice_R2N_Adisyahputra</title>
     <style>
-        :root { --primary-color: #b71c1c; --secondary-color: #333; --bg-light: #f8f9fa; }
-        body { font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif; color: #333; line-height: 1.6; background-color: #e0e0e0; padding: 40px 20px; }
-        
-        .invoice-box { 
-            max-width: 850px; 
-            margin: auto; 
-            padding: 50px; 
-            background: #fff; 
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        :root { 
+            --primary: #c62828; 
+            --dark: #263238; 
+            --light-gray: #fcfcfc;
+            --border: #e0e0e0;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: #e9ecef; 
+            margin: 0; 
+            padding: 40px 10px;
+            color: var(--dark);
+        }
+
+        .invoice-box {
+            max-width: 850px;
+            margin: auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
 
-        /* Watermark */
+        /* Watermark Logo R2 Nusantara */
         .invoice-box::before {
-            content: "ORIGINAL";
+            content: "";
             position: absolute;
-            top: 50%;
+            top: 55%;
             left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 100px;
-            font-weight: bold;
-            color: rgba(0,0,0,0.02);
+            transform: translate(-50%, -50%);
+            width: 550px;
+            height: 550px;
+            background-image: url('https://i.ibb.co.com/Kx7xXbTk/1769971101597.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.04;
             z-index: 0;
             pointer-events: none;
         }
 
-        .header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 30px; position: relative; z-index: 1; }
-        .brand h1 { margin: 0; color: var(--primary-color); font-size: 28px; letter-spacing: 2px; font-weight: 800; }
-        .brand p { margin: 0; font-size: 11px; text-transform: uppercase; color: #777; letter-spacing: 1px; }
-
-        .invoice-meta { text-align: right; }
-        .invoice-meta h2 { margin: 0; font-size: 32px; color: #444; font-weight: 300; }
-        .invoice-meta p { margin: 0; font-weight: bold; color: var(--primary-color); }
-
-        .address-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; position: relative; z-index: 1; }
-        .address-box h4 { margin: 0 0 10px 0; font-size: 13px; color: var(--primary-color); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .address-box p { margin: 0; font-size: 13px; color: #555; }
-
-        .items-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; position: relative; z-index: 1; }
-        .items-table th { background: #444; color: #fff; padding: 12px 15px; text-align: left; font-size: 12px; text-transform: uppercase; }
-        .items-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 13px; }
-        .items-table tr:nth-child(even) { background-color: #fafafa; }
-
-        .summary-container { display: flex; justify-content: flex-end; margin-bottom: 40px; position: relative; z-index: 1; }
-        .summary-table { width: 300px; border-collapse: collapse; }
-        .summary-table td { padding: 8px 15px; font-size: 14px; }
-        .total-row { background: var(--primary-color); color: #fff; font-weight: bold; }
-        .total-row td { padding: 12px 15px; font-size: 18px; }
-
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; margin-top: 50px; position: relative; z-index: 1; }
-        
-        .payment-details { background: var(--bg-light); padding: 20px; border-radius: 4px; border-left: 4px solid var(--primary-color); }
-        .payment-details h5 { margin: 0 0 10px 0; font-size: 14px; color: var(--secondary-color); }
-        .payment-details table { font-size: 13px; width: 100%; }
-        .payment-details td { padding: 3px 0; }
-
-        .auth-section { text-align: center; }
-        .stamp-area { height: 80px; position: relative; display: flex; align-items: center; justify-content: center; }
-        .official-stamp { 
-            border: 3px double rgba(183, 28, 28, 0.4); 
-            color: rgba(183, 28, 28, 0.5); 
-            padding: 5px 15px; 
-            font-weight: bold; 
-            transform: rotate(-12deg); 
-            border-radius: 8px;
-            font-size: 14px;
-            text-transform: uppercase;
+        /* Header Layout */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 25px;
+            margin-bottom: 35px;
+            position: relative;
+            z-index: 1;
         }
 
-        .terms { margin-top: 40px; font-size: 10px; color: #999; border-top: 1px solid #eee; padding-top: 15px; }
+        .brand-section { display: flex; align-items: center; gap: 20px; }
+        .logo-main { width: 85px; height: 85px; object-fit: contain; border-radius: 10px; }
+        
+        .brand-text h1 { margin: 0; font-size: 30px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+        .brand-text p { margin: 2px 0; font-size: 12px; color: #666; font-weight: 500; text-transform: uppercase; }
 
-        .no-print-btn { 
-            display: block; width: 220px; margin: 30px auto; padding: 12px; 
-            background: var(--primary-color); color: #fff; text-align: center; 
-            border: none; border-radius: 50px; cursor: pointer; text-decoration: none; 
-            font-weight: bold; box-shadow: 0 4px 15px rgba(183, 28, 28, 0.3);
+        .meta-section { text-align: right; }
+        .meta-section h2 { margin: 0; font-size: 36px; font-weight: 300; letter-spacing: 5px; color: #999; }
+        .inv-number { font-size: 16px; font-weight: 700; color: var(--primary); margin: 5px 0; }
+
+        /* Information Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-box h4 { 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            color: var(--primary); 
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .info-box p { margin: 0; font-size: 13.5px; line-height: 1.6; color: #444; }
+
+        /* Table Styling */
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            position: relative;
+            z-index: 1;
+        }
+
+        .items-table th {
+            background: var(--dark);
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+
+        .items-table td {
+            padding: 18px 15px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .items-table tr:nth-child(even) { background: var(--light-gray); }
+
+        .item-desc strong { color: var(--dark); display: block; font-size: 15px; }
+        .item-desc span { font-size: 12px; color: #888; }
+
+        /* Calculations */
+        .calc-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .calc-table { width: 350px; }
+        .calc-table td { padding: 10px 15px; font-size: 14px; }
+        .total-row { 
+            background: var(--primary); 
+            color: #fff; 
+            font-weight: 700; 
+            border-radius: 0 0 8px 8px;
+        }
+        .total-row td { font-size: 20px; padding: 15px; }
+
+        /* Footer Section */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .payment-card {
+            background: var(--light-gray);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .payment-card h5 { margin: 0 0 15px 0; font-size: 13px; color: var(--primary); letter-spacing: 1px; }
+        
+        .bank-details { width: 100%; font-size: 13px; }
+        .bank-details td { padding: 5px 0; }
+
+        .signature-group {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .sign-box { width: 140px; }
+        .sign-box p { font-size: 12px; margin-bottom: 70px; }
+        .sign-box strong { border-top: 1px solid var(--dark); padding-top: 5px; display: block; font-size: 13px; }
+
+        .stamp-img {
+            width: 85px;
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            opacity: 0.5;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .no-print-btn {
+            display: block;
+            width: 280px;
+            margin: 40px auto;
+            padding: 15px;
+            background: var(--primary);
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(198, 40, 40, 0.2);
+            border: none;
+            cursor: pointer;
             transition: 0.3s;
         }
-        .no-print-btn:hover { background: #8e1616; transform: translateY(-2px); }
 
-        @media print { 
-            body { background: #fff; padding: 0; } 
-            .invoice-box { box-shadow: none; border: 1px solid #eee; width: 100%; max-width: 100%; padding: 30px; } 
+        .no-print-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(198, 40, 40, 0.3); }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .invoice-box { box-shadow: none; border: none; padding: 20px; width: 100%; }
             .no-print-btn { display: none; }
+            .invoice-box::before { opacity: 0.06; }
         }
     </style>
 </head>
@@ -98,70 +217,70 @@
 
 <div class="invoice-box">
     <div class="header">
-        <div class="brand">
-            <h1>R2 NUSANTARA</h1>
-            <p>Logistics & Distribution Network</p>
-            <div style="font-size: 11px; color: #666; margin-top: 5px;">
-                Malang, Jawa Timur, Indonesia 65162<br>
-                Email: admin@r2nusantara.com | Telp: (+62) 821-xxxx-xxxx
+        <div class="brand-section">
+            <img src="https://i.ibb.co.com/Kx7xXbTk/1769971101597.jpg" alt="Logo" class="logo-main">
+            <div class="brand-text">
+                <h1>R2 NUSANTARA</h1>
+                <p>Distribusi Logistik & Supply Chain</p>
+                <div style="font-size: 10px; color: #888; margin-top: 5px; text-transform: none;">
+                    Malang, Jawa Timur, Indonesia 65162<br>
+                    WhatsApp Support: (+62) 821-xxxx-xxxx
+                </div>
             </div>
         </div>
-        <div class="invoice-meta">
-            <h2>FAKTUR</h2>
-            <p>#INV/R2N/2026/0202</p>
-            <div style="font-size: 12px; color: #666; margin-top: 5px;">
-                Tanggal: 02 Februari 2026<br>
-                Jatuh Tempo: 02 Februari 2026
-            </div>
+        <div class="meta-section">
+            <h2>INVOICE</h2>
+            <div class="inv-number">#INV/R2N/2026/0202</div>
+            <p style="margin:0; font-size:12px; color:#666;">Tanggal Terbit: 02 Feb 2026</p>
         </div>
     </div>
 
-    <div class="address-container">
-        <div class="address-box">
-            <h4>Diterbitkan Oleh:</h4>
-            <strong>Gudang R2 Nusantara</strong><br>
-            Pusat Distribusi Utama - Jawa Timur<br>
-            Divisi Logistik Rokok & Tembakau
+    <div class="info-grid">
+        <div class="info-box">
+            <h4>Pusat Pengiriman:</h4>
+            <p><strong>Gudang Utama R2 Nusantara</strong><br>
+            Divisi Logistik Wilayah Timur<br>
+            Jawa Timur - Indonesia</p>
         </div>
-        <div class="address-box">
-            <h4>Ditagihkan Kepada:</h4>
-            <strong>Adisyahputra</strong><br>
+        <div class="info-box">
+            <h4>Ditujukan Kepada:</h4>
+            <p><strong>Adisyahputra</strong><br>
             (+62) 813-6289-2993<br>
             Cinta Dapat, Dsn. Mawar, Ds. Padang Brahrang,<br>
-            Kec. Selesai, Kab. Langkat, Sumatera Utara 20762
+            Kec. Selesai, Kab. Langkat, Sumatera Utara 20762</p>
         </div>
     </div>
 
     <table class="items-table">
         <thead>
             <tr>
-                <th>Item & Deskripsi</th>
+                <th width="50%">Deskripsi Produk</th>
                 <th style="text-align: center;">Kuantitas</th>
-                <th style="text-align: right;">Harga Satuan</th>
-                <th style="text-align: right;">Total</th>
+                <th style="text-align: right;">Harga Slop</th>
+                <th style="text-align: right;">Total Harga</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>Helium Blue</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td class="item-desc"><strong>Helium Blue</strong><span>Kemasan: 1 Bal</span></td>
                 <td style="text-align: center;">20 Slop</td>
                 <td style="text-align: right;">Rp 80.000</td>
                 <td style="text-align: right;">Rp 1.600.000</td>
             </tr>
             <tr>
-                <td><strong>Platinum Seven</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td class="item-desc"><strong>Platinum Seven</strong><span>Kemasan: 1 Bal</span></td>
                 <td style="text-align: center;">20 Slop</td>
                 <td style="text-align: right;">Rp 80.000</td>
                 <td style="text-align: right;">Rp 1.600.000</td>
             </tr>
             <tr>
-                <td><strong>Oris Mango</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td class="item-desc"><strong>Oris Mango</strong><span>Kemasan: 1 Bal</span></td>
                 <td style="text-align: center;">20 Slop</td>
                 <td style="text-align: right;">Rp 90.000</td>
                 <td style="text-align: right;">Rp 1.800.000</td>
             </tr>
             <tr>
-                <td><strong>Luffman Merah</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td class="item-desc"><strong>Luffman Merah</strong><span>Kemasan: 1 Bal</span></td>
                 <td style="text-align: center;">20 Slop</td>
                 <td style="text-align: right;">Rp 70.000</td>
                 <td style="text-align: right;">Rp 1.400.000</td>
@@ -169,19 +288,15 @@
         </tbody>
     </table>
 
-    <div class="summary-container">
-        <table class="summary-table">
+    <div class="calc-wrapper">
+        <table class="calc-table">
             <tr>
-                <td>Total Kuantitas:</td>
-                <td style="text-align: right;">80 Slop</td>
+                <td style="color:#888;">Total Item:</td>
+                <td style="text-align: right; font-weight: 600;">80 Slop (4 Bal)</td>
             </tr>
             <tr>
-                <td>Subtotal:</td>
-                <td style="text-align: right;">Rp 6.400.000</td>
-            </tr>
-            <tr>
-                <td>Biaya Kirim:</td>
-                <td style="text-align: right;">Gratis / Sudah Termasuk</td>
+                <td style="color:#888;">Biaya Pengiriman:</td>
+                <td style="text-align: right; color: #2e7d32; font-weight: 600;">GRATIS</td>
             </tr>
             <tr class="total-row">
                 <td>GRAND TOTAL:</td>
@@ -191,37 +306,35 @@
     </div>
 
     <div class="footer-grid">
-        <div class="payment-details">
-            <h5>INSTRUKSI PEMBAYARAN:</h5>
-            <table>
-                <tr><td width="100">Bank</td><td>: <strong>Bank BRI</strong></td></tr>
-                <tr><td>No. Rekening</td><td>: <strong>7664-0100-2223-504</strong></td></tr>
-                <tr><td>Atas Nama</td><td>: <strong>Muhammad Aryandi</strong></td></tr>
-                <tr><td colspan="2" style="font-size: 11px; color: #666; padding-top: 10px;">*Mohon sertakan nomor invoice pada berita transfer.</td></tr>
+        <div class="payment-card">
+            <h5>INFORMASI PEMBAYARAN:</h5>
+            <table class="bank-details">
+                <tr><td width="110">Bank Tujuan</td><td>: <strong>BANK BRI</strong></td></tr>
+                <tr><td>No. Rekening</td><td>: <strong style="font-size: 15px; letter-spacing: 0.5px;">7664-0100-2223-504</strong></td></tr>
+                <tr><td>Atas Nama</td><td>: <strong>MUHAMMAD ARYANDI</strong></td></tr>
             </table>
+            <p style="margin-top: 15px; font-size: 11px; color: #d32f2f; font-weight: 600;">*Pembayaran dianggap sah jika dana sudah masuk ke rekening di atas.</p>
         </div>
-        <div class="auth-section">
-            <p style="font-size: 12px; margin-bottom: 5px;">Hormat Kami,</p>
-            <div class="stamp-area">
-                <div class="official-stamp">R2 NUSANTARA<br>DISTRIBUTION</div>
+        
+        <div class="signature-group">
+            <div class="sign-box">
+                <p>Penerima,</p>
+                <strong>Adisyahputra</strong>
             </div>
-            <p style="margin-top: 10px; border-top: 1px solid #333; display: inline-block; padding: 0 20px;">
-                <strong>Admin Gudang Utama</strong>
-            </p>
+            <div class="sign-box" style="position: relative;">
+                <p>Hormat Kami,</p>
+                <img src="https://i.ibb.co.com/Kx7xXbTk/1769971101597.jpg" class="stamp-img" alt="Stamp">
+                <strong>Admin Gudang</strong>
+            </div>
         </div>
     </div>
 
-    <div class="terms">
-        <strong>Syarat & Ketentuan:</strong>
-        <ol style="padding-left: 15px; margin-top: 5px;">
-            <li>Pembayaran setelah barang terkonfirmasi terkirim di Ekspedisi.</li>
-            <li>Faktur ini adalah bukti transaksi yang sah jika pembayaran sudah diverifikasi.</li>
-            <li>Keluhan terkait jumlah barang wajib melampirkan video unboxing saat paket diterima.</li>
-        </ol>
+    <div style="margin-top: 40px; border-top: 1px dashed var(--border); padding-top: 15px; font-size: 10px; color: #aaa; text-align: center;">
+        Dokumen ini dibuat secara digital dan merupakan bukti transaksi sah PT R2 Nusantara Logistik.
     </div>
 </div>
 
-<button class="no-print-btn" onclick="window.print()">UNDUH FAKTUR RESMI (PDF)</button>
+<button class="no-print-btn" onclick="window.print()">CETAK & SIMPAN (PDF)</button>
 
 </body>
 </html>
