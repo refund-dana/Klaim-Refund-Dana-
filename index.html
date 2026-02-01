@@ -3,117 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faktur R2 Nusantara - Fahru Rahman K</title>
+    <title>Faktur Resmi R2 Nusantara - #INV/R2N/2026/0202</title>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; color: #333; line-height: 1.4; background-color: #f0f0f0; padding: 20px; }
-        .invoice-box { max-width: 800px; margin: auto; padding: 30px; background: #fff; border: 1px solid #ddd; border-top: 8px solid #d32f2f; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        :root { --primary-color: #b71c1c; --secondary-color: #333; --bg-light: #f8f9fa; }
+        body { font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif; color: #333; line-height: 1.6; background-color: #e0e0e0; padding: 40px 20px; }
         
-        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
-        .company-info h1 { margin: 0; color: #d32f2f; font-size: 24px; letter-spacing: 1px; }
-        .company-info p { margin: 2px 0; font-size: 12px; color: #666; }
+        .invoice-box { 
+            max-width: 850px; 
+            margin: auto; 
+            padding: 50px; 
+            background: #fff; 
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Watermark */
+        .invoice-box::before {
+            content: "ORIGINAL";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            font-weight: bold;
+            color: rgba(0,0,0,0.02);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--primary-color); padding-bottom: 20px; margin-bottom: 30px; position: relative; z-index: 1; }
+        .brand h1 { margin: 0; color: var(--primary-color); font-size: 28px; letter-spacing: 2px; font-weight: 800; }
+        .brand p { margin: 0; font-size: 11px; text-transform: uppercase; color: #777; letter-spacing: 1px; }
+
+        .invoice-meta { text-align: right; }
+        .invoice-meta h2 { margin: 0; font-size: 32px; color: #444; font-weight: 300; }
+        .invoice-meta p { margin: 0; font-weight: bold; color: var(--primary-color); }
+
+        .address-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; position: relative; z-index: 1; }
+        .address-box h4 { margin: 0 0 10px 0; font-size: 13px; color: var(--primary-color); border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .address-box p { margin: 0; font-size: 13px; color: #555; }
+
+        .items-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; position: relative; z-index: 1; }
+        .items-table th { background: #444; color: #fff; padding: 12px 15px; text-align: left; font-size: 12px; text-transform: uppercase; }
+        .items-table td { padding: 15px; border-bottom: 1px solid #eee; font-size: 13px; }
+        .items-table tr:nth-child(even) { background-color: #fafafa; }
+
+        .summary-container { display: flex; justify-content: flex-end; margin-bottom: 40px; position: relative; z-index: 1; }
+        .summary-table { width: 300px; border-collapse: collapse; }
+        .summary-table td { padding: 8px 15px; font-size: 14px; }
+        .total-row { background: var(--primary-color); color: #fff; font-weight: bold; }
+        .total-row td { padding: 12px 15px; font-size: 18px; }
+
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; margin-top: 50px; position: relative; z-index: 1; }
         
-        .invoice-title { text-align: right; }
-        .invoice-title h2 { margin: 0; color: #444; font-size: 28px; text-transform: uppercase; }
-        
-        .details-table { width: 100%; margin-bottom: 20px; border-spacing: 0; }
-        .details-table td { vertical-align: top; width: 50%; padding: 10px 0; }
-        
-        .items-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .items-table th { background: #444; color: #fff; padding: 12px; text-align: left; font-size: 13px; }
-        .items-table td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
-        
-        .total-section { text-align: right; margin-top: 20px; }
-        .total-row { display: inline-block; background: #f9f9f9; padding: 10px 20px; border-radius: 5px; }
-        
-        .payment-footer { display: flex; justify-content: space-between; margin-top: 40px; align-items: flex-end; }
-        .qris-box { border: 2px solid #333; padding: 10px; text-align: center; width: 160px; background: #fff; }
-        .qris-img { width: 140px; height: 140px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 10px; border: 1px solid #ddd; margin-bottom: 5px; }
-        
-        .signature-box { text-align: center; width: 200px; }
-        .stamp { color: rgba(211, 47, 47, 0.6); border: 2px solid rgba(211, 47, 47, 0.6); padding: 5px; display: inline-block; transform: rotate(-10deg); font-weight: bold; margin-bottom: 10px; font-size: 12px; border-radius: 5px; }
-        
-        .no-print-btn { display: block; width: 200px; margin: 20px auto; padding: 10px; background: #d32f2f; color: #fff; text-align: center; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-weight: bold; }
-        
-        @media print { .no-print-btn { display: none; } body { background: #fff; padding: 0; } .invoice-box { border: none; box-shadow: none; } }
+        .payment-details { background: var(--bg-light); padding: 20px; border-radius: 4px; border-left: 4px solid var(--primary-color); }
+        .payment-details h5 { margin: 0 0 10px 0; font-size: 14px; color: var(--secondary-color); }
+        .payment-details table { font-size: 13px; width: 100%; }
+        .payment-details td { padding: 3px 0; }
+
+        .auth-section { text-align: center; }
+        .stamp-area { height: 80px; position: relative; display: flex; align-items: center; justify-content: center; }
+        .official-stamp { 
+            border: 3px double rgba(183, 28, 28, 0.4); 
+            color: rgba(183, 28, 28, 0.5); 
+            padding: 5px 15px; 
+            font-weight: bold; 
+            transform: rotate(-12deg); 
+            border-radius: 8px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .terms { margin-top: 40px; font-size: 10px; color: #999; border-top: 1px solid #eee; padding-top: 15px; }
+
+        .no-print-btn { 
+            display: block; width: 220px; margin: 30px auto; padding: 12px; 
+            background: var(--primary-color); color: #fff; text-align: center; 
+            border: none; border-radius: 50px; cursor: pointer; text-decoration: none; 
+            font-weight: bold; box-shadow: 0 4px 15px rgba(183, 28, 28, 0.3);
+            transition: 0.3s;
+        }
+        .no-print-btn:hover { background: #8e1616; transform: translateY(-2px); }
+
+        @media print { 
+            body { background: #fff; padding: 0; } 
+            .invoice-box { box-shadow: none; border: 1px solid #eee; width: 100%; max-width: 100%; padding: 30px; } 
+            .no-print-btn { display: none; }
+        }
     </style>
 </head>
 <body>
 
 <div class="invoice-box">
-    <div class="header-container">
-        <div class="company-info">
+    <div class="header">
+        <div class="brand">
             <h1>R2 NUSANTARA</h1>
-            <p>Gudang Distribusi & Logistik Utama</p>
-            <p>Malang, Jawa Timur, Indonesia 65162.</p>
+            <p>Logistics & Distribution Network</p>
+            <div style="font-size: 11px; color: #666; margin-top: 5px;">
+                Malang, Jawa Timur, Indonesia 65162<br>
+                Email: admin@r2nusantara.com | Telp: (+62) 821-xxxx-xxxx
+            </div>
         </div>
-        <div class="invoice-title">
+        <div class="invoice-meta">
             <h2>FAKTUR</h2>
-            <p style="margin:0; font-weight:bold;">#INV/R2N/2026/0131</p>
+            <p>#INV/R2N/2026/0202</p>
+            <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                Tanggal: 02 Februari 2026<br>
+                Jatuh Tempo: 05 Februari 2026
+            </div>
         </div>
     </div>
 
-    <table class="details-table">
-        <tr>
-            <td>
-                <strong style="color: #d32f2f;">TAGIHAN KEPADA:</strong><br>
-                <strong>Fahru Rahman K</strong><br>
-                (+62) 821-4545-0288<br>
-                RT.006 / RW.003, Dusun Timur, Desa Waro<br>
-                Kec. Monta, Kab. Bima, NTB 84172
-            </td>
-            <td style="text-align: right;">
-                <strong>Tanggal Terbit:</strong>Sabtu, 31 Januari 2026<br>
-                <strong>Metode:</strong> QRIS / Transfer<br>
-                <strong>Jatuh Tempo:</strong> Sesuai Kesepakatan
-            </td>
-        </tr>
-    </table>
+    <div class="address-container">
+        <div class="address-box">
+            <h4>Diterbitkan Oleh:</h4>
+            <strong>Gudang R2 Nusantara</strong><br>
+            Pusat Distribusi Utama - Jawa Timur<br>
+            Divisi Logistik Rokok & Tembakau
+        </div>
+        <div class="address-box">
+            <h4>Ditagihkan Kepada:</h4>
+            <strong>Adisyahputra</strong><br>
+            (+62) 813-6289-2993<br>
+            Cinta Dapat, Dsn. Mawar, Ds. Padang Brahrang,<br>
+            Kec. Selesai, Kab. Langkat, Sumatera Utara 20762
+        </div>
+    </div>
 
     <table class="items-table">
         <thead>
             <tr>
-                <th>DESKRIPSI PRODUK</th>
-                <th style="text-align: center;">QTY</th>
-                <th style="text-align: right;">HARGA/SLOP</th>
-                <th style="text-align: right;">TOTAL</th>
+                <th>Item & Deskripsi</th>
+                <th style="text-align: center;">Kuantitas</th>
+                <th style="text-align: right;">Harga Satuan</th>
+                <th style="text-align: right;">Total</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>ROKOK PS DJERAM</strong><br><small>Kemasan: 3 Bal (Total 60 Slop)</small></td>
-                <td style="text-align: center;">60</td>
+                <td><strong>Helium Blue</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td style="text-align: center;">20 Slop</td>
+                <td style="text-align: right;">Rp 80.000</td>
+                <td style="text-align: right;">Rp 1.600.000</td>
+            </tr>
+            <tr>
+                <td><strong>Platinum Seven</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td style="text-align: center;">20 Slop</td>
+                <td style="text-align: right;">Rp 80.000</td>
+                <td style="text-align: right;">Rp 1.600.000</td>
+            </tr>
+            <tr>
+                <td><strong>Oris Mango</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td style="text-align: center;">20 Slop</td>
+                <td style="text-align: right;">Rp 90.000</td>
+                <td style="text-align: right;">Rp 1.800.000</td>
+            </tr>
+            <tr>
+                <td><strong>Luffman Merah</strong><br><small style="color:#777;">Kemasan: 1 Bal (20 Slop)</small></td>
+                <td style="text-align: center;">20 Slop</td>
                 <td style="text-align: right;">Rp 70.000</td>
-                <td style="text-align: right;">Rp 4.200.000</td>
+                <td style="text-align: right;">Rp 1.400.000</td>
             </tr>
         </tbody>
     </table>
 
-    <div class="total-section">
-        <div class="total-row">
-            <span style="font-size: 14px; color: #666;">GRAND TOTAL:</span><br>
-            <strong style="font-size: 22px; color: #d32f2f;">Rp 4.200.000</strong>
+    <div class="summary-container">
+        <table class="summary-table">
+            <tr>
+                <td>Total Kuantitas:</td>
+                <td style="text-align: right;">80 Slop</td>
+            </tr>
+            <tr>
+                <td>Subtotal:</td>
+                <td style="text-align: right;">Rp 6.400.000</td>
+            </tr>
+            <tr>
+                <td>Biaya Kirim:</td>
+                <td style="text-align: right;">Gratis / Sudah Termasuk</td>
+            </tr>
+            <tr class="total-row">
+                <td>GRAND TOTAL:</td>
+                <td style="text-align: right;">Rp 6.400.000</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer-grid">
+        <div class="payment-details">
+            <h5>INSTRUKSI PEMBAYARAN:</h5>
+            <table>
+                <tr><td width="100">Bank</td><td>: <strong>Bank BRI</strong></td></tr>
+                <tr><td>No. Rekening</td><td>: <strong>7664-0100-2223-504</strong></td></tr>
+                <tr><td>Atas Nama</td><td>: <strong>Muhammad Aryandi</strong></td></tr>
+                <tr><td colspan="2" style="font-size: 11px; color: #666; padding-top: 10px;">*Mohon sertakan nomor invoice pada berita transfer.</td></tr>
+            </table>
+        </div>
+        <div class="auth-section">
+            <p style="font-size: 12px; margin-bottom: 5px;">Hormat Kami,</p>
+            <div class="stamp-area">
+                <div class="official-stamp">R2 NUSANTARA<br>DISTRIBUTION</div>
+            </div>
+            <p style="margin-top: 10px; border-top: 1px solid #333; display: inline-block; padding: 0 20px;">
+                <strong>Admin Gudang Utama</strong>
+            </p>
         </div>
     </div>
 
-    <div class="payment-footer">
-        <div class="qris-box">
-            <div class="qris-img">TEMPEL QRIS<br>R2 NUSANTARA</div>
-            <strong style="font-size: 12px;">SCAN UNTUK BAYAR</strong>
-        </div>
-        
-        <div class="signature-box">
-            <div class="stamp">GUDANG R2 NUSANTARA</div>
-            <p style="margin-bottom: 60px;">Hormat Kami,</p>
-            <p><strong>( Admin Gudang )</strong></p>
-        </div>
-    </div>
-
-    <div style="margin-top: 40px; font-size: 10px; color: #888; text-align: center; border-top: 1px dashed #ddd; padding-top: 10px;">
-        Harap simpan faktur ini sebagai bukti transaksi sah dari Gudang R2 Nusantara.
+    <div class="terms">
+        <strong>Syarat & Ketentuan:</strong>
+        <ol style="padding-left: 15px; margin-top: 5px;">
+            <li>Barang yang sudah dibayar akan diproses pengirimannya maksimal 1x24 jam.</li>
+            <li>Faktur ini adalah bukti transaksi yang sah jika pembayaran sudah diverifikasi.</li>
+            <li>Keluhan terkait jumlah barang wajib melampirkan video unboxing saat paket diterima.</li>
+        </ol>
     </div>
 </div>
 
-<button class="no-print-btn" onclick="window.print()">CETAK FAKTUR / PDF</button>
+<button class="no-print-btn" onclick="window.print()">UNDUH FAKTUR RESMI (PDF)</button>
 
 </body>
 </html>
