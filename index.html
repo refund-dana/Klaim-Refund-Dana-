@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <title>Berita Acara Resmi - Bea Cukai Sultra</title>
     <style>
-        @page { size: A4; margin: 0; }
+        @page {
+            size: A4;
+            margin: 0;
+        }
         body {
-            background-color: #525659;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
             display: flex;
@@ -15,46 +18,51 @@
         }
         .page {
             width: 210mm;
-            height: 297mm;
-            padding: 25mm 20mm;
+            min-height: 297mm;
+            padding: 25mm 20mm 45mm; /* extra bottom for footer */
             background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
             box-sizing: border-box;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
-        /* Watermark */
-        .watermark {
+
+        /* === WATERMARK BACKGROUND TRANSPARAN (WAJIB) === */
+        .watermark-bg {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 80pt;
-            color: rgba(0, 0, 0, 0.03);
-            white-space: nowrap;
-            user-select: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.ibb.co/ynTPqdF9/IMG-20260117-110547.jpg');
+            background-size: 280px;
+            background-repeat: repeat;
+            background-position: center;
+            opacity: 0.04;
             z-index: 0;
-            font-weight: bold;
+            pointer-events: none;
         }
+
         /* Kop Surat */
         .kop-surat {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             border-bottom: 3px double #000;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
             margin-bottom: 25px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
-        .logo-kiri {
-            width: 75px;
+        .logo-item {
+            width: 70px;
             height: auto;
-            margin-right: 15px;
         }
         .header-text {
             flex: 1;
             text-align: center;
             line-height: 1.2;
+            margin: 0 20px;
         }
         .header-text h2 { margin: 0; font-size: 14pt; font-weight: bold; }
         .header-text h3 { margin: 0; font-size: 13pt; font-weight: bold; }
@@ -65,7 +73,7 @@
             text-align: center;
             margin-bottom: 30px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         .title-block h1 {
             font-size: 13pt;
@@ -75,13 +83,13 @@
         }
         .title-block p { font-size: 11pt; font-weight: bold; margin: 0; }
 
-        /* Isi Surat */
+        /* Isi Dokumen */
         .body-text {
             font-size: 11pt;
             text-align: justify;
             line-height: 1.5;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         .table-data {
             width: 100%;
@@ -96,73 +104,56 @@
         .bg-gray { background-color: #f5f5f5; font-weight: bold; width: 35%; }
         .status-danger { color: #cc0000; font-weight: bold; }
 
-        /* Tanda Tangan */
+        /* Footer Section */
         .footer-section {
-            margin-top: 50px;
+            margin-top: 40px;
             display: flex;
             justify-content: space-between;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         .qr-area {
-            margin-top: 20px;
             text-align: left;
         }
-        .qr-placeholder {
+        .qr-img {
             width: 90px;
             height: 90px;
             border: 1px solid #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 7pt;
-            background: #fff;
+            background: white;
+            object-fit: contain;
         }
         .signature-block {
             text-align: center;
             width: 250px;
+            position: relative;
         }
-        .stempel-basah {
+        .materai-digital {
             position: absolute;
-            right: 60px;
-            bottom: 40px;
-            width: 110px;
-            height: 110px;
-            border: 3px solid rgba(43, 58, 143, 0.6);
-            border-radius: 50%;
-            color: rgba(43, 58, 143, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8pt;
-            font-weight: bold;
-            text-align: center;
-            transform: rotate(-15deg);
-            pointer-events: none;
+            top: -10px;
+            right: -110px; /* di samping kanan blok ttd */
+            width: 100px;
+            height: auto;
+            z-index: 3;
+            opacity: 0.98;
         }
 
         @media print {
             body { background: none; }
             .page { box-shadow: none; }
+            .watermark-bg { opacity: 0.03; }
         }
     </style>
 </head>
 <body>
 
 <div class="page">
-    <div class="watermark">SALINAN RESMI</div>
+    <!-- Watermark Latar Belakang Transparan -->
+    <div class="watermark-bg"></div>
 
+    <!-- Kop Surat: Logo Kemenkeu (KIRI), Bea Cukai (KANAN) -->
     <div class="kop-surat">
-        <!-- Logo Resmi DJBC -->
-        <div class="logo-kiri">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" fill="#003366"/>
-                <path d="M50 15 L70 35 L65 40 L50 25 L35 40 L30 35 Z" fill="#DAA520"/>
-                <circle cx="50" cy="50" r="20" fill="#DAA520"/>
-                <text x="50" y="55" text-anchor="middle" font-size="8" fill="#003366" font-family="Arial" font-weight="bold">DJBC</text>
-            </svg>
-        </div>
-
+        <img src="https://i.ibb.co/MDnRN4H2/IMG-20260121-011440.jpg" alt="Logo Kementerian Keuangan RI" class="logo-item">
+        
         <div class="header-text">
             <h2>KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
             <h3>DIREKTORAT JENDERAL BEA DAN CUKAI</h3>
@@ -171,33 +162,22 @@
             <p>Telepon: (0401) 3121734 | Laman: www.beacukai.go.id</p>
         </div>
 
-        <!-- Logo Kemenkeu (opsional simetris) -->
-        <div class="logo-kiri">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="45" fill="#DAA520"/>
-                <path d="M30 50 Q50 30 70 50 Q50 70 30 50" fill="#003366"/>
-                <text x="50" y="55" text-anchor="middle" font-size="8" fill="#DAA520" font-family="Arial" font-weight="bold">KMK</text>
-            </svg>
-        </div>
+        <img src="https://i.ibb.co/ZRBzVw5R/IMG-20260121-011318.jpg" alt="Logo Direktorat Jenderal Bea dan Cukai" class="logo-item">
     </div>
 
+    <!-- Judul Dokumen -->
     <div class="title-block">
         <h1>BERITA ACARA PEMERIKSAAN FISIK BARANG</h1>
         <p>NOMOR: BAP-001797/KPU.01/BD.05/2026</p>
     </div>
 
+    <!-- Isi Dokumen -->
     <div class="body-text">
         <p>Pada hari ini, <b>Kamis</b> tanggal <b>Dua Puluh Sembilan</b> bulan <b>Januari</b> tahun <b>Dua Ribu Dua Puluh Enam</b>, kami Pejabat Pemeriksa pada Kantor Wilayah Bea dan Cukai Sulawesi Tenggara, berdasarkan kewenangan yang diatur dalam Undang-Undang, telah melakukan pemeriksaan fisik terhadap kiriman pos sebagai berikut:</p>
 
         <table class="table-data">
-            <tr>
-                <td class="bg-gray">Penyelenggara Pos</td>
-                <td>PT. Pos Indonesia (Persero)</td>
-            </tr>
-            <tr>
-                <td class="bg-gray">Nomor Resi / AWB</td>
-                <td><b>001797572510</b></td>
-            </tr>
+            <tr><td class="bg-gray">Penyelenggara Pos</td><td>PT. Pos Indonesia (Persero)</td></tr>
+            <tr><td class="bg-gray">Nomor Resi / AWB</td><td><b>001797572510</b></td></tr>
             <tr>
                 <td class="bg-gray">Identitas Penerima</td>
                 <td>
@@ -210,38 +190,30 @@
                 <td class="bg-gray">Uraian Barang</td>
                 <td>80 Slop (1.600 Batang) Hasil Tembakau<br>Jenis: SKM (Tanpa Pita Cukai / Polos)</td>
             </tr>
-            <tr>
-                <td class="bg-gray">Jenis Pelanggaran</td>
-                <td>Melanggar Pasal 54 UU No. 39 Tahun 2007 (Cukai)</td>
-            </tr>
-            <tr>
-                <td class="bg-gray">Status Barang</td>
-                <td class="status-danger">BARANG DITEGAH / MILIK NEGARA</td>
-            </tr>
+            <tr><td class="bg-gray">Jenis Pelanggaran</td><td>Melanggar Pasal 54 UU No. 39 Tahun 2007 (Cukai)</td></tr>
+            <tr><td class="bg-gray">Status Barang</td><td class="status-danger">BARANG DITEGAH / MILIK NEGARA</td></tr>
         </table>
 
         <p>Atas temuan tersebut, dilakukan tindakan penegahan guna pemenuhan kewajiban administratif dan penelitian lebih lanjut. Seluruh proses pemeriksaan dilaksanakan sesuai dengan ketentuan hukum yang berlaku.</p>
         <p>Demikian Berita Acara ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya.</p>
     </div>
 
+    <!-- Footer: QR + TTD + MATERAI (POSISI RESMI) -->
     <div class="footer-section">
         <div class="qr-area">
-            <div class="qr-placeholder">
-                <div style="text-align:center">SCAN UNTUK<br>VALIDASI<br>CEISA</div>
-            </div>
+            <img src="https://i.ibb.co/d02DxXjq/1000020200-1.png" alt="QR Code Validasi CEISA" class="qr-img">
             <p style="font-size: 7.5pt; margin-top: 5px; font-weight: bold;">TERVERIFIKASI DIGITAL</p>
         </div>
 
         <div class="signature-block">
             <p>Kendari, 29 Januari 2026</p>
             <p>Pejabat Pemeriksa,</p>
-            <div style="height: 80px;"></div>
+            <div style="height: 60px;"></div> <!-- ruang tanda tangan -->
             <p><u><b>AGUS SULISQQI</b></u></p>
             <p>NIP 19780322 200312 1 002</p>
-        </div>
 
-        <div class="stempel-basah">
-            DIREKTORAT JENDERAL<br>BEA DAN CUKAI<br>KENDARI
+            <!-- Materai Digital: di samping kanan, tidak menutupi teks -->
+            <img src="https://i.ibb.co/fGqwXhMb/1000014472-11zon.jpg" alt="Materai Digital" class="materai-digital">
         </div>
     </div>
 </div>
