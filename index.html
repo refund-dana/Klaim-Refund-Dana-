@@ -3,172 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOMASI RESMI 2026 - RAMAZAN</title>
+    <title>Surat Somasi Resmi - Ramazan vs Rijal Julians</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @page { size: A4; margin: 2cm; }
         body {
-            background: #f0f2f5;
-            font-family: "Times New Roman", Times, serif;
-            color: #000;
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px;
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.5;
+            background-color: #555;
+            margin: 0;
+            padding: 20px;
         }
-        
-        .a4-page {
+        .paper {
+            background: white;
             width: 210mm;
             min-height: 297mm;
-            padding: 3cm; /* Standard Margin Hukum */
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            padding: 25mm;
+            margin: auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-sizing: border-box;
             position: relative;
         }
-
-        /* Border Tipis Formal */
-        .a4-page::after {
-            content: "";
-            position: absolute;
-            top: 1cm; left: 1cm; right: 1cm; bottom: 1cm;
-            border: 0.5pt solid #eee;
-            pointer-events: none;
+        .line-bold { border-top: 3px solid black; margin-top: 5px; }
+        .line-thin { border-top: 1px solid black; margin-top: 2px; margin-bottom: 20px; }
+        .header-meta { margin-bottom: 30px; }
+        .header-meta table { width: 100%; border: none; }
+        .subject-title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 18px;
+            margin-bottom: 25px;
         }
-
-        .header-info { text-align: right; margin-bottom: 40px; font-size: 11pt; }
-        
-        .subject-line { margin: 30px 0; border-top: 1.5pt solid #000; border-bottom: 1.5pt solid #000; padding: 10px 0; }
-        .subject-line table { width: 100%; border: none; }
-        .subject-line td { vertical-align: top; font-weight: bold; font-size: 12pt; }
-
-        .title { text-align: center; font-weight: bold; font-size: 14pt; text-decoration: underline; margin-bottom: 30px; }
-
-        .content { font-size: 12pt; line-height: 1.6; text-align: justify; }
-        .content p { margin-bottom: 15px; }
-
-        .list-item { margin-left: 20px; margin-bottom: 10px; display: flex; }
-        .list-item span { margin-right: 10px; }
-
-        .legal-ref {
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin: 20px 0;
-            font-size: 11pt;
-            font-style: italic;
-        }
-
-        .warning-box {
-            border: 2pt solid #000;
-            padding: 20px;
-            margin-top: 30px;
-            background: #fff;
-        }
-
-        .signature-table { width: 100%; margin-top: 50px; }
-        .signature-table td { width: 50%; text-align: center; vertical-align: top; }
-        .sig-space { height: 100px; }
-
-        .editable:hover { background: #fffde7; cursor: text; }
-
-        /* Print Controls */
-        .no-print {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            background: #1a73e8;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            border: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        @media print {
-            body { background: white; padding: 0; }
-            .a4-page { box-shadow: none; width: 100%; margin: 0; padding: 2cm; }
-            .no-print { display: none; }
-            .a4-page::after { border: none; }
-        }
+        .content { text-align: justify; font-size: 12pt; }
+        .identitas { margin: 15px 0 15px 30px; }
+        .identitas td { vertical-align: top; }
+        .footer { margin-top: 50px; }
+        .signature-box { float: right; text-align: center; width: 250px; }
+        .tembusan { margin-top: 100px; font-size: 10pt; font-style: italic; border-top: 1px solid #ccc; padding-top: 10px; }
+        .stamp-area { height: 80px; }
     </style>
 </head>
 <body>
 
-    <button class="no-print" onclick="window.print()">🖨️ Cetak Surat (PDF)</button>
+<div class="paper">
+    <div style="text-align: center;">
+        <span style="font-size: 20px; font-weight: bold;">SURAT PERINGATAN (SOMASI I)</span>
+    </div>
+    <div class="line-bold"></div>
+    <div class="line-thin"></div>
 
-    <div class="a4-page" contenteditable="true">
-        <div class="header-info">
-            <p><strong>Tempat/Tanggal:</strong> Bekasi, <span class="editable">[Masukan Tanggal Hari Ini]</span></p>
-            <p><strong>Sifat:</strong> PENTING / SEGERA</p>
-            <p><strong>Lampiran:</strong> 1 (Satu) Berkas Bukti Transfer</p>
-        </div>
-
-        <div class="subject-line">
-            <table>
-                <tr>
-                    <td style="width: 80px;">PERIHAL:</td>
-                    <td>SOMASI PERTAMA DAN TERAKHIR (PERINGATAN KERAS) ATAS DUGAAN TINDAK PIDANA PENIPUAN DAN PENGGELAPAN</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="content">
-            <p>Kepada Yth.<br>
-               <strong>Sdr. RIJAL JULIANS</strong><br>
-               Warga Binaan Pemasyarakatan (WBP)<br>
-               Lembaga Pemasyarakatan (Lapas) Gunung Sindur<br>
-               Kabupaten Bogor, Jawa Barat</p>
-
-            <p>Dengan hormat,</p>
-            <p>Saya yang bertanda tangan di bawah ini, <strong>RAMAZAN</strong>, beralamat di Cikarang Kedasih 1 No. 76, Bekasi, selaku Korban dalam hal ini menyampaikan hal-hal sebagai berikut:</p>
-
-            <div class="list-item">
-                <span>1.</span>
-                <p>Bahwa Saudara telah melakukan serangkaian kebohongan dan tipu muslihat yang mengakibatkan saya menyerahkan uang sebesar <strong>Rp [NOMINAL]</strong> untuk keperluan [JELASKAN KEPERLUAN] pada tanggal [TANGGAL].</p>
-            </div>
-
-            <div class="list-item">
-                <span>2.</span>
-                <p>Bahwa hingga detik ini, Saudara tidak memenuhi janji tersebut dan tidak menunjukkan itikad baik untuk mengembalikan dana saya, serta secara sengaja memutus komunikasi.</p>
-            </div>
-
-            <div class="list-item">
-                <span>3.</span>
-                <p>Bahwa perbuatan Saudara telah memenuhi unsur pidana dalam <strong>Pasal 378 KUHP (Penipuan)</strong> dan <strong>Pasal 372 KUHP (Penggelapan)</strong>, serta merujuk pada ketentuan <strong>KUHP Baru (UU No. 1 Tahun 2023)</strong> yang berlaku di tahun 2026 ini.</p>
-            </div>
-
-            <div class="legal-ref">
-                "Barang siapa dengan maksud menguntungkan diri sendiri secara melawan hukum... menggerakkan orang lain untuk menyerahkan barang sesuatu... diancam karena penipuan."
-            </div>
-
-            <p>Perlu Saudara sadari bahwa status Saudara saat ini adalah Narapidana yang sedang menjalani masa hukuman. Adanya <strong>Laporan Polisi Baru</strong> akan mengakibatkan:</p>
-            <div style="margin-left: 20px; font-weight: bold;">
-                <p>- Pembatalan/Penangguhan Hak Remisi;<br>
-                - Pembatalan Hak Pembebasan Bersyarat (PB) / CMB;<br>
-                - Penambahan masa hukuman baru yang bersifat kumulatif.</p>
-            </div>
-
-            <div class="warning-box">
-                <p><strong>ULTIMATUM:</strong></p>
-                <p>Melalui surat ini, saya menuntut Saudara untuk mengembalikan seluruh dana saya sebesar <strong>Rp [NOMINAL]</strong> dalam waktu paling lambat <strong>3x24 Jam</strong> setelah surat ini diterima oleh pihak Lapas/Saudara.</p>
-                <p>Apabila tidak dipenuhi, saya akan segera melaporkan Saudara ke <strong>Polres Kabupaten Bogor</strong> dan menembuskan surat laporan tersebut kepada <strong>Kalapas Gunung Sindur</strong> agar status pembinaan Saudara dievaluasi secara ketat.</p>
-            </div>
-
-            <p>Demikian somasi ini saya sampaikan untuk segera diindahkan.</p>
-        </div>
-
-        <table class="signature-table">
+    <div class="header-meta">
+        <table>
             <tr>
-                <td></td>
-                <td>
-                    <p>Hormat saya,</p>
-                    <div class="sig-space"></div>
-                    <p><strong>( RAMAZAN )</strong></p>
-                    <p style="font-size: 10pt;">Tembusan: Arsip</p>
-                </td>
+                <td width="15%">Nomor</td>
+                <td width="2%">:</td>
+                <td>001/SOMASI/RMZ/II/2026</td>
+                <td align="right">Bekasi, 02 Februari 2026</td>
+            </tr>
+            <tr>
+                <td>Lampiran</td>
+                <td>:</td>
+                <td>1 (satu) Berkas Bukti Transaksi</td>
+            </tr>
+            <tr>
+                <td>Perihal</td>
+                <td>:</td>
+                <td><strong>TEGURAN HUKUM & PERINGATAN KERAS</strong></td>
             </tr>
         </table>
     </div>
+
+    <p>Kepada Yth.<br>
+    <strong>Sdr. Rijal Julians (Usia: 32 Tahun)</strong><br>
+    Warga Binaan Pemasyarakatan (WBP)<br>
+    Lapas Kelas IIA Gunung Sindur<br>
+    Jl. Pengayoman No. 1, Komplek Perkantoran<br>
+    Kabupaten Bogor, Jawa Barat</p>
+
+    <div class="content">
+        <p>Dengan hormat,</p>
+        <p>Saya yang bertanda tangan di bawah ini:</p>
+        
+        <table class="identitas">
+            <tr><td>Nama</td><td>:</td><td><strong>RAMAZAN</strong></td></tr>
+            <tr><td>Umur</td><td>:</td><td>38 Tahun</td></tr>
+            <tr><td>Alamat</td><td>:</td><td>Cikarang Kedasih 1 No. 76, Bekasi</td></tr>
+            <tr><td>Pekerjaan</td><td>:</td><td>Wiraswasta</td></tr>
+        </table>
+
+        <p>Melalui surat ini, saya menyampaikan Somasi kepada Saudara atas dugaan tindakan wanprestasi dan/atau tindak pidana penggelapan dana dengan uraian sebagai berikut:</p>
+        
+        <ol>
+            <li>Bahwa pada tanggal <strong>26 Desember 2025</strong>, Saudara telah menerima dana dari saya sebesar <strong>Rp3.500.000,- (Tiga Juta Lima Ratus Ribu Rupiah)</strong>.</li>
+            <li>Bahwa hingga detik ini, Saudara tidak memberikan kepastian pengembalian meskipun saya telah beritikad baik untuk berkomunikasi.</li>
+            <li>Bahwa perbuatan Saudara dapat dikategorikan sebagai Tindak Pidana Penipuan dan/atau Penggelapan sebagaimana diatur dalam <strong>Pasal 378 dan Pasal 372 KUHP</strong> dengan ancaman pidana penjara paling lama 4 tahun.</li>
+            <li>Bahwa status Saudara sebagai Narapidana di Lapas Gunung Sindur <strong>tidak melepaskan tanggung jawab perdata maupun pidana baru</strong> yang Saudara lakukan. Tindakan ini dapat memperberat catatan perilaku Saudara (Remisi/Bebas Bersyarat).</li>
+        </ol>
+
+        <p><strong>DENGAN INI SAYA MEMPERINGATKAN:</strong></p>
+        <p>Agar Saudara segera mengembalikan dana tersebut dalam waktu paling lambat <strong>3 x 24 Jam</strong> setelah surat ini diterima. Apabila Saudara mengabaikan peringatan ini, maka saya akan menempuh jalur hukum dengan melaporkan secara resmi kepada <strong>Pihak Kepolisian (Polres Metro Bekasi/Bogor)</strong> serta bersurat kepada <strong>Dirjen Pemasyarakatan</strong>.</p>
+        
+        <p>Demikian somasi ini saya sampaikan untuk segera ditindaklanjuti.</p>
+    </div>
+
+    <div class="footer">
+        <div class="signature-box">
+            Hormat Saya,
+            <div class="stamp-area"></div>
+            <strong>( RAMAZAN )</strong>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+
+    <div class="tembusan">
+        <strong>Tembusan Yth:</strong><br>
+        1. Kepala Lapas Kelas IIA Gunung Sindur (Sebagai Laporan Perilaku WBP);<br>
+        2. Satreskrim Polres Metro Bekasi;<br>
+        3. Arsip.
+    </div>
+</div>
 
 </body>
 </html>
