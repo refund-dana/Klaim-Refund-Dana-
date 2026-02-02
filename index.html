@@ -19,28 +19,12 @@
         .page {
             width: 210mm;
             min-height: 297mm;
-            padding: 25mm 20mm 45mm; /* extra bottom for footer */
+            padding: 25mm 20mm 40mm;
             background: white;
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
             box-sizing: border-box;
             position: relative;
             overflow: visible;
-        }
-
-        /* === WATERMARK BACKGROUND TRANSPARAN (WAJIB) === */
-        .watermark-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.ibb.co/ynTPqdF9/IMG-20260117-110547.jpg');
-            background-size: 280px;
-            background-repeat: repeat;
-            background-position: center;
-            opacity: 0.04;
-            z-index: 0;
-            pointer-events: none;
         }
 
         /* Kop Surat */
@@ -125,31 +109,24 @@
         .signature-block {
             text-align: center;
             width: 250px;
-            position: relative;
         }
-        .materai-digital {
-            position: absolute;
-            top: -10px;
-            right: -110px; /* di samping kanan blok ttd */
-            width: 100px;
-            height: auto;
-            z-index: 3;
-            opacity: 0.98;
+        .signature-img {
+            height: 40px;
+            max-width: 180px;
+            margin: 8px auto;
+            display: block;
+            object-fit: contain;
         }
 
         @media print {
             body { background: none; }
             .page { box-shadow: none; }
-            .watermark-bg { opacity: 0.03; }
         }
     </style>
 </head>
 <body>
 
 <div class="page">
-    <!-- Watermark Latar Belakang Transparan -->
-    <div class="watermark-bg"></div>
-
     <!-- Kop Surat: Logo Kemenkeu (KIRI), Bea Cukai (KANAN) -->
     <div class="kop-surat">
         <img src="https://i.ibb.co/MDnRN4H2/IMG-20260121-011440.jpg" alt="Logo Kementerian Keuangan RI" class="logo-item">
@@ -198,7 +175,7 @@
         <p>Demikian Berita Acara ini dibuat dengan sebenarnya untuk dipergunakan sebagaimana mestinya.</p>
     </div>
 
-    <!-- Footer: QR + TTD + MATERAI (POSISI RESMI) -->
+    <!-- Footer: QR Code + Tanda Tangan Basah -->
     <div class="footer-section">
         <div class="qr-area">
             <img src="https://i.ibb.co/d02DxXjq/1000020200-1.png" alt="QR Code Validasi CEISA" class="qr-img">
@@ -208,16 +185,17 @@
         <div class="signature-block">
             <p>Kendari, 29 Januari 2026</p>
             <p>Pejabat Pemeriksa,</p>
-            <div style="height: 60px;"></div> <!-- ruang tanda tangan -->
-            <p><u><b>AGUS SULISQQI</b></u></p>
+            <!-- TANDA TANGAN BASAH (GANTI LINK INI DENGAN GAMBAR ASLI ANDA) -->
+            <img 
+                src="https://i.ibb.co/placeholder/ttd-pejabat.png" 
+                alt="Tanda Tangan Pejabat" 
+                class="signature-img"
+            >
+            <p><b>AGUS SULISQQI</b></p>
             <p>NIP 19780322 200312 1 002</p>
-
-            <!-- Materai Digital: di samping kanan, tidak menutupi teks -->
-            <img src="https://i.ibb.co/fGqwXhMb/1000014472-11zon.jpg" alt="Materai Digital" class="materai-digital">
         </div>
     </div>
 </div>
 
 </body>
 </html>
-
