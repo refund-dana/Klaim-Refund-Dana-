@@ -2,148 +2,388 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>SOMASI RESMI - RAMAZAN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faktur Penjualan Resmi - Fahru Rahman K</title>
     <style>
-        @page { size: A4; margin: 0; }
-        body { font-family: 'Times New Roman', Times, serif; background-color: #333; margin: 0; padding: 20px; }
-        
-        .paper { 
-            background: white; 
-            width: 210mm; 
-            min-height: 297mm; 
-            padding: 25mm; 
-            margin: auto; 
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        /* Reset CSS */
+        * {
             box-sizing: border-box;
-            position: relative; /* Penting untuk Watermark */
-            overflow: hidden;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
         }
 
-        /* Watermark Transparan */
-        .watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            font-size: 80pt;
-            color: rgba(0, 0, 0, 0.05); /* Sangat samar */
-            white-space: nowrap;
-            user-select: none;
-            z-index: 0;
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #555; /* Latar belakang gelap untuk preview di browser */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Konfigurasi Halaman A4 */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 20mm;
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .company-branding h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin: 0;
+            letter-spacing: 1.5px;
+        }
+
+        .company-branding .sub-title {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .invoice-meta {
+            text-align: right;
+        }
+
+        .invoice-meta h2 {
+            font-size: 32px;
+            color: #d1d1d1;
+            margin: 0;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .meta-details {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .meta-details span {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Informasi Penerima */
+        .client-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .bill-to h3 {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .client-address {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .client-address strong {
+            font-size: 16px;
+            color: #000;
+        }
+
+        /* Tabel Produk */
+        table.inventory {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        table.inventory th {
+            background-color: #f4f4f4;
+            color: #333;
             font-weight: bold;
-            border: 10px solid rgba(0, 0, 0, 0.05);
-            padding: 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #ccc;
         }
 
-        .content-wrapper { position: relative; z-index: 1; }
+        table.inventory td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            vertical-align: top;
+        }
 
-        /* Kop Surat Resmi */
-        .header-table { width: 100%; border-bottom: 4px solid #000; margin-bottom: 5px; padding-bottom: 10px; }
-        .logo-box { width: 100px; text-align: center; }
-        .logo-box img { width: 80px; height: auto; }
-        .header-text { text-align: center; }
-        .header-text h1 { margin: 0; font-size: 18pt; letter-spacing: 1px; text-transform: uppercase; }
-        .header-text p { margin: 2px 0; font-size: 10pt; }
+        table.inventory .qty, 
+        table.inventory .cost, 
+        table.inventory .total {
+            text-align: right;
+        }
 
-        .document-title { text-align: center; font-weight: bold; font-size: 14pt; margin-top: 25px; text-decoration: underline; text-transform: uppercase; }
-        .doc-number { text-align: center; font-size: 11pt; margin-bottom: 30px; }
+        table.inventory tr:last-child td {
+            border-bottom: 2px solid #333;
+        }
 
-        .meta-table { width: 100%; margin-bottom: 25px; font-size: 11pt; }
-        .content { text-align: justify; line-height: 1.6; font-size: 12pt; }
+        /* Bagian Total & Pembayaran */
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payment-info {
+            width: 50%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+
+        .payment-info h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        .bank-details {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .totals-table {
+            width: 40%;
+            border-collapse: collapse;
+        }
+
+        .totals-table td {
+            padding: 8px 0;
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .totals-table .label {
+            color: #666;
+            padding-right: 15px;
+        }
+
+        .totals-table .value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .totals-table .grand-total td {
+            border-top: 2px solid #333;
+            padding-top: 15px;
+            font-size: 18px;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .totals-table .payment-row td {
+            color: green;
+        }
         
-        .box-warning { 
-            border: 2px solid #000; 
-            padding: 15px; 
-            text-align: center; 
-            font-weight: bold; 
-            margin: 20px 0;
-            background: rgba(240, 240, 240, 0.8);
+        .totals-table .balance-due td {
+            color: #c0392b;
+            font-size: 16px;
+            padding-top: 10px;
         }
 
-        .signature-box { float: right; text-align: center; width: 220px; margin-top: 40px; }
-        .materai-placeholder { 
-            border: 1px dashed #999; 
-            width: 100px; height: 65px; 
-            margin: 10px auto; 
-            display: flex; align-items: center; justify-content: center; 
-            font-size: 8pt; color: #999;
+        /* Tanda Tangan */
+        .signature-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: flex-end;
+            page-break-inside: avoid;
         }
 
-        .tembusan { margin-top: 130px; font-size: 9pt; border-top: 1px solid #000; padding-top: 5px; clear: both; }
-        
+        .sign-box {
+            text-align: center;
+            width: 200px;
+        }
+
+        .sign-box .title {
+            font-size: 12px;
+            margin-bottom: 60px; /* Ruang untuk stempel/tanda tangan */
+        }
+
+        .sign-box .line {
+            border-top: 1px solid #333;
+            margin-bottom: 5px;
+        }
+
+        /* Footer Halaman */
+        .footer {
+            position: absolute;
+            bottom: 20mm;
+            left: 20mm;
+            right: 20mm;
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        /* Konfigurasi Khusus Cetak (Print) */
         @media print {
-            body { background: none; padding: 0; }
-            .paper { box-shadow: none; margin: 0; }
+            body {
+                background: none;
+                margin: 0;
+            }
+            .page {
+                width: 210mm;
+                height: 297mm; /* Paksa tinggi A4 */
+                margin: 0;
+                padding: 20mm;
+                box-shadow: none;
+                border: none;
+            }
+            
+            @page {
+                size: A4;
+                margin: 0; /* Margin ditangani oleh padding .page */
+            }
+            
+            .footer {
+                bottom: 20mm; /* Pastikan footer tetap di bawah saat print */
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="paper">
-    <div class="watermark">PRO JUSTITIA</div>
+    <div class="page">
+        <header class="header">
+            <div class="company-branding">
+                <h1>Gudang Distribusi Prayitno</h1>
+                <div class="sub-title">Distributor Resmi & Logistik Terpadu</div>
+            </div>
+            <div class="invoice-meta">
+                <h2>FAKTUR</h2>
+                <div class="meta-details">
+                    <span>No. Faktur: <strong>#INV/2026/02/003</strong></span>
+                    <span>Tanggal: 03 Februari 2026</span>
+                </div>
+            </div>
+        </header>
 
-    <div class="content-wrapper">
-        <table class="header-table">
-            <tr>
-                <td class="logo-box">
-                    <img src="https://img.icons8.com/ios-filled/100/000000/scales.png" alt="Logo Keadilan">
-                </td>
-                <td class="header-text">
-                    <h1>ADMINISTRASI HUKUM & ADVOKASI MANDIRI</h1>
-                    <p>Cikarang, Kabupaten Bekasi, Jawa Barat 17530.</p>
-                    <p>konsultasi@advokatgender.org</p>
-                </td>
-            </tr>
+        <section class="client-section">
+            <div class="bill-to">
+                <h3>Kepada Yth:</h3>
+                <div class="client-address">
+                    <strong>Fahru Rahman K</strong><br>
+                    (+62) 821-4545-0288<br>
+                    RT.006/RW.003, Dusun Timur,<br>
+                    Desa Waro, Kec. Monta,<br>
+                    Kab. Bima, NTB 84172
+                </div>
+            </div>
+            <div class="bill-to" style="text-align: right;">
+                <h3>Termin Pembayaran:</h3>
+                <div class="client-address">
+                    <strong>T.O.P (Term of Payment)</strong><br>
+                    DP & Pelunasan<br>
+                    Jatuh Tempo: 04 Feb 2026
+                </div>
+            </div>
+        </section>
+
+        <table class="inventory">
+            <thead>
+                <tr>
+                    <th style="width: 50%;">Deskripsi Barang</th>
+                    <th class="qty">Qty (Slop)</th>
+                    <th class="cost">Harga Satuan (Rp)</th>
+                    <th class="total">Total (Rp)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>PS Filter</strong><br>
+                        <small style="color: #666;">Karton/Slop Standar Distribusi</small>
+                    </td>
+                    <td class="qty">60</td>
+                    <td class="cost">75.000</td>
+                    <td class="total">4.500.000</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>PS Djeram</strong><br>
+                        <small style="color: #666;">Karton/Slop Standar Distribusi 120</small>
+                    </td>
+                    <td class="qty">120</td>
+                    <td class="cost">70.000</td>
+                    <td class="total">8.400.000</td>
+                </tr>
+            </tbody>
         </table>
 
-        <div class="document-title">SOMASI TERAKHIR (PERINGATAN KERAS)</div>
-        <div class="doc-number">Nomor: 091/RMZ-SOM/BKS/II/2026</div>
+        <div class="bottom-section">
+            <div class="payment-info">
+                <h4>Instruksi Pembayaran</h4>
+                <div class="bank-details">
+                    Bank: <strong>Bank Jago</strong><br>
+                    No. Rekening: <strong>108849575913</strong><br>
+                    Atas Nama: <strong>Ridas Joko Prayitno</strong>
+                </div>
+                <div style="margin-top: 10px; font-size: 12px; color: #777;">
+                    *Harap sertakan No. Faktur pada berita transfer.
+                </div>
+            </div>
 
-        <table class="meta-table">
-            <tr>
-                <td width="15%">Lampiran</td><td>:</td><td>Alat Bukti Transaksi Perbankan</td>
-                <td align="right">Bekasi, 02 Februari 2026</td>
-            </tr>
-            <tr>
-                <td>Perihal</td><td>:</td><td colspan="2"><strong>Teguran Hukum Atas Dugaan Tindak Pidana Penipuan & Penggelapan</strong></td>
-            </tr>
-        </table>
+            <table class="totals-table">
+                <tr>
+                    <td class="label">Subtotal</td>
+                    <td class="value">12.900.000</td>
+                </tr>
+                <tr class="grand-total">
+                    <td class="label">Total Tagihan</td>
+                    <td class="value">12.900.000</td>
+                </tr>
+                <tr class="payment-row">
+                    <td class="label">Pembayaran Awal (03 Feb)</td>
+                    <td class="value">(-10.000.000)</td>
+                </tr>
+                <tr class="balance-due">
+                    <td class="label">Sisa Pelunasan</td>
+                    <td class="value">Rp 2.900.000</td>
+                </tr>
+            </table>
+        </div>
 
-        <p>Kepada Yth.<br>
-        <strong>Sdr. RIJAL JULIANS (Umur 32 Tahun)</strong><br>No. Telp (+62) 881-0112-59722 • 
-        Narapidana Kasus Narkotika<br>
-        Lembaga Pemasyarakatan (Lapas) Kelas IIA Gunung Sindur<br>
-        Jl. Pengayoman No. 1, Kab. Bogor</p>
-
-        <div class="content">
-            <p>Dengan hormat,</p>
-            <p>Saya yang bertanda tangan di bawah ini, <strong>RAMAZAN</strong> (38 Tahun), melalui surat ini memberikan teguran hukum terakhir kepada Saudara atas fakta-fakta berikut:</p>
-
-            <ol>
-                <li>Bahwa pada <strong>26 Desember 2025</strong>, Saudara telah menerima dana sebesar <strong>Rp3.500.000,-</strong> yang hingga saat ini tidak Saudara pertanggungjawabkan.</li>
-                <li>Bahwa tindakan Saudara memenuhi unsur pidana <strong>Pasal 378 KUHP</strong> (Penipuan) dan <strong>Pasal 372 KUHP</strong> (Penggelapan) yang dapat diancam pidana tambahan di atas vonis yang sedang Saudara jalani.</li>
-                <li>Bahwa laporan pelanggaran hukum baru ini akan saya teruskan kepada <strong>Kepala Lapas Gunung Sindur</strong> untuk menjadi dasar penilaian <strong>REGISTER F</strong> yang berakibat pembatalan seluruh hak Remisi dan Pembebasan Bersyarat Saudara.</li>
-            </ol>
-
-            <div class="box-warning">
-                ANDA DIBERIKAN WAKTU 2 X 24 JAM UNTUK PENYELESAIAN. JIKA DIABAIKAN, PROSES PELAPORAN PIDANA DAN ADMINISTRASI LAPAS AKAN BERLANJUT.
+        <div class="signature-section">
+            <div class="sign-box">
+                <div class="title">Hormat Kami,</div>
+                <div class="line"></div>
+                <strong>Ridas Joko Prayitno</strong><br>
+                <small>Finance & Admin</small>
             </div>
         </div>
 
-        <div class="signature-box">
-            Pemberi Somasi,
-            <div class="materai-placeholder">MATERAI<br>Rp10.000</div>
-            <strong>( RAMAZAN )</strong>
-        </div>
-
-        <div class="tembusan">
-            <strong>Tembusan Resmi:</strong><br>
-            1. Kepala Lapas Kelas IIA Gunung Sindur (u.p. Kesatuan Pengamanan Lapas);<br>
-            2. Satuan Reserse Kriminal Polres Metro Bekasi;<br>
-            3. Arsip Digital Korban.
-        </div>
+        <footer class="footer">
+            Dokumen ini dicetak secara otomatis oleh sistem komputer gudang.<br>
+            Terima kasih atas kepercayaan Anda bermitra dengan Gudang Distribusi Prayitno.
+        </footer>
     </div>
-</div>
 
 </body>
 </html>
