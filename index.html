@@ -1,389 +1,366 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faktur Tagihan - Fahru Rahman K</title>
-    <style>
-        /* Reset CSS */
-        * {
-            box-sizing: border-box;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corporate Logistics Gateway | PT. SiCepat Express Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sc-red: #e51a25;
+      --sc-dark: #0f172a;
+      --sc-navy: #1e293b;
+      --sc-gray: #64748b;
+      --sc-light: #f8fafc;
+      --sc-success: #10b981;
+      --sc-warning: #f59e0b;
+      --glass: rgba(255, 255, 255, 0.98);
+      --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    }
 
-        body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #555; /* Latar belakang gelap untuk preview di browser */
-            margin: 0;
-            padding: 0;
-        }
+    * { box-sizing: border-box; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: #cbd5e1;
+      background-image: radial-gradient(var(--sc-navy) 0.5px, transparent 0.5px);
+      background-size: 30px 30px;
+      margin: 0; padding: 40px 20px;
+      color: var(--sc-dark);
+    }
 
-        /* Konfigurasi Halaman A4 */
-        .page {
-            width: 210mm;
-            min-height: 297mm;
-            padding: 20mm;
-            margin: 10mm auto;
-            background: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            position: relative;
-        }
+    .premium-container {
+      max-width: 1250px;
+      margin: 0 auto;
+      background: var(--glass);
+      border-radius: 24px;
+      box-shadow: var(--shadow-premium);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.3);
+      backdrop-filter: blur(10px);
+    }
 
-        /* Header */
-        .header {
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
+    /* Top Global Nav */
+    .top-nav {
+      background: var(--sc-dark);
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      font-size: 11px;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
 
-        .company-branding h1 {
-            font-size: 26px;
-            text-transform: uppercase;
-            color: #1a1a1a;
-            margin: 0;
-            letter-spacing: 1.5px;
-        }
+    .live-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--sc-red);
+    }
 
-        .company-branding .sub-title {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
+    .pulse {
+      width: 8px; height: 8px; background: var(--sc-red);
+      border-radius: 50%; box-shadow: 0 0 10px var(--sc-red);
+      animation: pulse-red 2s infinite;
+    }
 
-        .invoice-meta {
-            text-align: right;
-        }
+    @keyframes pulse-red { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        .invoice-meta h2 {
-            font-size: 32px;
-            color: #d1d1d1;
-            margin: 0;
-            text-transform: uppercase;
-            font-weight: 800;
-        }
+    /* Main Branding Header */
+    .header-brand {
+      padding: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #ffffff, #f1f5f9);
+      border-bottom: 1px solid #e2e8f0;
+    }
 
-        .meta-details {
-            margin-top: 10px;
-            font-size: 14px;
-        }
+    .logo-area img { height: 55px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05)); }
 
-        .meta-details span {
-            display: block;
-            margin-bottom: 3px;
-        }
+    .doc-identity { text-align: right; }
+    .doc-identity h1 { margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+    .resi-pill { 
+      display: inline-block; background: var(--sc-dark); color: white;
+      padding: 6px 16px; border-radius: 8px; font-family: 'JetBrains Mono', monospace;
+      font-size: 16px; margin-top: 8px;
+    }
 
-        /* Informasi Penerima */
-        .client-section {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
+    /* Layout Structure */
+    .dashboard-grid { display: grid; grid-template-columns: 1fr 400px; }
+    .main-canvas { padding: 40px; }
+    .side-control { background: #f8fafc; padding: 40px; border-left: 1px solid #e2e8f0; }
 
-        .bill-to h3 {
-            font-size: 12px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-            display: inline-block;
-        }
+    /* Alert Premium */
+    .alert-premium {
+      background: #fef2f2; border: 1px solid #fee2e2;
+      border-radius: 16px; padding: 24px; margin-bottom: 40px;
+      display: flex; gap: 20px; align-items: center;
+    }
 
-        .client-address {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #333;
-        }
+    .alert-icon-wrap {
+      width: 50px; height: 50px; background: var(--sc-red);
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; color: white; font-size: 24px;
+    }
 
-        .client-address strong {
-            font-size: 16px;
-            color: #000;
-        }
+    /* Info Cards */
+    .info-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+    .info-card { 
+      background: white; border: 1px solid #e2e8f0; padding: 24px; 
+      border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+    .card-label { font-size: 11px; font-weight: 800; color: var(--sc-gray); text-transform: uppercase; margin-bottom: 12px; }
 
-        /* Tabel Produk */
-        table.inventory {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
+    /* Timeline Premium */
+    .timeline-premium { position: relative; padding-left: 32px; }
+    .timeline-premium::before {
+      content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+      width: 2px; background: #e2e8f0;
+    }
 
-        table.inventory th {
-            background-color: #f4f4f4;
-            color: #333;
-            font-weight: bold;
-            font-size: 12px;
-            text-transform: uppercase;
-            text-align: left;
-            padding: 12px;
-            border-bottom: 2px solid #ccc;
-        }
+    .step { position: relative; margin-bottom: 35px; }
+    .step-dot { 
+      position: absolute; left: -32px; top: 4px; width: 18px; height: 18px; 
+      border-radius: 50%; background: white; border: 4px solid #cbd5e1; z-index: 2;
+    }
+    .step.completed .step-dot { border-color: var(--sc-success); background: var(--sc-success); }
+    .step.active .step-dot { border-color: var(--sc-red); animation: border-pulse 2s infinite; }
 
-        table.inventory td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-            vertical-align: top;
-        }
+    @keyframes border-pulse { 0% { box-shadow: 0 0 0 0 rgba(229, 26, 37, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(229, 26, 37, 0); } 100% { box-shadow: 0 0 0 0 rgba(229, 26, 37, 0); } }
 
-        table.inventory .qty, 
-        table.inventory .cost, 
-        table.inventory .total {
-            text-align: right;
-        }
+    /* Table Design */
+    table { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin-top: -8px; }
+    th { text-align: left; padding: 12px; font-size: 12px; color: var(--sc-gray); text-transform: uppercase; }
+    td { background: #fff; padding: 16px 12px; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+    td:first-child { border-left: 1px solid #f1f5f9; border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+    td:last-child { border-right: 1px solid #f1f5f9; border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
 
-        table.inventory tr:last-child td {
-            border-bottom: 2px solid #333;
-        }
+    /* Interaction UI */
+    .btn-premium {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 100%; padding: 18px; background: var(--sc-red); color: white;
+      border: none; border-radius: 14px; font-weight: 700; font-size: 15px;
+      cursor: pointer; box-shadow: 0 10px 15px -3px rgba(229, 26, 37, 0.3);
+      gap: 10px;
+    }
 
-        /* Bagian Total & Pembayaran */
-        .bottom-section {
-            display: flex;
-            justify-content: space-between;
-        }
+    .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 20px 25px -5px rgba(229, 26, 37, 0.4); }
 
-        .payment-info {
-            width: 50%;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 4px;
-            border: 1px solid #eee;
-        }
+    .btn-secondary { background: white; color: var(--sc-dark); border: 1px solid #e2e8f0; box-shadow: none; margin-top: 12px; }
 
-        .payment-info h4 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
-            text-transform: uppercase;
-            color: #333;
-        }
+    /* Modal Styling */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center;
+    }
+    .modal-content {
+      background: white; width: 550px; border-radius: 24px; padding: 40px; text-align: center;
+      position: relative; overflow: hidden;
+    }
 
-        .bank-details {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #555;
-        }
+    /* Verification UI */
+    .scan-line {
+      width: 100%; height: 2px; background: var(--sc-red);
+      position: absolute; top: 0; left: 0; box-shadow: 0 0 15px var(--sc-red);
+      animation: scan 2s linear infinite; display: none;
+    }
+    @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
 
-        .totals-table {
-            width: 40%;
-            border-collapse: collapse;
-        }
-
-        .totals-table td {
-            padding: 8px 0;
-            text-align: right;
-            font-size: 14px;
-        }
-
-        .totals-table .label {
-            color: #666;
-            padding-right: 15px;
-        }
-
-        .totals-table .value {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .totals-table .grand-total td {
-            border-top: 2px solid #333;
-            padding-top: 15px;
-            font-size: 18px;
-            font-weight: 800;
-            color: #000;
-        }
-
-        .totals-table .payment-row td {
-            color: green;
-        }
-        
-        .totals-table .balance-due td {
-            color: #c0392b;
-            font-size: 16px;
-            padding-top: 10px;
-        }
-
-        /* Tanda Tangan */
-        .signature-section {
-            margin-top: 50px;
-            display: flex;
-            justify-content: flex-end;
-            page-break-inside: avoid;
-        }
-
-        .sign-box {
-            text-align: center;
-            width: 200px;
-        }
-
-        .sign-box .title {
-            font-size: 12px;
-            margin-bottom: 60px; /* Ruang untuk stempel/tanda tangan */
-        }
-
-        .sign-box .line {
-            border-top: 1px solid #333;
-            margin-bottom: 5px;
-        }
-
-        /* Footer Halaman */
-        .footer {
-            position: absolute;
-            bottom: 20mm;
-            left: 20mm;
-            right: 20mm;
-            text-align: center;
-            font-size: 10px;
-            color: #999;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-
-        /* Konfigurasi Khusus Cetak (Print) */
-        @media print {
-            body {
-                background: none;
-                margin: 0;
-            }
-            .page {
-                width: 210mm;
-                height: 297mm; /* Paksa tinggi A4 */
-                margin: 0;
-                padding: 20mm;
-                box-shadow: none;
-                border: none;
-            }
-            
-            @page {
-                size: A4;
-                margin: 0; /* Margin ditangani oleh padding .page */
-            }
-            
-            .footer {
-                bottom: 20mm; /* Pastikan footer tetap di bawah saat print */
-            }
-        }
-    </style>
+    @media print {
+      .side-control, .top-nav, .btn-premium { display: none !important; }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      body { background: white; padding: 0; }
+      .premium-container { box-shadow: none; border: none; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="page">
-        <header class="header">
-            <div class="company-branding">
-                <h1>Gudang Distributor R2 NUSANTARA</h1>
-                <div class="sub-title">Distributor Resmi & Logistik Terpadu</div>
-            </div>
-            <div class="invoice-meta">
-                <h2>FAKTUR</h2>
-                <div class="meta-details">
-                    <span>No. Faktur: <strong>#INV/2026/072/0063</strong></span>
-                    <span>Tanggal: 03 Februari 2026</span>
-                </div>
-            </div>
-        </header>
+  <div class="premium-container">
+    <nav class="top-nav">
+      <div class="live-indicator"><div class="pulse"></div> CORE SYSTEM ACTIVE: NODE-SX-042</div>
+      <div>SECURITY PROTOCOL: LEVEL 4 (HIGH-VALUE CARGO)</div>
+    </nav>
 
-        <section class="client-section">
-            <div class="bill-to">
-                <h3>Kepada Yth:</h3>
-                <div class="client-address">
-                    <strong>Fahru Rahman K</strong><br>
-                    (+62) 821-4545-0288<br>
-                    RT.006/RW.003, Dusun Timur,<br>
-                    Desa Waro, Kec. Monta,<br>
-                    Kab. Bima, NTB 84172
-                </div>
-            </div>
-            <div class="bill-to" style="text-align: right;">
-                <h3>Termin Pembayaran:</h3>
-                <div class="client-address">
-                    <strong>T.O.P (Term of Payment)</strong><br>
-                    DP & Pelunasan<br>
-                    Jatuh Tempo: 04 Feb 2026
-                </div>
-            </div>
-        </section>
+    <header class="header-brand">
+      <div class="logo-area">
+        <img src="https://i.ibb.co/RTKgNRFm/IMG-20260126-155412.jpg" alt="SiCepat Official">
+      </div>
+      <div class="doc-identity">
+        <h1>SURAT JALAN RESMI</h1>
+        <div class="resi-pill">SCEP/R2N/2026/042</div>
+      </div>
+    </header>
 
-        <table class="inventory">
-            <thead>
-                <tr>
-                    <th style="width: 50%;">Deskripsi Barang</th>
-                    <th class="qty">Qty (Slop)</th>
-                    <th class="cost">Harga Satuan (Rp)</th>
-                    <th class="total">Total (Rp)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <strong>PS Filter</strong><br>
-                        <small style="color: #666;">Karton/Slop Standar Distribusi</small>
-                    </td>
-                    <td class="qty">60</td>
-                    <td class="cost">75.000</td>
-                    <td class="total">4.500.000</td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>PS Djeram</strong><br>
-                        <small style="color: #666;">Karton/Slop Standar Distribusi 120</small>
-                    </td>
-                    <td class="qty">120</td>
-                    <td class="cost">70.000</td>
-                    <td class="total">8.400.000</td>
-                </tr>
-            </tbody>
+    <div class="dashboard-grid">
+      <main class="main-canvas">
+        <div class="alert-premium">
+          <div class="alert-icon-wrap">🛡️</div>
+          <div class="alert-msg">
+            <strong style="display: block; font-size: 16px; margin-bottom: 4px;">Security Validation Required</strong>
+            <p style="margin: 0; font-size: 13px; color: var(--sc-gray);">Muatan terdeteksi sebagai kategori <b>"Premium Goods"</b>. Berdasarkan SOP logistik nasional, pelepasan status <b>Blocked</b> memerlukan validasi jaminan keamanan perjalanan.</p>
+          </div>
+        </div>
+
+        <div class="info-card-grid">
+          <div class="info-card">
+            <div class="card-label">Origin / Pengirim</div>
+            <strong>R2 Nusantara</strong>
+            <div style="font-size: 13px; color: var(--sc-gray); margin-top: 5px;">
+              Malang, Jawa Timur<br>ID Transit: MLG-88271
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="card-label">Destination / Penerima</div>
+            <strong>Fahru Rahman K</strong>
+            <div style="font-size: 13px; color: var(--sc-gray); margin-top: 5px;">
+              Kec. Monta, Kab. Bima<br>Nusa Tenggara Barat 84172
+            </div>
+          </div>
+        </div>
+
+        <div class="card-label">Item Manifest (Validated)</div>
+        <table>
+          <thead>
+            <tr><th>Description</th><th>Qty</th><th>Unit</th><th>Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ROKOK PS DJERAM</strong></td><td>60</td><td>Slop</td><td>18.0 kg</td></tr>
+            <tr><td><strong>PS FILTER</strong></td><td>60</td><td>Slop</td><td>15.0 kg</td></tr>
+            <tr><td><strong>PS DJERAM</strong></td><td>120</td><td>Slop</td><td>30.0 kg</td></tr>
+          </tbody>
         </table>
 
-        <div class="bottom-section">
-            <div class="payment-info">
-                <h4>Instruksi Pembayaran</h4>
-                <div class="bank-details">
-                    Bank: <strong>Bank Jago</strong><br>
-                    No. Rekening: <strong>108849575913</strong><br>
-                    Atas Nama: <strong>Ridas Joko Prayitno</strong>
-                </div>
-                <div style="margin-top: 10px; font-size: 12px; color: #777;">
-                    *Harap sertakan No. Faktur pada berita transfer.
-                </div>
-            </div>
+        <div style="margin-top: 30px; background: #f1f5f9; padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-weight: 700;">TOTAL DEPOSIT JAMINAN</span>
+          <span style="font-size: 24px; font-weight: 800; color: var(--sc-red);">Rp 1.500.042</span>
+        </div>
+      </main>
 
-            <table class="totals-table">
-                <tr>
-                    <td class="label">Subtotal</td>
-                    <td class="value">12.900.000</td>
-                </tr>
-                <tr class="grand-total">
-                    <td class="label">Total Tagihan</td>
-                    <td class="value">12.900.000</td>
-                </tr>
-                <tr class="payment-row">
-                    <td class="label">Pembayaran Awal (03 Feb)</td>
-                    <td class="value">(-10.000.000)</td>
-                </tr>
-                <tr class="balance-due">
-                    <td class="label">Sisa Pelunasan</td>
-                    <td class="value">Rp 2.900.000</td>
-                </tr>
-            </table>
+      <aside class="side-control">
+        <div class="card-label">Live Transit Tracking</div>
+        <div class="timeline-premium">
+          <div class="step active">
+            <div class="step-dot"></div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--sc-red);">06 FEB 2026 - 18:05</div>
+            <div style="font-weight: 800; font-size: 14px;">SECURITY BLOCK</div>
+            <div style="font-size: 12px; color: var(--sc-gray);">Gateway Surabaya (Internal SUB-1)</div>
+          </div>
+          <div class="step completed">
+            <div class="step-dot"></div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--sc-success);">06 FEB 2026 - 14:20</div>
+            <div style="font-weight: 700; font-size: 14px;">TRANSIT SORTIR</div>
+            <div style="font-size: 12px; color: var(--sc-gray);">Hub Warehouse Jawa Timur</div>
+          </div>
+          <div class="step completed">
+            <div class="step-dot"></div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--sc-success);">06 FEB 2026 - 09:12</div>
+            <div style="font-weight: 700; font-size: 14px;">PICK-UP SUCCESS</div>
+            <div style="font-size: 12px; color: var(--sc-gray);">Origin: Malang Hub</div>
+          </div>
+          <div class="step" style="opacity: 0.4;">
+            <div class="step-dot"></div>
+            <div style="font-size: 11px; font-weight: 700;">ESTIMASI</div>
+            <div style="font-weight: 700; font-size: 14px;">TIBA DI TUJUAN</div>
+            <div style="font-size: 12px; color: var(--sc-gray);">Kec. Monta, Kab. Bima</div>
+          </div>
         </div>
 
-        <div class="signature-section">
-            <div class="sign-box">
-                <div class="title">Hormat Kami,</div>
-                <div class="line"></div>
-                <strong>Ridas Joko Prayitno</strong><br>
-                <small>Administrasi Gudang</small>
-            </div>
+        <div style="margin-top: 40px;">
+          <button class="btn-premium" onclick="openGate()">
+            <span>🔓</span> SELESAIKAN JAMINAN
+          </button>
+          <button class="btn-premium btn-secondary" onclick="window.print()">
+            <span>📄</span> UNDUH PDF RESMI
+          </button>
         </div>
 
-        <footer class="footer">
-            Dokumen ini dicetak secara otomatis oleh sistem komputer gudang.<br>
-            Terima kasih atas kepercayaan Anda bermitra dengan Gudang R2 NUSANTARA.
-        </footer>
+        <div style="margin-top: 30px; text-align: center;">
+          <img src="https://i.ibb.co/Mx9xmsCV/IMG-20260206-180618.jpg" style="width: 140px; opacity: 0.8; filter: grayscale(1);">
+          <div style="font-size: 10px; color: #94a3b8; margin-top: 10px; font-family: 'JetBrains Mono';">VERIFIED BY SICEPAT CORE AI</div>
+        </div>
+      </aside>
     </div>
 
+    <footer style="background: var(--sc-dark); color: #64748b; padding: 30px; text-align: center; font-size: 11px;">
+      <p>PT. SiCepat Express Indonesia - Head Office: Jl. Ir. H. Juanda No. 3, Jakarta Pusat.<br>
+      Dokumen ini bersifat rahasia dan tervalidasi secara digital. Segala manipulasi data akan diproses hukum.</p>
+    </footer>
+  </div>
+
+  <div id="modalGate" class="modal-overlay">
+    <div class="modal-content">
+      <div class="scan-line" id="scanner"></div>
+      <div id="init-view">
+        <h2 style="font-weight: 800; margin-bottom: 10px;">VALIDASI KEAMANAN</h2>
+        <p style="font-size: 14px; color: var(--sc-gray);">Kirim jaminan untuk membuka segel pengiriman <strong>SCEP/R2N/042</strong></p>
+        
+        <div style="background: #f8fafc; padding: 25px; border-radius: 20px; text-align: left; border: 1px solid #e2e8f0; margin: 25px 0;">
+          <div style="font-size: 11px; color: var(--sc-gray); font-weight: 800;">REKENING TUJUAN (CORPORATE)</div>
+          <div style="font-size: 18px; font-weight: 800; margin: 8px 0; letter-spacing: 1px;">BANK MANDIRI: 144-00-2277-XXX-A</div>
+          <div style="font-size: 12px; font-weight: 600;">A/N PT SICEPAT EXPRESS INDONESIA</div>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0;">
+          <div style="font-size: 11px; color: var(--sc-gray); font-weight: 800;">NOMINAL TRANSFER</div>
+          <div style="font-size: 22px; font-weight: 800; color: var(--sc-red);">Rp 1.500.042</div>
+        </div>
+
+        <button class="btn-premium" onclick="verifyLogic()">SAYA SUDAH TRANSFER</button>
+        <p style="font-size: 12px; margin-top: 15px; cursor: pointer; color: var(--sc-gray);" onclick="closeGate()">Batalkan Sesi</p>
+      </div>
+
+      <div id="verify-view" style="display: none;">
+        <h2 style="font-weight: 800; margin-bottom: 20px;">AI VERIFICATION IN PROGRESS</h2>
+        <div style="height: 10px; background: #f1f5f9; border-radius: 20px; overflow: hidden; margin-bottom: 20px;">
+          <div id="bar" style="width: 0%; height: 100%; background: var(--sc-red);"></div>
+        </div>
+        <div id="status-log" style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--sc-gray);">INITIALIZING ENCRYPTED CONNECTION...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openGate() { document.getElementById('modalGate').style.display = 'flex'; }
+    function closeGate() { document.getElementById('modalGate').style.display = 'none'; }
+
+    function verifyLogic() {
+      document.getElementById('init-view').style.display = 'none';
+      document.getElementById('verify-view').style.display = 'block';
+      document.getElementById('scanner').style.display = 'block';
+      
+      let p = 0;
+      let bar = document.getElementById('bar');
+      let log = document.getElementById('status-log');
+      
+      const msgs = [
+        "MENYAMBUNGKAN KE DATABASE PERBANKAN...",
+        "MENCOCOKKAN MUTASI REKENING (SCEP-042)...",
+        "MENGVERIFIKASI TANDA TANGAN DIGITAL...",
+        "DANA TERDETEKSI - MENUNGGU KONFIRMASI OTORITAS...",
+        "KESALAHAN: VALIDASI MANUAL DIPERLUKAN!"
+      ];
+
+      let interval = setInterval(() => {
+        p += 1;
+        bar.style.width = p + "%";
+        if(p == 20) log.innerText = msgs[0];
+        if(p == 40) log.innerText = msgs[1];
+        if(p == 60) log.innerText = msgs[2];
+        if(p == 85) log.innerText = msgs[3];
+        
+        if(p >= 100) {
+          clearInterval(interval);
+          log.innerText = msgs[4];
+          log.style.color = "red";
+          setTimeout(() => {
+            alert("SISTEM: Pembayaran terdeteksi namun memerlukan upload bukti manual. Hubungi Customer Service via Live Chat.");
+            location.reload();
+          }, 2000);
+        }
+      }, 50);
+    }
+  </script>
 </body>
-</html>
+                                        </html>
