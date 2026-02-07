@@ -3,28 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dokumen Resmi Perusahaan | PT. SiCepat Express Indonesia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:wght@600&display=swap" rel="stylesheet">
+  <title>Lacak Paket | PT. SiCepat Express Indonesia</title>
+  <meta name="description" content="Lacak paket Anda secara real-time dengan platform resmi SiCepat Express. Jaminan keamanan, verifikasi digital, dan ekspor dokumen resmi.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     :root {
       --primary: #e51a25;
-      --dark: #1a1a1a;
-      --gray-900: #212529;
-      --gray-700: #495057;
-      --gray-500: #adb5bd;
-      --gray-300: #dee2e6;
-      --gray-100: #f8f9fa;
-      --border: #e9ecef;
+      --primary-dark: #c51620;
+      --dark: #0f172a;
+      --gray-900: #1e293b;
+      --gray-800: #334155;
+      --gray-700: #475569;
+      --gray-600: #64748b;
+      --gray-300: #cbd5e1;
+      --gray-200: #e2e8f0;
+      --gray-100: #f1f5f9;
+      --white: #ffffff;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      --radius: 12px;
+    }
+
+    .dark {
+      --dark: #f1f5f9;
+      --gray-900: #e2e8f0;
+      --gray-800: #cbd5e1;
+      --gray-700: #94a3b8;
+      --gray-600: #64748b;
+      --gray-300: #334155;
+      --gray-200: #1e293b;
+      --gray-100: #0f172a;
+      --white: #0f172a;
+      background: linear-gradient(135deg, #0c1427 0%, #0a0f1d 100%) !important;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f9fafb;
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
       color: var(--gray-900);
       line-height: 1.6;
-      padding: 25px;
+      min-height: 100vh;
       position: relative;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* Watermark Anti-Pemalsuan */
@@ -36,322 +60,661 @@
       width: 100%;
       height: 100%;
       background-image: url('https://i.ibb.co.com/ynTPqdF9/IMG-20260117-110547.jpg');
-      background-size: 280px;
+      background-size: 320px;
       background-repeat: repeat;
-      opacity: 0.05;
+      opacity: 0.04;
       z-index: -1;
       pointer-events: none;
     }
 
-    .document-container {
-      max-width: 850px;
+    .dark::before { opacity: 0.03; }
+
+    .container {
+      max-width: 1200px;
       margin: 0 auto;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      overflow: hidden;
-      border-top: 4px solid var(--primary);
-      font-size: 14px;
+      padding: 20px;
     }
 
-    /* Header Resmi Perusahaan */
-    .header {
-      padding: 28px 40px;
+    /* Header Resmi SiCepat */
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-200);
+      margin-bottom: 30px;
     }
     .logo {
-      height: 48px;
+      height: 44px;
     }
-    .doc-meta {
-      text-align: right;
-      font-size: 12px;
-      color: var(--gray-700);
+    .header-actions {
+      display: flex;
+      gap: 16px;
     }
-    .doc-number {
-      font-weight: 700;
-      color: var(--primary);
-      letter-spacing: 0.5px;
+    .btn-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dark .btn-icon {
+      background: var(--gray-200);
+      border-color: var(--gray-300);
+    }
+    .btn-icon:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
     }
 
-    /* Judul Dokumen */
-    .doc-title {
-      font-family: 'Source Serif Pro', serif;
-      font-size: 22px;
-      font-weight: 600;
+    /* Hero Section - Inspirasi dari sicepat.com */
+    .hero {
       text-align: center;
-      margin: 24px 0;
+      margin: 30px 0 40px;
+    }
+    .hero h1 {
+      font-size: 36px;
+      font-weight: 700;
       color: var(--dark);
-      letter-spacing: 0.3px;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
     }
-
-    /* Section Umum */
-    .section {
-      padding: 0 40px 28px;
-    }
-    .section-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin: 22px 0 14px;
-      color: var(--primary);
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--gray-300);
-    }
-
-    /* Grid Info */
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 28px;
-      margin: 16px 0;
-    }
-    .info-card h4 {
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 8px;
+    .hero p {
+      font-size: 18px;
       color: var(--gray-700);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .info-card p {
-      font-size: 14px;
-      line-height: 1.5;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
 
-    /* Tabel Manifest */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0;
-      font-size: 13px;
+    /* Tracker Card - Desain Kartu Modern ala SiCepat */
+    .tracker-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+      max-width: 720px;
+      margin: 0 auto 45px;
+      border: 1px solid var(--gray-200);
     }
-    th, td {
-      padding: 11px 12px;
-      text-align: left;
-      border-bottom: 1px solid var(--gray-300);
-    }
-    th {
-      background-color: var(--gray-100);
-      font-weight: 600;
-      color: var(--gray-700);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Kotak Jaminan */
-    .guarantee-box {
-      background-color: #fff8f8;
-      border: 1px solid #ffe0e0;
-      border-radius: 6px;
-      padding: 20px;
-      margin: 24px 0;
-    }
-    .guarantee-amount {
+    .tracker-title {
       font-size: 20px;
       font-weight: 700;
+      margin-bottom: 24px;
+      color: var(--gray-900);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tracker-title i {
       color: var(--primary);
-      margin: 10px 0;
-      font-family: 'Source Serif Pro', serif;
     }
-    .guarantee-note {
-      font-size: 13px;
-      color: var(--gray-700);
-      margin-top: 12px;
-      padding-top: 12px;
-      border-top: 1px dashed var(--gray-300);
+    .input-group {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
     }
-
-    /* Barcode & QR */
-    .barcode-section {
-      text-align: center;
-      margin: 28px 0;
-    }
-    .barcode-img {
-      width: 200px;
-      height: auto;
+    .input-group input {
+      flex: 1;
+      padding: 16px 20px;
       border: 1px solid var(--gray-300);
-      padding: 8px;
-      background: white;
-      margin: 0 auto;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
-    .qris-link {
-      display: inline-block;
-      margin-top: 16px;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 13px;
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(229, 26, 37, 0.15);
     }
-    .qris-link:hover { text-decoration: underline; }
-
-    /* Materai Digital */
-    .digital-stamp {
-      text-align: center;
-      margin-top: 30px;
-      padding-top: 22px;
-      border-top: 1px solid var(--border);
-    }
-    .stamp-img {
-      width: 120px;
-      height: auto;
-      opacity: 0.98;
-    }
-    .stamp-label {
-      font-size: 11px;
+    .btn-add {
+      width: 46px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
       color: var(--gray-700);
-      margin-top: 8px;
-      font-style: italic;
+      transition: all 0.2s;
     }
-
-    /* Tombol Konfirmasi */
-    .btn-confirm {
-      display: block;
+    .btn-add:hover {
+      background: var(--gray-200);
+      border-color: var(--gray-400);
+    }
+    .btn-track {
       width: 100%;
-      max-width: 280px;
-      margin: 24px auto;
-      padding: 13px 0;
+      padding: 16px;
       background: var(--primary);
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 14px;
-      text-align: center;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      font-size: 17px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      letter-spacing: 0.3px;
     }
-    .btn-confirm:hover {
-      opacity: 0.92;
+    .btn-track:hover:not(:disabled) {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    .btn-track:disabled {
+      background: #999;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    /* Footer Legal */
-    .footer {
-      text-align: center;
-      font-size: 11px;
-      color: var(--gray-700);
-      padding: 20px 40px;
-      border-top: 1px solid var(--border);
-      line-height: 1.5;
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      transform: translateX(200%);
+      transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: 1000;
     }
-    .footer a {
+    #toast.show {
+      transform: translateX(0);
+    }
+
+    /* Result Container */
+    .result-container { 
+      display: none; 
+      animation: fadeIn 0.7s ease-out;
+    }
+
+    /* Timeline Tracking - Versi Premium */
+    .tracking-timeline {
+      position: relative;
+      max-width: 750px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+    .tracking-timeline::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      background: var(--gray-200);
+      top: 20px;
+      bottom: 20px;
+      left: 50%;
+      margin-left: -1.5px;
+      border-radius: 2px;
+    }
+    .timeline-item {
+      display: flex;
+      margin-bottom: 32px;
+      position: relative;
+      width: 100%;
+    }
+    .timeline-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 24px;
+      flex-shrink: 0;
+      font-size: 18px;
+      color: var(--gray-600);
+    }
+    .timeline-content {
+      padding-top: 4px;
+    }
+    .timeline-time {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .timeline-location {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+      color: var(--gray-900);
+    }
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--gray-700);
+      max-width: 90%;
+    }
+
+    /* Status Aktif & Hold */
+    .timeline-item.active .timeline-icon {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: #fff5f5;
+    }
+    .timeline-item.hold .timeline-icon {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+    .timeline-item.hold .timeline-desc {
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    /* Guarantee Card - Desain Resmi */
+    .guarantee-section {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 32px;
+      max-width: 750px;
+      margin: 45px auto;
+      box-shadow: var(--shadow);
+    }
+    .guarantee-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .guarantee-header i {
+      color: var(--primary);
+      font-size: 22px;
+    }
+    .guarantee-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+    .guarantee-amount {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 16px 0;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    .guarantee-note {
+      background: #fff8f8;
+      border-left: 3px solid var(--primary);
+      padding: 16px;
+      border-radius: 0 6px 6px 0;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .btn-confirm {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 14px 32px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+    .btn-confirm:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Dokumen Resmi */
+    .document-section {
+      text-align: center;
+      margin: 45px 0;
+      padding: 0 20px;
+    }
+    .document-img {
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto 20px;
+      display: block;
+      border: 1px solid var(--gray-200);
+      padding: 12px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .document-label {
+      font-size: 13px;
+      color: var(--gray-700);
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 0 20px;
+      color: var(--gray-600);
+      font-size: 14px;
+      border-top: 1px solid var(--gray-200);
+      margin-top: 20px;
+    }
+    footer a {
       color: var(--primary);
       text-decoration: none;
     }
 
-    @media print {
-      body { background: white; padding: 0; }
-      body::before { opacity: 0.03; }
-      .btn-confirm, .qris-link { display: none; }
-      .document-container { box-shadow: none; border-radius: 0; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    /* Responsif */
+    @media (max-width: 768px) {
+      .input-group { flex-direction: column; }
+      .btn-add { width: 100%; }
+      .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .timeline-icon {
+        margin: 0 0 16px 0;
+      }
+      .tracking-timeline::before {
+        left: 24px;
+      }
+      .timeline-item::before {
+        left: 24px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="document-container">
+  <div class="container">
     <!-- Header Resmi -->
-    <div class="header">
+    <header>
       <img src="https://i.ibb.co.com/9HyV9Bky/IMG-20260126-155359.jpg" alt="PT. SiCepat Express Indonesia" class="logo">
-      <div class="doc-meta">
-        <div class="doc-number">DOC/SCEP/R2N/2026/042</div>
-        <div>06 Februari 2026 | 18:05 WIB</div>
-        <div>Kode Verifikasi: SIC-99827-2026</div>
-      </div>
-    </div>
-
-    <!-- Judul Dokumen -->
-    <div class="doc-title">SURAT JALAN RESMI DAN SURAT JAMINAN KEAMANAN PERJALANAN</div>
-
-    <div class="section">
-      <!-- Identitas Pengiriman -->
-      <div class="info-grid">
-        <div class="info-card">
-          <h4>PENGIRIM (SHIPPER)</h4>
-          <p><strong>R2 Nusantara</strong><br>
-          Jl. Raya Utama No. 88<br>
-          Malang, Jawa Timur 65111<br>
-          Kontak: (+62) 857-1590-5079</p>
+      <div class="header-actions">
+        <div class="btn-icon" id="themeToggle" title="Ganti Mode">
+          <i class="fas fa-moon"></i>
         </div>
-        <div class="info-card">
-          <h4>PENERIMA (CONSIGNEE)</h4>
-          <p><strong>Fahru Rahman K</strong><br>
-          RT.006 / RW.003, Dusun Timur, Desa Waro<br>
-          Kec. Monta, Kab. Bima, NTB 84172<br>
-          HP: (+62) 821-4545-0288</p>
+        <div class="btn-icon" id="pdfExport" title="Ekspor ke PDF">
+          <i class="fas fa-file-pdf"></i>
         </div>
       </div>
+    </header>
 
-      <!-- Manifest Barang -->
-      <div class="section-title">MANIFEST BARANG</div>
-      <table>
-        <thead>
-          <tr>
-            <th>No.</th>
-            <th>Deskripsi Barang</th>
-            <th>Qty</th>
-            <th>Satuan</th>
-            <th>Berat (kg)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>1</td><td>ROKOK PS DJERAM</td><td>60</td><td>Slop</td><td>18.0</td></tr>
-          <tr><td>2</td><td>PS FILTER</td><td>60</td><td>Slop</td><td>15.0</td></tr>
-          <tr><td>3</td><td>PS DJERAM</td><td>120</td><td>Slop</td><td>30.0</td></tr>
-          <tr>
-            <td colspan="4" style="text-align: right; font-weight: 600;">TOTAL BERAT:</td>
-            <td style="font-weight: 600;">63.0 kg</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Lacak Paket & Verifikasi Jaminan</h1>
+      <p>Platform resmi SiCepat Express untuk pelacakan real-time, manajemen jaminan keamanan, dan ekspor dokumen resmi.</p>
+    </div>
 
-      <!-- Jaminan Keamanan -->
-      <div class="section-title">JAMINAN KEAMANAN PERJALANAN</div>
-      <div class="guarantee-box">
-        <p>PT. SiCepat Express Indonesia menerima jaminan keamanan perjalanan sebesar:</p>
-        <div class="guarantee-amount">Rp 1.500.000,- (Satu Juta Lima Ratus Ribu Rupiah)</div>
-        <p>Jaminan ini bersifat <strong>sementara dan 100% refundable</strong> setelah barang tiba di tujuan dalam kondisi utuh dan dokumen ini dikembalikan ke kantor cabang SiCepat terdekat.</p>
-        <div class="guarantee-note">
-          • Tidak berlaku sebagai premi asuransi atau biaya administrasi.<br>
-          • Pengembalian dana maksimal 3 hari kerja setelah verifikasi penerimaan.
+    <!-- Tracker Card -->
+    <div class="tracker-card">
+      <div class="tracker-title">
+        <i class="fas fa-search"></i>
+        Lacak Nomor Resi Anda
+      </div>
+      <div id="resiInputs">
+        <div class="input-group">
+          <input type="text" placeholder="Masukkan nomor resi (contoh: SCEP/R2N/2026/042)" maxlength="30">
+          <button class="btn-add" type="button" onclick="addResiField()">+</button>
         </div>
       </div>
-
-      <!-- Barcode & QRIS -->
-      <div class="barcode-section">
-        <img src="https://i.ibb.co/Mx9xmsCV/IMG-20260206-180618.jpg" alt="Barcode Resi" class="barcode-img">
-        <p style="font-size: 12px; color: var(--gray-700); margin-top: 10px;">Nomor Resi: SCEP/R2N/2026/042</p>
-        <a href="https://wa.me/62881010104981?text=Konfirmasi%20Jaminan%20Resi%20SCEP%2FR2N%2F2026%2F042%20-%20Rp1.500.000" 
-           target="_blank" 
-           class="qris-link">
-          [Lihat Instruksi Pembayaran QRIS]
-        </a>
-      </div>
-
-      <!-- Tombol Konfirmasi -->
-      <a href="https://wa.me/62881010104981?text=Konfirmasi%20Jaminan%20Resi%20SCEP%2FR2N%2F2026%2F042%20-%20Rp1.500.000" 
-         target="_blank" 
-         class="btn-confirm">
-        KONFIRMASI PEMBAYARAN JAMINAN
-      </a>
-
-      <!-- Materai Digital -->
-      <div class="digital-stamp">
-        <img src="https://i.ibb.co.com/fGqwXhMb/1000014472-11zon.jpg" alt="Materai Digital Resmi" class="stamp-img">
-        <div class="stamp-label">Materai Digital Resmi – Validasi Elektronik Terenkripsi</div>
-      </div>
+      <button class="btn-track" id="trackBtn" onclick="checkResi()">
+        <i class="fas fa-paper-plane"></i> LACAK SEKARANG
+      </button>
+      <div id="errorMessage" style="color: var(--primary); font-size: 14px; margin-top: 12px; min-height: 20px; font-weight: 500;"></div>
     </div>
 
-    <!-- Footer Legal -->
-    <div class="footer">
-      <p>Dokumen ini merupakan bagian dari sistem manajemen logistik terintegrasi PT. SiCepat Express Indonesia.<br>
-      Berlaku sah jika dicetak utuh, tidak diubah, dan memiliki cap waktu digital serta materai elektronik resmi.</p>
-      <p>© 2026 PT. SiCepat Express Indonesia. All Rights Reserved<br>
-      Kantor Pusat: Jakarta | Website: <a href="https://www.sicepat.com" target="_blank">www.sicepat.com</a> | Call Center: 1500-111</p>
+    <!-- Result Container -->
+    <div id="result" class="result-container">
+      <!-- Diisi oleh JS -->
     </div>
+
+    <footer>
+      <p>© 2026 PT. SiCepat Express Indonesia. All Rights Reserved</p>
+      <p>Call Center: <strong>1500-111</strong> | Website: <a href="https://www.sicepat.com" target="_blank">www.sicepat.com</a></p>
+    </footer>
   </div>
 
+  <!-- Toast Notification -->
+  <div id="toast">Berhasil diekspor ke PDF!</div>
+
+  <script>
+    // === DARK MODE ===
+    const themeToggle = document.getElementById('themeToggle');
+    const icon = themeToggle.querySelector('i');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (prefersDark || localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      if (document.body.classList.contains('dark')) {
+        localStorage.setItem('theme', 'dark');
+        icon.classList.replace('fa-moon', 'fa-sun');
+      } else {
+        localStorage.setItem('theme', 'light');
+        icon.classList.replace('fa-sun', 'fa-moon');
+      }
+    });
+
+    // === RESI INPUT ===
+    function addResiField() {
+      const container = document.getElementById('resiInputs');
+      if (container.children.length >= 5) {
+        showToast('Maksimal 5 resi sekaligus.');
+        return;
+      }
+      const div = document.createElement('div');
+      div.className = 'input-group';
+      div.innerHTML = `
+        <input type="text" placeholder="Nomor resi tambahan" maxlength="30">
+        <button class="btn-add" type="button" onclick="removeResiField(this)">−</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function removeResiField(btn) {
+      btn.parentElement.remove();
+    }
+
+    function isValidResi(resi) {
+      return /^SCEP\/[A-Z0-9]+\/\d{4}\/\d{3,6}$/i.test(resi.trim());
+    }
+
+    // === SIMULASI API TRACKING (Inspirasi dari struktur sicepat.com) ===
+    async function fetchTrackingData(resi) {
+      await new Promise(r => setTimeout(r, 900));
+      
+      const now = new Date();
+      return {
+        success: true,
+        resi: resi,
+        status: "ON_HOLD",
+        events: [
+          { 
+            timestamp: new Date(now - 2*3600*1000), 
+            location: "Malang Hub", 
+            description: "Paket diambil dari pengirim",
+            status: "PICKED_UP"
+          },
+          { 
+            timestamp: new Date(now - 1*3600*1000), 
+            location: "HUB Jawa Timur", 
+            description: "Paket dalam perjalanan ke gateway",
+            status: "IN_TRANSIT"
+          },
+          { 
+            timestamp: now, 
+            location: "Gateway Surabaya", 
+            description: "Menunggu pembayaran jaminan keamanan perjalanan",
+            status: "ON_HOLD"
+          }
+        ],
+        guaranteeRequired: 1500000,
+        estimatedDelivery: new Date(now + 2*24*3600*1000)
+      };
+    }
+
+    function formatDate(date) {
+      if (!(date instanceof Date)) return "Estimasi";
+      const d = new Date(date);
+      const months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agt","Sep","Okt","Nov","Des"];
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()} • ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')} WIB`;
+    }
+
+    function renderResult(data) {
+      const guaranteeFormatted = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+      }).format(data.guaranteeRequired);
+
+      let timelineHTML = '';
+      data.events.forEach((event, i) => {
+        const isActive = event.status !== "ON_HOLD";
+        const isHold = event.status === "ON_HOLD";
+        const icon = isHold ? 'fa-lock' : (isActive ? 'fa-check-circle' : 'fa-clock');
+        const colorClass = isHold ? 'hold' : (isActive ? 'active' : '');
+        
+        timelineHTML += `
+          <div class="timeline-item ${colorClass}">
+            <div class="timeline-icon">
+              <i class="fas ${icon}"></i>
+            </div>
+            <div class="timeline-content">
+              <div class="timeline-time">${formatDate(event.timestamp)}</div>
+              <div class="timeline-location">${event.location}</div>
+              <div class="timeline-desc">${event.description}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('result').innerHTML = `
+        <div class="tracking-timeline">
+          ${timelineHTML}
+        </div>
+
+        <div class="guarantee-section">
+          <div class="guarantee-header">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Jaminan Keamanan Perjalanan</h3>
+          </div>
+          <p>Untuk melanjutkan pengiriman, diperlukan jaminan keamanan sebesar:</p>
+          <div class="guarantee-amount">${guaranteeFormatted}</div>
+          <div class="guarantee-note">
+            Jaminan ini bersifat <strong>sementara dan 100% refundable</strong> setelah paket tiba di tujuan dalam kondisi utuh.
+          </div>
+          <a href="https://wa.me/6281388889999?text=Konfirmasi%20Jaminan%20Resi%20${encodeURIComponent(data.resi)}%20-%20${guaranteeFormatted}" 
+             target="_blank" 
+             class="btn-confirm">
+            <i class="fab fa-whatsapp"></i> KONFIRMASI PEMBAYARAN
+          </a>
+        </div>
+
+        <div class="document-section">
+          <img src="https://i.ibb.co/Mx9xmsCV/IMG-20260206-180618.jpg" alt="Barcode Resi" class="document-img">
+          <div class="document-label">Nomor Resi: ${data.resi}</div>
+          
+          <img src="https://i.ibb.co.com/fGqwXhMb/1000014472-11zon.jpg" alt="Materai Digital" class="document-img" style="max-width:140px;margin-top:30px;">
+          <div class="document-label">Materai Digital Resmi – Validasi Elektronik</div>
+        </div>
+      `;
+      document.getElementById('result').style.display = 'block';
+    }
+
+    // === PELACAKAN UTAMA ===
+    async function checkResi() {
+      const inputs = document.querySelectorAll('#resiInputs input');
+      const resis = Array.from(inputs).map(el => el.value.trim()).filter(v => v);
+      const errorDiv = document.getElementById('errorMessage');
+      const btn = document.getElementById('trackBtn');
+
+      if (resis.length === 0) {
+        errorDiv.textContent = 'Masukkan minimal satu nomor resi.';
+        return;
+      }
+
+      const invalid = resis.find(r => !isValidResi(r));
+      if (invalid) {
+        errorDiv.textContent = `Format tidak valid: ${invalid}. Contoh: SCEP/R2N/2026/042`;
+        return;
+      }
+
+      errorDiv.textContent = '';
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+      try {
+        const data = await fetchTrackingData(resis[0]);
+        renderResult(data);
+        
+        // Simpan riwayat
+        const history = JSON.parse(localStorage.getItem('resiHistory') || '[]');
+        const newHistory = [...new Set([resis[0], ...history])].slice(0, 10);
+        localStorage.setItem('resiHistory', JSON.stringify(newHistory));
+        
+        document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (err) {
+        errorDiv.textContent = 'Gagal menghubungi server. Coba lagi nanti.';
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> LACAK SEKARANG';
+      }
+    }
+
+    // === EKSPOR PDF ===
+    document.getElementById('pdfExport').addEventListener('click', () => {
+      const element = document.getElementById('result');
+      if (element.style.display === 'none') {
+        showToast('Tidak ada hasil untuk diekspor.');
+        return;
+      }
+
+      html2canvas(element, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
+        const imgWidth = 210;
+        const pageHeight = 295;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        pdf.save(`SiCepat_Tracking_${new Date().toISOString().slice(0,10)}.pdf`);
+        showToast('Dokumen resmi berhasil diunduh!');
+      });
+    });
+
+    // === UTILITAS ===
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    document.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+        checkResi();
+      }
+    });
+  </script>
 </body>
 </html>
