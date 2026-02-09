@@ -3,403 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Manajemen Keuangan & Stok</title>
+    <title>Sistem Keuangan & Stok Profesional</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            --primary: #2563eb;       /* Biru Utama */
-            --secondary: #64748b;     /* Abu-abu */
-            --success: #10b981;       /* Hijau (Masuk/Untung) */
-            --danger: #ef4444;        /* Merah (Keluar/Rugi) */
-            --bg-light: #f1f5f9;
-            --white: #ffffff;
+            --primary: #2563eb;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #16a34a;
+            --danger: #dc2626;
             --border: #e2e8f0;
-            --text-dark: #1e293b;
-            --sidebar-width: 260px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-        
-        body { background-color: var(--bg-light); color: var(--text-dark); display: flex; min-height: 100vh; }
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { margin: 0; background: var(--light); display: flex; height: 100vh; overflow: hidden; }
 
-        /* Sidebar Navigation */
+        /* Sidebar */
         .sidebar {
-            width: var(--sidebar-width);
-            background: #1e293b;
-            color: white;
-            padding: 2rem 1.5rem;
-            position: fixed;
-            height: 100vh;
-            left: 0; top: 0;
-            display: flex;
-            flex-direction: column;
+            width: 250px; background: var(--dark); color: white; display: flex; flex-direction: column;
+            padding: 1.5rem; flex-shrink: 0;
         }
-        
-        .brand { font-size: 1.4rem; font-weight: 700; margin-bottom: 2.5rem; color: var(--white); border-bottom: 1px solid #334155; padding-bottom: 1rem; }
-        
-        .nav-item {
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            color: #94a3b8;
-            font-weight: 500;
+        .logo { font-size: 1.2rem; font-weight: bold; margin-bottom: 2rem; border-bottom: 1px solid #334155; padding-bottom: 1rem; }
+        .menu-item {
+            padding: 10px; margin-bottom: 5px; cursor: pointer; border-radius: 6px; color: #cbd5e1;
         }
-        
-        .nav-item:hover, .nav-item.active { background: var(--primary); color: white; }
+        .menu-item:hover, .menu-item.active { background: var(--primary); color: white; }
+        .menu-item.danger { color: #fca5a5; margin-top: auto; }
+        .menu-item.danger:hover { background: var(--danger); }
 
         /* Main Content */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            padding: 2rem;
-        }
+        .main { flex: 1; padding: 2rem; overflow-y: auto; display: flex; flex-direction: column; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-pdf { background: var(--dark); color: white; }
 
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        .date-display { font-weight: 600; color: var(--secondary); background: white; padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border); }
+        /* Report Container (Area to be printed) */
+        #report-area { background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); min-height: 100%; }
 
-        /* Dashboard Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card { background: var(--white); padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid var(--border); }
-        .card-label { font-size: 0.85rem; color: var(--secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .card-value { font-size: 1.6rem; font-weight: 700; margin-top: 0.5rem; }
+        /* Cards */
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+        .stat-card { border: 1px solid var(--border); padding: 1.5rem; border-radius: 8px; background: #fff; }
+        .stat-label { font-size: 0.8rem; color: #64748b; text-transform: uppercase; }
+        .stat-val { font-size: 1.5rem; font-weight: bold; margin-top: 5px; }
         .text-green { color: var(--success); }
         .text-red { color: var(--danger); }
-        .text-blue { color: var(--primary); }
 
-        /* Form Section */
-        .input-section {
-            background: var(--white);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--primary);
-        }
-
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; align-items: end; }
-        
-        .form-group label { display: block; font-size: 0.85rem; margin-bottom: 0.4rem; font-weight: 500; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 0.7rem; border: 1px solid var(--border); border-radius: 6px; outline: none; transition: 0.2s;
-        }
-        .form-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
-
-        button.btn-submit {
-            background: var(--primary); color: white; border: none; padding: 0.7rem 1.5rem; border-radius: 6px; cursor: pointer; font-weight: 600; height: 42px; width: 100%;
-        }
-        button.btn-submit:hover { background: #1d4ed8; }
+        /* Input Form */
+        .input-box { background: #eff6ff; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid #dbeafe; }
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; align-items: end; }
+        input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        label { font-size: 0.85rem; font-weight: 600; color: #475569; display: block; margin-bottom: 4px; }
 
         /* Tables */
-        .table-wrapper { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 2rem; }
-        .table-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
-        .table-title { font-weight: 700; color: var(--text-dark); }
-        
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
-        th { background: #f1f5f9; font-weight: 600; color: var(--secondary); font-size: 0.8rem; text-transform: uppercase; }
-        tr:last-child td { border-bottom: none; }
-        
-        .badge { padding: 0.25rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
-        .bg-in { background: #dcfce7; color: #15803d; }
-        .bg-out { background: #fee2e2; color: #b91c1c; }
+        h3 { border-bottom: 2px solid var(--primary); padding-bottom: 5px; margin-top: 30px; color: var(--dark); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: #f1f5f9; }
+        .badge { padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; }
+        .bg-in { background: #dcfce7; color: #166534; }
+        .bg-out { background: #fee2e2; color: #991b1b; }
 
-        /* Tabs Logic (Simple Show/Hide) */
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        /* PDF Styles */
+        .pdf-header { display: none; text-align: center; margin-bottom: 20px; }
+        .pdf-header h1 { margin: 0; font-size: 1.5rem; }
+        .pdf-header p { margin: 5px 0; color: #666; }
 
-        @media (max-width: 768px) {
-            .sidebar { display: none; } /* Simplified for mobile */
-            .main-content { margin-left: 0; padding: 1rem; }
+        @media print {
+            .no-print { display: none !important; }
+            .sidebar { display: none; }
+            .main { padding: 0; }
+            #report-area { box-shadow: none; padding: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="brand">Keuangan & Stok</div>
-        <div class="nav-item active" onclick="switchTab('dashboard')">📊 Dashboard</div>
-        <div class="nav-item" onclick="switchTab('money')">💰 Riwayat Keuangan</div>
-        <div class="nav-item" onclick="switchTab('stock')">📦 Riwayat Barang</div>
+    <div class="sidebar no-print">
+        <div class="logo">FINANCE & STOCK</div>
+        <div class="menu-item active">📊 Dashboard Utama</div>
+        <div class="menu-item danger" onclick="resetData()">🗑️ Reset Data (Mulai Baru)</div>
     </div>
 
-    <div class="main-content">
-        
-        <div class="header">
-            <div>
-                <h1 style="font-size: 1.5rem;">Laporan Terintegrasi</h1>
-                <p style="color: var(--secondary);">Pantau arus kas dan barang dalam satu sistem.</p>
-            </div>
-            <div class="date-display" id="current-date">09 FEB 2026</div>
+    <div class="main">
+        <div class="header no-print">
+            <h2>Dashboard Harian</h2>
+            <button class="btn btn-pdf" onclick="generatePDF()">
+                🖨️ Download Laporan PDF
+            </button>
         </div>
 
-        <div class="stats-grid">
-            <div class="card">
-                <div class="card-label">Saldo Kas</div>
-                <div class="card-value text-blue" id="dash-balance">Rp 0</div>
+        <div id="report-area">
+            
+            <div class="pdf-header" id="pdf-header-show">
+                <h1>LAPORAN KEUANGAN & STOK</h1>
+                <p>Periode Update: <span id="print-date"></span></p>
+                <hr style="border: 1px solid #000; margin-top: 10px;">
             </div>
-            <div class="card">
-                <div class="card-label">Total Uang Masuk</div>
-                <div class="card-value text-green" id="dash-in">Rp 0</div>
-            </div>
-            <div class="card">
-                <div class="card-label">Total Uang Keluar</div>
-                <div class="card-value text-red" id="dash-out">Rp 0</div>
-            </div>
-            <div class="card">
-                <div class="card-label">Item Terjual (Qty)</div>
-                <div class="card-value" id="dash-items-sold">0</div>
-            </div>
-        </div>
 
-        <div class="input-section">
-            <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">Input Transaksi Baru</h3>
-            <form id="unified-form">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="date" id="t-date" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Jenis Transaksi (Logika Otomatis)</label>
-                        <select id="t-category" onchange="toggleFormFields()">
-                            <option value="expense">💸 Biaya Operasional (Uang Keluar)</option>
-                            <option value="income">💵 Pendapatan Lain (Uang Masuk)</option>
-                            <option value="buy_stock">📦 Beli Stok Barang (Uang Keluar + Stok Masuk)</option>
-                            <option value="sell_stock">🛒 Jual Barang (Uang Masuk + Stok Keluar)</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Keterangan / Nama Barang</label>
-                        <input type="text" id="t-desc" placeholder="Contoh: Listrik / Sepatu" required>
-                    </div>
-
-                    <div class="form-group" id="field-qty" style="display: none;">
-                        <label>Jumlah (Qty)</label>
-                        <input type="number" id="t-qty" placeholder="0">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nominal Rupiah (Total)</label>
-                        <input type="number" id="t-amount" placeholder="Rp" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>&nbsp;</label>
-                        <button type="submit" class="btn-submit">Simpan Transaksi</button>
-                    </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Saldo Kas Akhir</div>
+                    <div class="stat-val" style="color: var(--primary);" id="disp-saldo">Rp 0</div>
                 </div>
-                <p style="font-size: 0.8rem; color: var(--secondary); margin-top: 0.5rem; font-style: italic;">
-                    *Tips: Jika memilih "Jual Barang", saldo bertambah dan stok berkurang otomatis.
-                </p>
-            </form>
-        </div>
-
-        <div id="tab-money" class="tab-content active">
-            <div class="table-wrapper">
-                <div class="table-header">
-                    <span class="table-title">Laporan Arus Kas (Uang)</span>
+                <div class="stat-card">
+                    <div class="stat-label">Total Masuk</div>
+                    <div class="stat-val text-green" id="disp-in">Rp 0</div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Keterangan</th>
-                            <th>Kategori</th>
-                            <th>Arus</th>
-                            <th style="text-align: right;">Nominal</th>
-                        </tr>
-                    </thead>
-                    <tbody id="money-table-body">
-                        </tbody>
-                </table>
+                <div class="stat-card">
+                    <div class="stat-label">Total Keluar</div>
+                    <div class="stat-val text-red" id="disp-out">Rp 0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Stok Bergerak (Pcs)</div>
+                    <div class="stat-val" id="disp-qty">0</div>
+                </div>
+            </div>
+
+            <div class="input-box no-print">
+                <h4 style="margin-top:0; margin-bottom: 10px;">Input Transaksi Harian</h4>
+                <form id="trxForm">
+                    <div class="form-row">
+                        <div>
+                            <label>Tanggal</label>
+                            <input type="date" id="i-date" required>
+                        </div>
+                        <div>
+                            <label>Jenis Transaksi</label>
+                            <select id="i-type" onchange="toggleQty()" required>
+                                <option value="expense">💸 Biaya (Uang Keluar)</option>
+                                <option value="income">💰 Pendapatan (Uang Masuk)</option>
+                                <option value="buy">📦 Beli Stok (Uang - / Stok +)</option>
+                                <option value="sell">🛒 Jual Barang (Uang + / Stok -)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>Keterangan</label>
+                            <input type="text" id="i-desc" placeholder="Contoh: Listrik / Sepatu" required>
+                        </div>
+                        <div id="qty-box" style="display:none;">
+                            <label>Qty Barang</label>
+                            <input type="number" id="i-qty" placeholder="0">
+                        </div>
+                        <div>
+                            <label>Nominal (Rp)</label>
+                            <input type="number" id="i-amount" placeholder="0" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="height: 38px; margin-top: auto;">+ Simpan</button>
+                    </div>
+                </form>
+            </div>
+
+            <h3>Laporan Arus Kas</h3>
+            <table id="table-money">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Keterangan</th>
+                        <th>Kategori</th>
+                        <th style="text-align:right;">Nominal</th>
+                    </tr>
+                </thead>
+                <tbody id="body-money"></tbody>
+            </table>
+
+            <h3>Laporan Mutasi Stok</h3>
+            <table id="table-stock">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Barang</th>
+                        <th>Aktivitas</th>
+                        <th style="text-align:center;">Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody id="body-stock"></tbody>
+            </table>
+
+            <div style="margin-top: 50px; display: none;" id="sign-area">
+                <div style="float: right; text-align: center; width: 200px;">
+                    <p>Dibuat Oleh,</p>
+                    <br><br><br>
+                    <p>(Admin Keuangan)</p>
+                </div>
             </div>
         </div>
-
-        <div id="tab-stock" class="tab-content">
-            <div class="table-wrapper">
-                <div class="table-header">
-                    <span class="table-title">Laporan Mutasi Barang</span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Nama Barang</th>
-                            <th>Aktivitas</th>
-                            <th>Jumlah (Qty)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="stock-table-body">
-                        </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
 
     <script>
-        // --- 1. DATA AWAL (DATABASE) ---
-        // Kita gabungkan data manual Anda (M, R, E) sebagai Uang Keluar
-        let financialData = [
-            { id: 1, date: '2026-02-09', desc: 'Pengeluaran -M', category: 'Biaya', type: 'out', amount: 1000000 },
-            { id: 2, date: '2026-02-09', desc: 'Pengeluaran -R', category: 'Biaya', type: 'out', amount: 1050000 },
-            { id: 3, date: '2026-02-09', desc: 'Pengeluaran -E', category: 'Biaya', type: 'out', amount: 150000 }
-        ];
+        // --- 1. INISIALISASI & LOAD DATA ---
+        let moneyData = JSON.parse(localStorage.getItem('moneyData')) || [];
+        let stockData = JSON.parse(localStorage.getItem('stockData')) || [];
 
-        let stockData = [
-            { id: 1, date: '2026-02-08', item: 'Stok Awal', type: 'in', qty: 100 } // Contoh data stok
-        ];
+        // Set Default Date hari ini
+        document.getElementById('i-date').valueAsDate = new Date();
 
-        // --- 2. FUNGSI UTILITIES ---
-        const formatRupiah = (num) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
-        const formatDate = (dateStr) => {
-            const options = { day: '2-digit', month: 'short', year: 'numeric' };
-            return new Date(dateStr).toLocaleDateString('id-ID', options);
-        };
+        // Format Rupiah
+        const fmtRp = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n);
+        const fmtDate = (d) => new Date(d).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
 
-        // Set default date form to today
-        document.getElementById('t-date').valueAsDate = new Date();
+        // --- 2. FUNGSI LOGIKA UTAMA ---
+        function render() {
+            const bMoney = document.getElementById('body-money');
+            const bStock = document.getElementById('body-stock');
+            bMoney.innerHTML = '';
+            bStock.innerHTML = '';
 
-        // --- 3. LOGIKA UI & TAB ---
-        function switchTab(tabName) {
-            // Update Menu Active State
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            let totalIn = 0, totalOut = 0, stockMove = 0;
 
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-
-            if(tabName === 'dashboard' || tabName === 'money') {
-                document.getElementById('tab-money').classList.add('active');
-            }
-            if(tabName === 'dashboard' || tabName === 'stock') {
-                document.getElementById('tab-stock').classList.add('active'); // Show both on dashboard logic if needed, but for now we separate tables
-                if(tabName === 'stock') {
-                    document.getElementById('tab-money').classList.remove('active');
-                    document.getElementById('tab-stock').classList.add('active');
-                }
-            }
-        }
-
-        function toggleFormFields() {
-            const category = document.getElementById('t-category').value;
-            const qtyField = document.getElementById('field-qty');
-            
-            if (category === 'buy_stock' || category === 'sell_stock') {
-                qtyField.style.display = 'block';
-                document.getElementById('t-qty').setAttribute('required', 'required');
-            } else {
-                qtyField.style.display = 'none';
-                document.getElementById('t-qty').removeAttribute('required');
-            }
-        }
-
-        // --- 4. CORE ENGINE (RENDER & HITUNG) ---
-        function refreshSystem() {
-            const moneyBody = document.getElementById('money-table-body');
-            const stockBody = document.getElementById('stock-table-body');
-            
-            moneyBody.innerHTML = '';
-            stockBody.innerHTML = '';
-
-            let totalIn = 0, totalOut = 0, soldQty = 0;
-
-            // Sort Data (Terbaru diatas)
-            financialData.sort((a,b) => new Date(b.date) - new Date(a.date));
+            // Sort data berdasarkan tanggal terbaru
+            moneyData.sort((a,b) => new Date(b.date) - new Date(a.date));
             stockData.sort((a,b) => new Date(b.date) - new Date(a.date));
 
             // Render Uang
-            financialData.forEach(trx => {
-                if(trx.type === 'in') totalIn += trx.amount;
-                else totalOut += trx.amount;
+            moneyData.forEach(m => {
+                if(m.flow === 'in') totalIn += m.amount;
+                else totalOut += m.amount;
 
-                const row = `<tr>
-                    <td>${formatDate(trx.date)}</td>
-                    <td>${trx.desc}</td>
-                    <td><span style="font-size:0.8rem; color:#64748b;">${trx.category}</span></td>
-                    <td><span class="badge ${trx.type === 'in' ? 'bg-in' : 'bg-out'}">${trx.type === 'in' ? 'Masuk' : 'Keluar'}</span></td>
-                    <td style="text-align: right; font-weight:600;" class="${trx.type === 'in' ? 'text-green' : 'text-red'}">
-                        ${trx.type === 'in' ? '+' : '-'} ${formatRupiah(trx.amount)}
-                    </td>
-                </tr>`;
-                moneyBody.innerHTML += row;
+                let color = m.flow === 'in' ? 'text-green' : 'text-red';
+                let sign = m.flow === 'in' ? '+' : '-';
+                let badge = m.flow === 'in' ? '<span class="badge bg-in">Masuk</span>' : '<span class="badge bg-out">Keluar</span>';
+
+                bMoney.innerHTML += `
+                    <tr>
+                        <td>${fmtDate(m.date)}</td>
+                        <td>${m.desc}</td>
+                        <td>${badge}</td>
+                        <td style="text-align:right;" class="${color}"><b>${sign} ${fmtRp(m.amount)}</b></td>
+                    </tr>
+                `;
             });
 
             // Render Stok
-            stockData.forEach(item => {
-                if(item.type === 'out') soldQty += parseInt(item.qty);
-
-                const row = `<tr>
-                    <td>${formatDate(item.date)}</td>
-                    <td>${item.item}</td>
-                    <td><span class="badge ${item.type === 'in' ? 'bg-in' : 'bg-out'}">${item.type === 'in' ? 'Barang Masuk' : 'Barang Keluar'}</span></td>
-                    <td style="font-weight:bold;">${item.qty} Pcs</td>
-                </tr>`;
-                stockBody.innerHTML += row;
+            stockData.forEach(s => {
+                stockMove += s.qty;
+                let badge = s.flow === 'in' ? '<span class="badge bg-in">Masuk</span>' : '<span class="badge bg-out">Keluar</span>';
+                
+                bStock.innerHTML += `
+                    <tr>
+                        <td>${fmtDate(s.date)}</td>
+                        <td>${s.item}</td>
+                        <td>${badge}</td>
+                        <td style="text-align:center;"><b>${s.qty}</b></td>
+                    </tr>
+                `;
             });
 
-            // Update Cards
-            document.getElementById('dash-in').innerText = formatRupiah(totalIn);
-            document.getElementById('dash-out').innerText = formatRupiah(totalOut);
-            document.getElementById('dash-balance').innerText = formatRupiah(totalIn - totalOut);
-            document.getElementById('dash-items-sold').innerText = soldQty;
+            // Update Kartu Atas
+            document.getElementById('disp-in').innerText = fmtRp(totalIn);
+            document.getElementById('disp-out').innerText = fmtRp(totalOut);
+            document.getElementById('disp-saldo').innerText = fmtRp(totalIn - totalOut);
+            document.getElementById('disp-qty').innerText = stockData.length + " Transaksi";
+
+            // Simpan ke LocalStorage
+            localStorage.setItem('moneyData', JSON.stringify(moneyData));
+            localStorage.setItem('stockData', JSON.stringify(stockData));
         }
 
-        // --- 5. HANDLE SUBMIT (SAMBUNGAN LOGIC) ---
-        document.getElementById('unified-form').addEventListener('submit', function(e) {
+        // --- 3. HANDLE INPUT ---
+        function toggleQty() {
+            const type = document.getElementById('i-type').value;
+            const qtyBox = document.getElementById('qty-box');
+            if(type === 'buy' || type === 'sell') {
+                qtyBox.style.display = 'block';
+                document.getElementById('i-qty').setAttribute('required', 'true');
+            } else {
+                qtyBox.style.display = 'none';
+                document.getElementById('i-qty').removeAttribute('required');
+            }
+        }
+
+        document.getElementById('trxForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            const date = document.getElementById('t-date').value;
-            const category = document.getElementById('t-category').value;
-            const desc = document.getElementById('t-desc').value;
-            const amount = parseFloat(document.getElementById('t-amount').value);
-            const qty = parseFloat(document.getElementById('t-qty').value) || 0;
-
-            // LOGIKA SAMBUNGAN (INTEGRASI)
             
-            // 1. Jika Biaya Biasa (Listrik, Gaji, dll)
-            if (category === 'expense') {
-                financialData.push({ id: Date.now(), date, desc, category: 'Operasional', type: 'out', amount });
-            }
-            
-            // 2. Jika Pendapatan Biasa (Jasa, dll)
-            else if (category === 'income') {
-                financialData.push({ id: Date.now(), date, desc, category: 'Pendapatan', type: 'in', amount });
+            const date = document.getElementById('i-date').value;
+            const type = document.getElementById('i-type').value;
+            const desc = document.getElementById('i-desc').value;
+            const amount = parseFloat(document.getElementById('i-amount').value);
+            const qty = parseFloat(document.getElementById('i-qty').value) || 0;
+
+            // LOGIKA PINTAR
+            if(type === 'expense') {
+                moneyData.push({ date, desc, flow: 'out', amount });
+            } else if (type === 'income') {
+                moneyData.push({ date, desc, flow: 'in', amount });
+            } else if (type === 'buy') {
+                moneyData.push({ date, desc: `Beli Stok: ${desc}`, flow: 'out', amount });
+                stockData.push({ date, item: desc, flow: 'in', qty });
+            } else if (type === 'sell') {
+                moneyData.push({ date, desc: `Penjualan: ${desc}`, flow: 'in', amount });
+                stockData.push({ date, item: desc, flow: 'out', qty });
             }
 
-            // 3. Jika BELI Barang (Uang -, Stok +)
-            else if (category === 'buy_stock') {
-                financialData.push({ id: Date.now(), date, desc: `Beli Stok: ${desc}`, category: 'Pembelian Stok', type: 'out', amount });
-                stockData.push({ id: Date.now(), date, item: desc, type: 'in', qty });
-            }
-
-            // 4. Jika JUAL Barang (Uang +, Stok -)
-            else if (category === 'sell_stock') {
-                financialData.push({ id: Date.now(), date, desc: `Penjualan: ${desc}`, category: 'Penjualan', type: 'in', amount });
-                stockData.push({ id: Date.now(), date, item: desc, type: 'out', qty });
-            }
-
-            // Reset & Refresh
             e.target.reset();
-            document.getElementById('t-date').valueAsDate = new Date();
-            toggleFormFields(); // hide qty field again
-            refreshSystem();
-            
-            // Feedback sederhana
-            alert('Data berhasil disimpan!');
+            document.getElementById('i-date').valueAsDate = new Date();
+            toggleQty();
+            render();
+            alert("Data tersimpan!");
         });
 
-        // Initialize
-        refreshSystem();
+        // --- 4. RESET DATA ---
+        function resetData() {
+            if(confirm("Yakin ingin menghapus SEMUA data? Ini tidak bisa dibatalkan.")) {
+                localStorage.clear();
+                moneyData = [];
+                stockData = [];
+                render();
+            }
+        }
+
+        // --- 5. GENERATE PDF ---
+        function generatePDF() {
+            const element = document.getElementById('report-area');
+            const pdfHeader = document.getElementById('pdf-header-show');
+            const signArea = document.getElementById('sign-area');
+            const dateSpan = document.getElementById('print-date');
+
+            // Persiapan Tampilan PDF
+            dateSpan.innerText = new Date().toLocaleDateString('id-ID', {weekday: 'long', day:'numeric', month:'long', year:'numeric'});
+            pdfHeader.style.display = 'block';
+            signArea.style.display = 'block';
+
+            // Opsi PDF
+            const opt = {
+                margin:       0.5,
+                filename:     `Laporan_Keuangan_${new Date().toISOString().slice(0,10)}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Proses Generate
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Kembalikan Tampilan Normal setelah download
+                pdfHeader.style.display = 'none';
+                signArea.style.display = 'none';
+            });
+        }
+
+        // Render awal saat halaman dibuka
+        render();
 
     </script>
 </body>
