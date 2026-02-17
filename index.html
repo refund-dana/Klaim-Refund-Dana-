@@ -2,390 +2,297 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinancePro - Solusi Keuangan & Stok</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SISTEM INTEGRASI REFUND NASIONAL | DJBC</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
     <style>
         :root {
-            --primary: #2563eb;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --dark: #0f172a;
-            --slate: #64748b;
-            --bg: #f1f5f9;
+            --supreme-navy: #001e3c;
+            --supreme-gold: #d4af37;
+            --royal-blue: #003366;
+            --safety-green: #10b981;
+            --paper: #ffffff;
+            --glass: rgba(255, 255, 255, 0.95);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
-        body { background-color: var(--bg); color: var(--dark); padding-bottom: 80px; }
-
-        /* App Header */
-        .app-header {
-            background: var(--dark);
-            color: white;
-            padding: 20px;
-            border-bottom-left-radius: 25px;
-            border-bottom-right-radius: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        body { 
+            background: #f0f2f5; 
+            color: var(--supreme-navy);
+            overflow-x: hidden;
+            -webkit-user-select: none;
         }
 
-        .user-profile { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .balance-card {
-            background: linear-gradient(135deg, var(--primary), #1d4ed8);
-            padding: 20px;
-            border-radius: 20px;
-            color: white;
-            margin-bottom: -50px;
-            box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
-        }
-
-        /* Container */
-        .container { padding: 60px 20px 20px; }
-
-        /* Quick Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 25px;
-        }
-
-        .stat-item {
-            background: white;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid #e2e8f0;
-        }
-        .stat-item span { font-size: 0.75rem; color: var(--slate); font-weight: 600; }
-        .stat-item div { font-size: 1rem; font-weight: 800; margin-top: 5px; }
-
-        /* Tabs/Sections */
-        .section { display: none; }
-        .section.active { display: block; animation: fadeIn 0.3s ease; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Form Style */
-        .card-form {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            margin-bottom: 20px;
-        }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; color: var(--slate); }
-        input, select {
-            width: 100%; padding: 12px; border: 1.5px solid #e2e8f0; border-radius: 10px; outline: none; transition: 0.2s;
-        }
-        input:focus { border-color: var(--primary); }
-
-        .btn-main {
-            width: 100%; background: var(--primary); color: white; border: none;
-            padding: 15px; border-radius: 12px; font-weight: bold; cursor: pointer;
-        }
-
-        /* List Items */
-        .list-card {
-            background: white;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 15px;
+        /* === 🏛️ SUPREME NAV BAR === */
+        nav {
+            background: var(--supreme-navy);
+            height: 80px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            border-left: 5px solid transparent;
+            border-bottom: 4px solid var(--supreme-gold);
+            position: sticky; top: 0; z-index: 2000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .type-in { border-left-color: var(--success); }
-        .type-out { border-left-color: var(--danger); }
-        .type-debt { border-left-color: var(--warning); }
 
-        .item-info h4 { font-size: 0.9rem; margin-bottom: 4px; }
-        .item-info p { font-size: 0.75rem; color: var(--slate); }
-        .item-amount { text-align: right; }
-        .amt-val { font-weight: 800; font-size: 0.95rem; }
-
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            z-index: 100;
+        .nav-inner {
+            width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
         }
-        .nav-item { text-align: center; color: var(--slate); cursor: pointer; font-size: 0.7rem; font-weight: 600; }
-        .nav-item.active { color: var(--primary); }
-        .nav-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
 
-        /* PDF Styles */
-        #pdf-template { background: white; padding: 40px; color: black; display: none; }
-        .pdf-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .pdf-table th, .pdf-table td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 12px; }
+        .logo-group { display: flex; align-items: center; gap: 15px; }
+        .logo-group img { height: 55px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
+        
+        .sys-info { color: white; border-left: 2px solid var(--supreme-gold); padding-left: 15px; }
+        .sys-info h1 { font-size: 14px; font-weight: 900; letter-spacing: 1px; }
+        .sys-info span { font-size: 9px; color: var(--supreme-gold); font-weight: 700; text-transform: uppercase; }
 
-        /* Utilities */
-        .text-green { color: var(--success); }
-        .text-red { color: var(--danger); }
+        /* === 🚀 DYNAMIC DASHBOARD === */
+        .dashboard {
+            max-width: 900px; margin: 40px auto; padding: 0 20px;
+        }
+
+        .hero-title { text-align: center; margin-bottom: 40px; }
+        .hero-title h2 { font-size: 28px; font-weight: 800; color: var(--royal-blue); }
+        .hero-title p { font-size: 14px; color: #64748b; margin-top: 10px; }
+
+        /* Search Engine Design */
+        .search-engine {
+            background: white; border-radius: 20px; padding: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative; overflow: hidden;
+        }
+
+        .search-engine::after {
+            content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100px;
+            background: linear-gradient(135deg, transparent 50%, #f1f5f9 50%);
+        }
+
+        .input-wrapper { display: flex; gap: 15px; margin-top: 25px; }
+        
+        input[type="text"] {
+            flex: 1; padding: 18px 25px; border-radius: 12px;
+            border: 2px solid #e2e8f0; font-size: 16px; font-weight: 700;
+            transition: 0.3s; background: #f8fafc;
+        }
+        input:focus { border-color: var(--royal-blue); background: white; outline: none; box-shadow: 0 0 0 5px rgba(0,51,102,0.1); }
+
+        .btn-verify {
+            background: var(--royal-blue); color: white; border: none;
+            padding: 0 35px; border-radius: 12px; font-weight: 800;
+            cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;
+        }
+        .btn-verify:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,51,102,0.3); }
+
+        /* === 📋 CASE FILE RESULT === */
+        #resultArea { display: none; margin-top: 30px; animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .case-file {
+            background: white; border-radius: 15px; padding: 0; overflow: hidden;
+            border: 1px solid #cbd5e1; box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+        .case-header { background: #f1f5f9; padding: 15px 25px; border-bottom: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center; }
+        .case-header span { font-family: 'Roboto Mono', monospace; font-size: 12px; font-weight: bold; color: #475569; }
+        
+        .case-body { padding: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .data-item label { display: block; font-size: 10px; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 5px; }
+        .data-item p { font-size: 14px; font-weight: 700; color: var(--supreme-navy); }
+
+        /* === 🖋️ REAL-TIME RECEIPT PREVIEW (MODAL) === */
+        #receiptModal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
+            z-index: 3000; display: none; justify-content: center; align-items: center;
+            overflow-y: auto; padding: 40px 0;
+        }
+
+        .receipt-paper {
+            width: 210mm; background: white; padding: 20mm; position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5); font-family: 'Times New Roman', serif;
+        }
+
+        /* Logic for Official Layering on Receipt */
+        .receipt-sig-area { display: flex; justify-content: flex-end; margin-top: 40px; }
+        .sig-container { width: 250px; text-align: center; position: relative; height: 160px; }
+        .layer-materai { position: absolute; width: 100px; left: 0; top: 20px; z-index: 1; filter: grayscale(0.2); }
+        .layer-ttd { position: absolute; width: 160px; left: 40px; top: 10px; z-index: 2; mix-blend-mode: multiply; transform: rotate(-2deg); }
+        .layer-stempel { position: absolute; width: 150px; left: 20px; top: 0; z-index: 3; mix-blend-mode: multiply; opacity: 0.85; transform: rotate(-5deg); }
+
+        /* === 📱 MOBILE FIX === */
+        @media (max-width: 768px) {
+            .nav-inner { padding: 0 15px; }
+            .sys-info { display: none; }
+            .input-wrapper { flex-direction: column; }
+            .case-body { grid-template-columns: 1fr; }
+            .receipt-paper { width: 95%; padding: 10mm; transform: scale(1); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="app-header">
-        <div class="user-profile">
-            <div>
-                <p style="font-size: 0.8rem; opacity: 0.8;">Selamat Datang,</p>
-                <h3 id="current-day">Februari 2026</h3>
-            </div>
-            <button onclick="downloadPDF()" style="background:rgba(255,255,255,0.1); border:none; color:white; padding:8px 12px; border-radius:10px; font-size:0.7rem;">PDF Laporan</button>
-        </div>
-        <div class="balance-card">
-            <p style="font-size: 0.8rem; opacity: 0.9;">Total Saldo Kas Riil</p>
-            <h1 id="total-balance" style="font-size: 2rem; margin: 5px 0;">Rp 0</h1>
-            <p id="total-debt-info" style="font-size: 0.75rem; background: rgba(0,0,0,0.2); padding: 5px 10px; border-radius: 20px; display: inline-block; margin-top: 10px;">
-                Sangkutan: Rp 0
-            </p>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <span>Pemasukan</span>
-                <div class="text-green" id="stat-income">Rp 0</div>
-            </div>
-            <div class="stat-item">
-                <span>Pengeluaran</span>
-                <div class="text-red" id="stat-expense">Rp 0</div>
-            </div>
-        </div>
-
-        <div id="sec-dashboard" class="section active">
-            <div class="card-form">
-                <h4 style="margin-bottom: 15px;">Input Transaksi Baru</h4>
-                <form id="trxForm">
-                    <div class="form-group">
-                        <label>Pilih Kategori</label>
-                        <select id="t-type" required>
-                            <option value="in">💰 Uang Masuk (Lunas)</option>
-                            <option value="out">💸 Uang Keluar (Belanja/Biaya)</option>
-                            <option value="debt">📦 Jual Sangkutan (Belum Lunas)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Keterangan / Nama Barang</label>
-                        <input type="text" id="t-desc" placeholder="Contoh: Sepatu A / Listrik" required>
-                    </div>
-                    <div class="form-row" style="display: flex; gap: 10px; margin-bottom: 15px;">
-                        <div style="flex: 1;">
-                            <label>Tanggal</label>
-                            <input type="date" id="t-date" required>
-                        </div>
-                        <div style="flex: 1;">
-                            <label>Nominal (Rp)</label>
-                            <input type="number" id="t-amount" placeholder="0" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-main">Simpan Transaksi</button>
-                </form>
-            </div>
-
-            <h4 style="margin-bottom: 15px;">Riwayat Aktivitas</h4>
-            <div id="recent-list">
+    <nav>
+        <div class="nav-inner">
+            <div class="logo-group">
+                <img src="https://i.ibb.co.com/xq9Qf08z/IMG-20260129-202430.jpg" alt="Kemenkeu">
+                <div class="sys-info">
+                    <h1>REFUND MANAGEMENT SYSTEM</h1>
+                    <span>Authorized Personnel Only - Secure Access</span>
                 </div>
-        </div>
-
-        <div id="sec-sangkutan" class="section">
-            <h4 style="margin-bottom: 15px;">Daftar Belum Lunas (Sangkutan)</h4>
-            <div id="debt-list">
-                </div>
-        </div>
-
-        <div id="sec-settings" class="section">
-            <div class="card-form" style="text-align: center;">
-                <h4>Pengaturan Sistem</h4>
-                <p style="color: var(--slate); font-size: 0.8rem; margin: 15px 0;">Data disimpan secara otomatis di perangkat Anda.</p>
-                <button onclick="clearAllData()" class="btn-main" style="background: var(--danger);">Hapus Seluruh Data</button>
             </div>
-        </div>
-    </div>
-
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="showSection('dashboard', this)">
-            <span class="nav-icon">📊</span> Transaksi
-        </div>
-        <div class="nav-item" onclick="showSection('sangkutan', this)">
-            <span class="nav-icon">📦</span> Sangkutan
-        </div>
-        <div class="nav-item" onclick="showSection('settings', this)">
-            <span class="nav-icon">⚙️</span> Pengaturan
+            <img src="https://i.ibb.co.com/SwqZVzhL/IMG-20260129-202143.jpg" style="height: 50px;" alt="Bea Cukai">
         </div>
     </nav>
 
-    <div id="pdf-template">
-        <h2 style="text-align: center;">LAPORAN KEUANGAN FORMAL</h2>
-        <p style="text-align: center; color: #666;" id="pdf-date">Tanggal Cetak: -</p>
-        <hr style="margin: 20px 0;">
-        <h3>1. Ringkasan Kas</h3>
-        <table class="pdf-table">
-            <tr><td>Total Saldo Riil</td><td id="p-saldo"></td></tr>
-            <tr><td>Total Pemasukan</td><td id="p-in"></td></tr>
-            <tr><td>Total Pengeluaran</td><td id="p-out"></td></tr>
-            <tr><td>Total Sangkutan</td><td id="p-debt"></td></tr>
-        </table>
-        <h3>2. Detail Transaksi</h3>
-        <table class="pdf-table" id="pdf-detail-table">
-            <thead>
-                <tr><th>Tanggal</th><th>Keterangan</th><th>Tipe</th><th>Nominal</th></tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+    <div class="dashboard">
+        <section class="hero-title">
+            <h2>Pusat Pengembalian Jaminan</h2>
+            <p>Validasi otomatis dana jaminan administratif komoditi cukai melalui jaringan terpusat CEISA 4.0</p>
+        </section>
+
+        <div class="search-engine">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h4 style="font-weight: 800; font-size: 13px; color: var(--royal-blue);">
+                    <i class="fas fa-shield-alt"></i> VERIFIKASI DOKUMEN
+                </h4>
+                <span id="liveClock" style="font-family: 'Roboto Mono'; font-size: 11px; font-weight: bold;"></span>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="searchID" placeholder="Masukkan Nomor Berita Acara (BA-...)">
+                <button class="btn-verify" id="verifyBtn">
+                    <i class="fas fa-search"></i> PERIKSA DATA
+                </button>
+            </div>
+        </div>
+
+        <div id="resultArea">
+            <div class="case-file">
+                <div class="case-header">
+                    <span>CASE FILE: #BJM-77182/2026</span>
+                    <span style="color: var(--safety-green);"><i class="fas fa-check-circle"></i> VALIDATED</span>
+                </div>
+                <div class="case-body">
+                    <div class="data-item"><label>Nama Pemilik</label><p>SAZALI RAHMAN</p></div>
+                    <div class="data-item"><label>Nominal Jaminan</label><p style="color: #b91c1c;">Rp 400.000,00</p></div>
+                    <div class="data-item"><label>Status Barang</label><p>Ready to Release</p></div>
+                    <div class="data-item"><label>Metode Refund</label><p>Transfer Bank Otomatis</p></div>
+                </div>
+                
+                <div style="padding: 25px; background: #fffdf5; border-top: 1px solid #cbd5e1;">
+                    <h4 style="font-size: 12px; margin-bottom: 15px; color: var(--royal-blue);">DATA REKENING TUJUAN</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <select id="bank" style="padding: 12px; border-radius: 8px; border: 1px solid #ddd; font-weight: bold;">
+                            <option>BANK BCA</option><option>BANK BRI</option><option>BANK BNI</option><option>BANK MANDIRI</option>
+                        </select>
+                        <input type="text" placeholder="Nomor Rekening" style="padding: 12px; border-radius: 8px; border: 1px solid #ddd;">
+                    </div>
+                    <button class="btn-verify" id="submitRefund" style="width: 100%; margin-top: 20px; background: var(--safety-green); justify-content: center; padding: 15px;">
+                        <i class="fas fa-paper-plane"></i> AJUKAN PENCAIRAN DANA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="receiptModal">
+        <div class="receipt-paper" id="printableReceipt">
+            <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 20px;">
+                <h2 style="font-size: 18pt; font-weight: bold;">KEMENTERIAN KEUANGAN REPUBLIK INDONESIA</h2>
+                <h3 style="font-size: 14pt; margin: 5px 0;">DIREKTORAT JENDERAL BEA DAN CUKAI</h3>
+                <p style="font-size: 10pt;">KPPBC TMP C BANJARMASIN - KUITANSI ELEKTRONIK PENGEMBALIAN JAMINAN</p>
+            </div>
+
+            <div style="margin: 30px 0;">
+                <table style="width: 100%; font-size: 12pt; line-height: 2;">
+                    <tr><td width="30%">No. Kuitansi</td><td>: <strong>RE-BJM/2026/02/77182</strong></td></tr>
+                    <tr><td>Telah Diterima Dari</td><td>: <strong>BENDAHARA PENERIMA KPPBC BANJARMASIN</strong></td></tr>
+                    <tr><td>Untuk Pembayaran</td><td>: <strong>PENGEMBALIAN JAMINAN LEGALITAS (REFUND)</strong></td></tr>
+                    <tr><td>Nama Penerima</td><td>: <strong>SAZALI RAHMAN</strong></td></tr>
+                    <tr><td>Jumlah Uang</td><td style="background: #eee; font-weight: bold;">: Rp 400.000,00</td></tr>
+                </table>
+            </div>
+
+            <div style="font-style: italic; font-size: 10pt; margin-top: 20px;">
+                "Terbilang: Empat Ratus Ribu Rupiah"
+            </div>
+
+            <div class="receipt-sig-area">
+                <div class="sig-container">
+                    <p>Banjarmasin, 17 Februari 2026</p>
+                    <p><strong>Pejabat Verifikasi,</strong></p>
+                    <img src="https://i.ibb.co.com/xqqh7Txq/IMG-20260211-183302.jpg" class="layer-materai">
+                    <img src="https://i.ibb.co.com/pBSnYcfG/892503b511f595d7115ade1a9349a49a.jpg" class="layer-ttd">
+                    <img src="https://i.ibb.co.com/1YhFBzwq/pm-1766605891575-cmp.jpg" class="layer-stempel">
+                    <div style="margin-top: 100px;">
+                        <p style="text-decoration: underline; font-weight: bold;">DIAN SETIAWAN</p>
+                        <p>NIP. 19890714 201301 1 008</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; border-top: 1px dashed #000; padding-top: 10px; font-size: 8pt; color: #555;">
+                *Kuitansi ini adalah bukti sah pengembalian dana yang dihasilkan oleh sistem CEISA 4.0 dan tidak memerlukan tanda tangan basah tambahan.
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;" class="no-print">
+                <button onclick="window.print()" style="padding: 10px 20px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer;">PRINT KUITANSI</button>
+                <button onclick="document.getElementById('receiptModal').style.display='none'" style="padding: 10px 20px; background: #666; color: white; border: none; border-radius: 5px; cursor: pointer;">TUTUP</button>
+            </div>
+        </div>
     </div>
 
     <script>
-        // --- DATA ENGINE ---
-        let data = JSON.parse(localStorage.getItem('finance_pro_data')) || {
-            transactions: [],
-            debts: []
-        };
-
-        const fmt = (n) => "Rp " + new Intl.NumberFormat('id-ID').format(n);
-        document.getElementById('t-date').valueAsDate = new Date();
-        document.getElementById('current-day').innerText = new Date().toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
-
-        // --- CORE LOGIC ---
-        function save() {
-            localStorage.setItem('finance_pro_data', JSON.stringify(data));
-            render();
+        // Live Clock logic
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('liveClock').innerText = 'SERVER TIME: ' + now.toLocaleString('id-ID');
         }
+        setInterval(updateClock, 1000);
+        updateClock();
 
-        function showSection(id, el) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('sec-' + id).classList.add('active');
-            el.classList.add('active');
-        }
+        // Search Interaction
+        const verifyBtn = document.getElementById('verifyBtn');
+        const searchInput = document.getElementById('searchID');
+        const resultArea = document.getElementById('resultArea');
 
-        document.getElementById('trxForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const type = document.getElementById('t-type').value;
-            const desc = document.getElementById('t-desc').value;
-            const amount = parseFloat(document.getElementById('t-amount').value);
-            const date = document.getElementById('t-date').value;
+        verifyBtn.addEventListener('click', () => {
+            const val = searchInput.value.toUpperCase();
+            if(val === "") return alert("Masukkan Nomor Berita Acara!");
 
-            if(type === 'debt') {
-                data.debts.push({ id: Date.now(), date, desc, amount });
-            } else {
-                data.transactions.push({ id: Date.now(), date, desc, type, amount });
-            }
+            verifyBtn.innerHTML = '<i class="fas fa-sync fa-spin"></i> ENCRYPTING...';
+            verifyBtn.disabled = true;
 
-            save();
-            e.target.reset();
-            document.getElementById('t-date').valueAsDate = new Date();
-            alert("Berhasil disimpan!");
+            setTimeout(() => {
+                verifyBtn.innerHTML = '<i class="fas fa-search"></i> PERIKSA DATA';
+                verifyBtn.disabled = false;
+                
+                if(val.includes("BA-052") || val.includes("001776528810")) {
+                    resultArea.style.display = 'block';
+                    window.scrollTo({ top: resultArea.offsetTop - 100, behavior: 'smooth' });
+                } else {
+                    alert("DATA NOT FOUND: Dokumen belum terdaftar atau sedang dalam proses antrian server.");
+                }
+            }, 2000);
         });
 
-        function settleDebt(id) {
-            const debtIdx = data.debts.findIndex(d => d.id === id);
-            const debtItem = data.debts[debtIdx];
-            
-            // Masuk ke kas
-            data.transactions.push({ 
-                id: Date.now(), 
-                date: new Date().toISOString().split('T')[0], 
-                desc: `Pelunasan: ${debtItem.desc}`, 
-                type: 'in', 
-                amount: debtItem.amount 
-            });
-            
-            // Hapus dari sangkutan
-            data.debts.splice(debtIdx, 1);
-            save();
-        }
+        // Submit Refund & Show Receipt
+        document.getElementById('submitRefund').addEventListener('click', () => {
+            alert("PROCESSING: Menghubungkan ke Gateway Bank Indonesia...");
+            setTimeout(() => {
+                document.getElementById('receiptModal').style.display = 'flex';
+            }, 1500);
+        });
 
-        function render() {
-            const listRecent = document.getElementById('recent-list');
-            const listDebt = document.getElementById('debt-list');
-            listRecent.innerHTML = '';
-            listDebt.innerHTML = '';
-
-            let totalIn = 0, totalOut = 0, totalDebt = 0;
-
-            // Render Transaksi Kas
-            data.transactions.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(t => {
-                if(t.type === 'in') totalIn += t.amount; else totalOut += t.amount;
-                listRecent.innerHTML += `
-                    <div class="list-card ${t.type === 'in' ? 'type-in' : 'type-out'}">
-                        <div class="item-info">
-                            <h4>${t.desc}</h4>
-                            <p>${t.date} • ${t.type === 'in' ? 'Masuk' : 'Keluar'}</p>
-                        </div>
-                        <div class="item-amount">
-                            <div class="amt-val ${t.type === 'in' ? 'text-green' : 'text-red'}">
-                                ${t.type === 'in' ? '+' : '-'} ${fmt(t.amount)}
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Render Sangkutan
-            data.debts.forEach(d => {
-                totalDebt += d.amount;
-                listDebt.innerHTML += `
-                    <div class="list-card type-debt">
-                        <div class="item-info">
-                            <h4>${d.desc}</h4>
-                            <p>${d.date} • Belum Lunas</p>
-                            <button onclick="settleDebt(${d.id})" style="margin-top:8px; background:var(--success); color:white; border:none; padding:5px 10px; border-radius:5px; font-size:0.7rem; font-weight:bold;">LUNASI ✅</button>
-                        </div>
-                        <div class="item-amount">
-                            <div class="amt-val" style="color:var(--warning)">${fmt(d.amount)}</div>
-                        </div>
-                    </div>
-                `;
-            });
-
-            // Update Dashboards
-            document.getElementById('total-balance').innerText = fmt(totalIn - totalOut);
-            document.getElementById('stat-income').innerText = fmt(totalIn);
-            document.getElementById('stat-expense').innerText = fmt(totalOut);
-            document.getElementById('total-debt-info').innerText = "Total Sangkutan: " + fmt(totalDebt);
-        }
-
-        function downloadPDF() {
-            const pdfTemplate = document.getElementById('pdf-template');
-            document.getElementById('pdf-date').innerText = "Dicetak pada: " + new Date().toLocaleString('id-ID');
-            document.getElementById('p-saldo').innerText = document.getElementById('total-balance').innerText;
-            document.getElementById('p-in').innerText = document.getElementById('stat-income').innerText;
-            document.getElementById('p-out').innerText = document.getElementById('stat-expense').innerText;
-            document.getElementById('p-debt').innerText = document.getElementById('total-debt-info').innerText;
-
-            const tbody = document.querySelector('#pdf-detail-table tbody');
-            tbody.innerHTML = '';
-            data.transactions.forEach(t => {
-                tbody.innerHTML += `<tr><td>${t.date}</td><td>${t.desc}</td><td>${t.type=='in'?'Masuk':'Keluar'}</td><td>${fmt(t.amount)}</td></tr>`;
-            });
-
-            pdfTemplate.style.display = 'block';
-            html2pdf().from(pdfTemplate).save('Laporan_Keuangan.pdf').then(() => {
-                pdfTemplate.style.display = 'none';
-            });
-        }
-
-        function clearAllData() {
-            if(confirm("Hapus seluruh data permanen?")) {
-                localStorage.clear();
-                location.reload();
-            }
-        }
-
-        render();
+        // Block Inspect
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'i')) e.preventDefault();
+        });
     </script>
 </body>
-</html>
+                            </html>
