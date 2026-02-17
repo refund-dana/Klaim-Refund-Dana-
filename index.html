@@ -127,7 +127,7 @@
 
         /* === 📋 MAIN CONTAINER === */
         .main-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 50px auto;
             padding: 0 25px;
         }
@@ -362,7 +362,7 @@
             color: #EA580C;
         }
 
-        /* === 📋 FORM SECTION === */
+        /* === 📋 FORM SECTIONS === */
         .form-section {
             background: #F8FAFC;
             padding: 30px;
@@ -380,9 +380,35 @@
             display: inline-block;
         }
 
+        .form-section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .form-section-header i {
+            font-size: 24px;
+            color: var(--gov-navy);
+        }
+
+        .form-section-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gov-navy);
+        }
+
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 20px;
         }
 
@@ -394,6 +420,10 @@
             margin-bottom: 10px;
             display: block;
             letter-spacing: 0.5px;
+        }
+
+        .form-label .required {
+            color: var(--gov-red);
         }
 
         .form-select, .form-input {
@@ -412,6 +442,61 @@
             border-color: var(--gov-navy);
             outline: none;
             box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.08);
+        }
+
+        .form-input-icon {
+            position: relative;
+        }
+
+        .form-input-icon i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .form-input-icon input {
+            padding-left: 48px;
+        }
+
+        /* === 👤 RECIPIENT DATA SECTION === */
+        .recipient-section {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border: 2px solid #BAE6FD;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+        }
+
+        .recipient-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .recipient-section-title i {
+            font-size: 22px;
+            color: var(--gov-blue);
+        }
+
+        .recipient-section-title h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gov-navy);
+        }
+
+        .recipient-badge {
+            background: var(--gov-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-left: auto;
         }
 
         /* === 💰 SUMMARY TABLE === */
@@ -477,7 +562,7 @@
         .qris-modal {
             background: white;
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             border-radius: 32px;
             padding: 45px;
             text-align: center;
@@ -547,7 +632,7 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .payment-instructions {
+        .payment-info-box {
             background: #F0F9FF;
             border: 1px solid #BAE6FD;
             padding: 20px;
@@ -556,7 +641,7 @@
             text-align: left;
         }
 
-        .payment-instructions h4 {
+        .payment-info-box h4 {
             font-size: 13px;
             font-weight: 700;
             color: var(--gov-navy);
@@ -566,14 +651,14 @@
             gap: 8px;
         }
 
-        .payment-instructions ol {
+        .payment-info-box ol {
             font-size: 12px;
             color: var(--text-secondary);
             padding-left: 20px;
             line-height: 1.8;
         }
 
-        .payment-instructions li {
+        .payment-info-box li {
             margin-bottom: 8px;
         }
 
@@ -620,6 +705,12 @@
             border: 1px solid rgba(234, 88, 12, 0.3);
         }
 
+        .badge-info {
+            background: rgba(0, 82, 165, 0.1);
+            color: var(--gov-blue);
+            border: 1px solid rgba(0, 82, 165, 0.3);
+        }
+
         /* === 📱 RESPONSIVE === */
         @media (max-width: 768px) {
             .header-wrapper {
@@ -652,12 +743,16 @@
                 font-size: 22px;
             }
 
-            .form-grid {
+            .form-grid, .form-grid-3 {
                 grid-template-columns: 1fr;
             }
 
             .payment-amount-value {
                 font-size: 28px;
+            }
+
+            .qris-modal {
+                padding: 30px 20px;
             }
         }
 
@@ -693,6 +788,143 @@
             height: 80px;
             opacity: 0.1;
             pointer-events: none;
+        }
+
+        /* === ✅ VALIDATION STYLES === */
+        .input-valid {
+            border-color: var(--gov-green) !important;
+            background: #F0FDF4 !important;
+        }
+
+        .input-invalid {
+            border-color: var(--gov-red) !important;
+            background: #FEF2F2 !important;
+        }
+
+        .validation-message {
+            font-size: 11px;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .validation-message.error {
+            color: var(--gov-red);
+        }
+
+        .validation-message.success {
+            color: var(--gov-green);
+        }
+
+        /* === 📊 DATA VERIFICATION BOX === */
+        .data-verification-box {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .data-verification-box h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gov-navy);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-verification-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #F1F5F9;
+            font-size: 13px;
+        }
+
+        .data-verification-item:last-child {
+            border-bottom: none;
+        }
+
+        .data-verification-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .data-verification-value {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* === 🎯 COMPLETION INDICATOR === */
+        .completion-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .completion-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            right: 50px;
+            height: 3px;
+            background: #E2E8F0;
+            z-index: 0;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #E2E8F0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .step-item.active .step-number {
+            background: var(--gov-blue);
+            color: white;
+        }
+
+        .step-item.completed .step-number {
+            background: var(--gov-green);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .step-item.active .step-label {
+            color: var(--gov-blue);
+        }
+
+        .step-item.completed .step-label {
+            color: var(--gov-green);
         }
     </style>
 </head>
@@ -750,6 +982,27 @@
 
         <!-- 📊 DASHBOARD PHASE -->
         <div id="dashboardPhase">
+            
+            <!-- 📈 COMPLETION STEPS -->
+            <div class="completion-steps">
+                <div class="step-item completed">
+                    <div class="step-number"><i class="fas fa-check"></i></div>
+                    <span class="step-label">Verifikasi</span>
+                </div>
+                <div class="step-item active">
+                    <div class="step-number">2</div>
+                    <span class="step-label">Data Penerima</span>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <span class="step-label">Pembayaran</span>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <span class="step-label">Pencairan</span>
+                </div>
+            </div>
+
             <div class="info-banner">
                 <div class="info-banner-header">
                     <span class="info-banner-title">
@@ -773,15 +1026,69 @@
             </div>
 
             <div class="premium-card">
+                
+                <!-- 👤 RECIPIENT DATA SECTION -->
+                <div class="recipient-section">
+                    <div class="recipient-section-title">
+                        <i class="fas fa-user-circle"></i>
+                        <h4>DATA PENERIMA DANA</h4>
+                        <span class="recipient-badge">Wajib Diisi</span>
+                    </div>
+
+                    <div class="form-grid-3">
+                        <div>
+                            <label class="form-label">Nama Lengkap <span class="required">*</span></label>
+                            <div class="form-input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="recipientName" class="form-input" placeholder="Sesuai KTP">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">NIK / No. KTP <span class="required">*</span></label>
+                            <div class="form-input-icon">
+                                <i class="fas fa-id-card"></i>
+                                <input type="number" id="recipientNIK" class="form-input" placeholder="16 digit NIK">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Nomor Telepon <span class="required">*</span></label>
+                            <div class="form-input-icon">
+                                <i class="fas fa-phone"></i>
+                                <input type="tel" id="recipientPhone" class="form-input" placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-grid" style="margin-top: 20px;">
+                        <div>
+                            <label class="form-label">Alamat Email <span class="required">*</span></label>
+                            <div class="form-input-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="recipientEmail" class="form-input" placeholder="email@contoh.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Kota / Kabupaten <span class="required">*</span></label>
+                            <div class="form-input-icon">
+                                <i class="fas fa-city"></i>
+                                <input type="text" id="recipientCity" class="form-input" placeholder="Kota/Kabupaten">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🏦 BANK ACCOUNT SECTION -->
                 <div class="form-section">
-                    <h3 class="form-section-title">
-                        <i class="fas fa-building-columns"></i> Data Rekening Penerima
-                    </h3>
+                    <div class="form-section-header">
+                        <i class="fas fa-building-columns"></i>
+                        <h3>INFORMASI REKENING BANK</h3>
+                    </div>
 
                     <div class="form-grid">
                         <div>
-                            <label class="form-label">Bank Tujuan</label>
+                            <label class="form-label">Nama Bank <span class="required">*</span></label>
                             <select id="userBank" class="form-select">
+                                <option value="">-- Pilih Bank --</option>
                                 <option value="BANK BCA">BANK CENTRAL ASIA (BCA)</option>
                                 <option value="BANK BRI">BANK RAKYAT INDONESIA (BRI)</option>
                                 <option value="BANK BNI">BANK NEGARA INDONESIA (BNI)</option>
@@ -789,21 +1096,35 @@
                                 <option value="BANK BSI">BANK SYARIAH INDONESIA (BSI)</option>
                                 <option value="BANK CIMB">BANK CIMB NIAGA</option>
                                 <option value="BANK DANAMON">BANK DANAMON</option>
+                                <option value="BANK PERMATA">BANK PERMATA</option>
+                                <option value="BANK MAYBANK">BANK MAYBANK INDONESIA</option>
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">Nomor Rekening</label>
-                            <input type="number" id="userAcc" class="form-input" placeholder="Masukkan nomor rekening">
+                            <label class="form-label">Nomor Rekening <span class="required">*</span></label>
+                            <div class="form-input-icon">
+                                <i class="fas fa-credit-card"></i>
+                                <input type="number" id="userAcc" class="form-input" placeholder="Masukkan nomor rekening">
+                            </div>
                         </div>
                     </div>
 
+                    <div style="margin-top: 20px;">
+                        <label class="form-label">Nama Pemilik Rekening <span class="required">*</span></label>
+                        <div class="form-input-icon">
+                            <i class="fas fa-user-tag"></i>
+                            <input type="text" id="accountHolder" class="form-input" placeholder="Nama sesuai buku tabungan">
+                        </div>
+                    </div>
+
+                    <!-- 💰 SUMMARY TABLE -->
                     <table class="summary-table">
                         <tr>
-                            <td>Dana Jaminan (Refund)</td>
+                            <td><i class="fas fa-money-bill-wave"></i> Dana Jaminan (Refund)</td>
                             <td>Rp 600.000,00</td>
                         </tr>
                         <tr>
-                            <td>Deposit Validasi (Dapat Dicairkan)</td>
+                            <td><i class="fas fa-shield-check"></i> Deposit Validasi (Dapat Dicairkan)</td>
                             <td>Rp 800.000,00</td>
                         </tr>
                         <tr class="summary-total">
@@ -812,6 +1133,24 @@
                         </tr>
                     </table>
 
+                    <!-- 📋 DATA VERIFICATION BOX -->
+                    <div class="data-verification-box">
+                        <h4><i class="fas fa-clipboard-check"></i> Ringkasan Data</h4>
+                        <div class="data-verification-item">
+                            <span class="data-verification-label">Nomor Dokumen</span>
+                            <span class="data-verification-value" id="summaryDocID">-</span>
+                        </div>
+                        <div class="data-verification-item">
+                            <span class="data-verification-label">Status Verifikasi</span>
+                            <span class="data-verification-value" style="color: var(--gov-green);"><i class="fas fa-check-circle"></i> Terverifikasi</span>
+                        </div>
+                        <div class="data-verification-item">
+                            <span class="data-verification-label">Waktu Proses</span>
+                            <span class="data-verification-value">1-3 Hari Kerja</span>
+                        </div>
+                    </div>
+
+                    <!-- 🔘 ACTION BUTTONS -->
                     <div class="action-buttons">
                         <button class="btn-primary btn-secondary" id="btnReceipt">
                             <i class="fas fa-file-invoice"></i> Lihat Kuitansi Ditangguhkan
@@ -823,7 +1162,7 @@
 
                     <div class="security-notice">
                         <i class="fas fa-circle-info"></i>
-                        <p>Deposit validasi akan dikembalikan bersama dana refund setelah proses verifikasi selesai (10-15 Menit).</p>
+                        <p>Deposit validasi akan dikembalikan bersama dana refund setelah proses verifikasi selesai (1-3 hari kerja). Pastikan semua data penerima diisi dengan benar.</p>
                     </div>
                 </div>
             </div>
@@ -847,7 +1186,7 @@
                 <div class="payment-amount-value">Rp 800.000</div>
             </div>
 
-            <div class="payment-instructions">
+            <div class="payment-info-box">
                 <h4><i class="fas fa-list-check"></i> Langkah Pembayaran:</h4>
                 <ol>
                     <li>Buka aplikasi mobile banking atau e-wallet</li>
@@ -856,6 +1195,13 @@
                     <li>Ikuti instruksi pembayaran hingga selesai</li>
                     <li>Simpan bukti pembayaran untuk konfirmasi</li>
                 </ol>
+            </div>
+
+            <div class="payment-info-box" style="background: #FEF2F2; border-color: #FECACA;">
+                <h4 style="color: #9F1239;"><i class="fas fa-triangle-exclamation"></i> Penting:</h4>
+                <p style="font-size: 12px; color: #9F1239; line-height: 1.6;">
+                    Pastikan nominal transfer sesuai dengan yang tertera. Pembayaran dengan nominal berbeda tidak dapat diproses secara otomatis.
+                </p>
             </div>
 
             <button class="btn-primary btn-success btn-block" id="btnFinal">
@@ -869,6 +1215,9 @@
     </div>
 
     <script>
+        // Store document ID for summary
+        let currentDocID = '';
+
         // === 🔐 DOCUMENT VERIFICATION ===
         document.getElementById('btnVerify').addEventListener('click', () => {
             const docId = document.getElementById('docID').value.toUpperCase().trim();
@@ -892,15 +1241,16 @@
                 background: 'white',
                 backdrop: 'rgba(0,0,0,0.8)'
             }).then(() => {
-                // Check for valid document patterns
                 if (docId.includes('BA-052') || docId.includes('001776528810') || docId.length >= 10) {
+                    currentDocID = docId;
+                    document.getElementById('summaryDocID').textContent = docId;
                     document.getElementById('searchPhase').style.display = 'none';
                     document.getElementById('dashboardPhase').style.display = 'block';
                     
                     Swal.fire({
                         icon: 'success',
                         title: 'Dokumen Ditemukan',
-                        text: 'Data berhasil diverifikasi. Silakan lengkapi informasi rekening.',
+                        text: 'Data berhasil diverifikasi. Silakan lengkapi informasi penerima dan rekening.',
                         confirmButtonText: 'Lanjutkan',
                         confirmButtonColor: '#003366'
                     });
@@ -916,33 +1266,79 @@
             });
         });
 
+        // === ✅ VALIDATE RECIPIENT DATA ===
+        function validateRecipientData() {
+            const name = document.getElementById('recipientName').value.trim();
+            const nik = document.getElementById('recipientNIK').value.trim();
+            const phone = document.getElementById('recipientPhone').value.trim();
+            const email = document.getElementById('recipientEmail').value.trim();
+            const city = document.getElementById('recipientCity').value.trim();
+            const bank = document.getElementById('userBank').value;
+            const account = document.getElementById('userAcc').value.trim();
+            const accountHolder = document.getElementById('accountHolder').value.trim();
+
+            if (!name) {
+                Swal.fire({ icon: 'warning', title: 'Data Tidak Lengkap', text: 'Nama Lengkap wajib diisi', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!nik || nik.length !== 16) {
+                Swal.fire({ icon: 'warning', title: 'NIK Tidak Valid', text: 'NIK harus 16 digit', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!phone || phone.length < 10) {
+                Swal.fire({ icon: 'warning', title: 'Nomor Telepon Tidak Valid', text: 'Masukkan nomor telepon yang valid', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!email || !email.includes('@')) {
+                Swal.fire({ icon: 'warning', title: 'Email Tidak Valid', text: 'Masukkan alamat email yang valid', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!city) {
+                Swal.fire({ icon: 'warning', title: 'Data Tidak Lengkap', text: 'Kota/Kabupaten wajib diisi', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!bank) {
+                Swal.fire({ icon: 'warning', title: 'Data Tidak Lengkap', text: 'Pilih bank tujuan', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!account || account.length < 8) {
+                Swal.fire({ icon: 'warning', title: 'Nomor Rekening Tidak Valid', text: 'Masukkan nomor rekening yang valid', confirmButtonColor: '#003366' });
+                return false;
+            }
+            if (!accountHolder) {
+                Swal.fire({ icon: 'warning', title: 'Data Tidak Lengkap', text: 'Nama pemilik rekening wajib diisi', confirmButtonColor: '#003366' });
+                return false;
+            }
+
+            return true;
+        }
+
         // === 💳 SHOW QRIS MODAL ===
         document.getElementById('btnShowQR').addEventListener('click', () => {
-            const account = document.getElementById('userAcc').value.trim();
-            
-            if (!account) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Peringatan',
-                    text: 'Silakan masukkan nomor rekening tujuan terlebih dahulu',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#003366'
-                });
+            if (!validateRecipientData()) {
                 return;
             }
 
-            if (account.length < 8) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Nomor Rekening Tidak Valid',
-                    text: 'Pastikan nomor rekening yang dimasukkan benar',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: '#003366'
-                });
-                return;
-            }
-
-            document.getElementById('qrisModal').style.display = 'flex';
+            Swal.fire({
+                title: 'Konfirmasi Data',
+                html: `<div style="text-align: left; font-size: 14px; line-height: 1.8;">
+                    <p><strong>Nama:</strong> ${document.getElementById('recipientName').value}</p>
+                    <p><strong>NIK:</strong> ${document.getElementById('recipientNIK').value}</p>
+                    <p><strong>Bank:</strong> ${document.getElementById('userBank').value}</p>
+                    <p><strong>Rekening:</strong> ${document.getElementById('userAcc').value}</p>
+                    <p style="margin-top: 15px; color: #EA580C;"><strong>Deposit Validasi: Rp 800.000</strong></p>
+                </div>`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Lanjut Pembayaran',
+                cancelButtonText: 'Perbaiki Data',
+                confirmButtonColor: '#059669',
+                cancelButtonColor: '#64748B'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('qrisModal').style.display = 'flex';
+                }
+            });
         });
 
         // === ✅ FINAL CONFIRMATION ===
@@ -1001,6 +1397,20 @@
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, 100);
+            }
+        });
+
+        // === 📝 Real-time validation feedback ===
+        const inputFields = ['recipientName', 'recipientNIK', 'recipientPhone', 'recipientEmail', 'recipientCity', 'userAcc', 'accountHolder'];
+        inputFields.forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('blur', () => {
+                    if (input.value.trim().length > 0) {
+                        input.classList.add('input-valid');
+                        input.classList.remove('input-invalid');
+                    }
+                });
             }
         });
     </script>
